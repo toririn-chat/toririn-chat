@@ -12,5 +12,25 @@
  *
  *= require_tree .
  *= require_self
- *= require jquery.mobile
+ *= require bootstrap_and_overrides
  */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+.footer {
+  /*position: absolute;*/
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f5f5f5;
+}

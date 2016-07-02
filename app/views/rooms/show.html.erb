@@ -1,14 +1,23 @@
-<div data-role="page">
-  <div data-role="header" data-position="fixed">
-    <h1>トーク</h1>
-  </div>
-  <div class="ui-content">
-    <ul data-role="listview" id="messages">
-      <%= render @messages %>
-    </ul>
-  </div>
-  <div data-role="footer" data-position="fixed">
-    <input type="text" id="text">
-    <input type="button" value="送信" id="button">
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <span class="navbar-brand">
+      とりりんチャット
+    </span>
   </div>
 </div>
+<div class="container">
+  <ul class="media-list" id="messages">
+    <%= render @messages %>
+  </ul>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="input-group">
+      <input type="text" class="form-control" id="text">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" id="button">送信</button>
+      </span>
+    </div>
+  </div>
+</footer>
