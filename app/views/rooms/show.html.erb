@@ -1,12 +1,12 @@
-<div id="header">
+<div data-role="header" data-position="fixed" data-fullscreen="true">
   <h1>トーク</h1>
 </div>
-<div id="content">
-  <div id="messages">
+<div class="ui-content">
+  <ul data-role="listview">
     <%= render @messages %>
-  </div>
+  </ul>
 </div>
-<div id="footer">
-  <input type="text" data-behavior="room_speaker" id="text">
-  <input type="button" value="送信" id="button"></input>
+<div data-role="footer" data-position="fixed">
+  <input type="text" id="text">
+  <input type="button" value="送信" id="button">
 </div>
