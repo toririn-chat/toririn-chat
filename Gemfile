@@ -22,11 +22,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-group :production do
-  gem 'sqlite3', require: false
-end
-
-group :development, :test do
+group :production, :development, :test do
   gem 'sqlite3'
 end
 
@@ -49,8 +45,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-group :heroku do
-  gem 'pg'
-  gem 'rails_12factor'
-end
