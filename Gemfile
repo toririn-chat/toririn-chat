@@ -22,11 +22,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
-group :production, :development, :test do
-  gem 'sqlite3'
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'pry-rails'
   gem 'pry-doc', require: false
   gem 'pry-coolline'
