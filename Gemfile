@@ -5,12 +5,12 @@ gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
-gem 'jquery_mobile_rails'
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails', git:'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 group :production, :development, :test do
   gem 'sqlite3'
