@@ -1,12 +1,14 @@
-<div data-role="header" data-position="fixed">
-  <h1>トーク</h1>
-</div>
-<div class="ui-content">
-  <ul data-role="listview" id="messages">
-    <%= render @messages %>
-  </ul>
-</div>
-<div data-role="footer" data-position="fixed">
-  <input type="text" id="text">
-  <input type="button" value="送信" id="button">
+<div data-role="page">
+  <div data-role="header" data-position="fixed">
+    <h1>トーク</h1>
+  </div>
+  <div class="ui-content">
+    <ul data-role="listview" id="messages">
+      <%= render @messages %>
+    </ul>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <input type="text" id="text">
+    <input type="button" value="送信" id="button">
+  </div>
 </div>
