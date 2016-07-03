@@ -1,13 +1,42 @@
 @import "twitter/bootstrap/bootstrap";
-
-// Glyphicons are not required by default, uncomment the following lines to enable them.
-//@glyphiconsEotPath: font-url("glyphicons-halflings-regular.eot");
-//@glyphiconsEotPath_iefix: font-url("glyphicons-halflings-regular.eot?#iefix");
-//@glyphiconsWoffPath: font-url("glyphicons-halflings-regular.woff");
-//@glyphiconsTtfPath: font-url("glyphicons-halflings-regular.ttf");
-//@glyphiconsSvgPath: font-url("glyphicons-halflings-regular.svg#glyphicons_halflingsregular");
-//
-//@import "twitter/bootstrap/glyphicons.less";
-
 @font-size-base: 16px;
+@navbar-height: 36px;
 @brand-primary: #3d4070;
+@navbar-padding-horizontal: 0;
+@container-tablet: (640px + @grid-gutter-width);
+@container-desktop: @container-tablet;
+@container-large-desktop: @container-tablet;
+@border-radius-small: 0;
+@input-border-focus: @input-border;
+@navbar-default-bg: fade(#3d4070, 95%);
+@navbar-default-brand-color: #fff;
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-top: 46px;
+  margin-bottom: 55px;
+}
+.container {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: solid 1px darken(fade(#f8f8f8, 95%), 6.5%);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: fade(#f8f8f8, 95%);
+}
+input.form-control {
+  -webkit-appearance: none;
+}
+.media-body {
+  padding-top: 10px;
+}
+.navbar-brand {
+  font-size: @font-size-base;
+}
