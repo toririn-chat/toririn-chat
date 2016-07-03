@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', git:'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+gem 'font-awesome-rails'
 
 group :production, :development, :test do
   gem 'sqlite3'
