@@ -1,13 +1,15 @@
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-    <span class="navbar-brand">
-      とりりんチャット
-    </span>
+    <%= link_to 'とりりんチャット', root_path, class:'navbar-brand' %>
+    <p class="navbar-text">
+      <%= fa_icon 'angle-double-right' %><%= @room.name %>
+    </p>
   </div>
 </div>
+
 <div class="container">
   <ul class="media-list" id="messages">
-    <%= render @messages %>
+    <%= render @room.messages %>
   </ul>
 </div>
 
@@ -23,14 +25,3 @@
     </div>
   </div>
 </footer>
-
-
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @room.name %>
-</p>
-
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>

@@ -1,15 +1,32 @@
-@import "twitter/bootstrap/bootstrap";
+@import 'twitter/bootstrap/bootstrap';
+@tc-accent-color: #3d4070;
+@tc-base-color: #eeeeee;
+@tc-color-amount-1: 6%;
+@tc-color-amount-2: 12%;
+@tc-color-amount-3: 18%;
+@tc-color-amount-4: 24%;
 @font-size-base: 16px;
 @navbar-height: 36px;
-@brand-primary: #3d4070;
+@brand-primary: @tc-accent-color;
 @navbar-padding-horizontal: 0;
 @container-tablet: (640px + @grid-gutter-width);
 @container-desktop: @container-tablet;
 @container-large-desktop: @container-tablet;
 @border-radius-small: 0;
 @input-border-focus: @input-border;
-@navbar-default-bg: fade(#3d4070, 95%);
+@navbar-default-bg: fade(@tc-accent-color, 95%);
 @navbar-default-brand-color: #fff;
+@navbar-default-link-color: #fff;
+@navbar-default-color: #fff;
+@navbar-default-brand-color: #fff;
+body {
+  font-family: 'LogoTypeGothic', 'sans-serif';
+}
+@font-face {
+  font-family: 'LogoTypeGothic';
+  src: font-url('LogoTypeGothic.ttf');
+  src: font-url('LogoTypeGothic.otf');
+}
 html {
   position: relative;
   min-height: 100%;
@@ -34,9 +51,10 @@ body {
 input.form-control {
   -webkit-appearance: none;
 }
-.media-body {
-  padding-top: 10px;
-}
 .navbar-brand {
   font-size: @font-size-base;
+}
+.navbar i.fa {
+  margin-left: 0.3em;
+  margin-right: 0.3em;
 }

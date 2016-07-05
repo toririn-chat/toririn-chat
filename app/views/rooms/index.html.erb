@@ -1,27 +1,21 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Rooms</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <%= link_to 'とりりんチャット', root_path, class:'navbar-brand' %>
+  </div>
+</div>
+<div class="container">
+  <ul class="room-list">
     <% @rooms.each do |room| %>
-      <tr>
-        <td><%= room.name %></td>
-        <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <li>
+      <%= link_to room do %>
+      <p class="room-list-item-heading">
+        <%= fa_icon :comments %>
+        <span class="title"><%= room.name %></span>
+        <span class="badge"><%= room.messages.size %></span>
+      </p>
+      <hr>
+      <% end %>
+    </li>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Room', new_room_path %>
+  </ul>
+</div>

@@ -1,4 +1,5 @@
 GIT
+  remote: https://github.com/seyhunak/twitter-bootstrap-rails.git
   revision: d3776ddd0b89d28fdebfd6e1c1541348cc90e5cc
   specs:
     twitter-bootstrap-rails (3.2.2)
@@ -198,14 +199,15 @@ GEM
       execjs (>= 0.3.0, < 3)
     unicode-display_width (0.1.1)
     unicode_utils (1.4.0)
-    web-console (3.3.0)
-      activemodel (>= 4.2)
+    web-console (3.3.1)
+      actionview (>= 5.0)
+      activemodel (>= 5.0)
       debug_inspector
-      railties (>= 4.2)
+      railties (>= 5.0)
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    yard (0.8.7.6)
+    yard (0.9.0)
 
 PLATFORMS
   ruby
