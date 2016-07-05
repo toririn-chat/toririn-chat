@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'rooms/show'
-  root to: 'rooms#show'
+  resources :rooms
+  resources :users
+  root to: 'rooms#index'
   mount ActionCable.server => '/cable'
 end

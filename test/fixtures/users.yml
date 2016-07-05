@@ -1,0 +1,9 @@
+<% %w(
+とりりん
+トリピー
+だらずさん
+).each.with_index do |name, index| %>
+user_<%= index %>:
+  id: <%= index %>
+  name: <%= name %>
+<% end %>

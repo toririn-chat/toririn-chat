@@ -5,6 +5,12 @@
     </div>
   </div>
   <div class="media-body">
-    <%= message.content %>
+    <p class="message-header">
+      <strong><%= message.user.name %></strong>
+      <span><small><%= message.created_at %></small><span>
+    </p>
+    <p class="message-content">
+      <span><%= message.content %><span>
+    </p>
   </div>
 </li>

@@ -1,0 +1,21 @@
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <%= link_to 'とりりんチャット', root_path, class:'navbar-brand' %>
+  </div>
+</div>
+<div class="container">
+  <ul class="room-list">
+    <% @rooms.each do |room| %>
+    <li>
+      <%= link_to room do %>
+      <p class="room-list-item-heading">
+        <%= fa_icon :comments %>
+        <span class="title"><%= room.name %></span>
+        <span class="badge"><%= room.messages.size %></span>
+      </p>
+      <hr>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+</div>
