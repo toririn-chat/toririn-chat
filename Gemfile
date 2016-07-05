@@ -12,6 +12,7 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', git:'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'font-awesome-rails'
+gem 'gon'
 
 group :production, :development, :test do
   gem 'sqlite3'
