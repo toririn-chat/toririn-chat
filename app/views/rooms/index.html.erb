@@ -1,8 +1,13 @@
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-default navbar-header navbar-fixed-top">
   <div class="container">
-    <%= link_to 'とりりんチャット', root_path, class:'navbar-brand' %>
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <span>とりりんチャット</span>
+      </div>
+    </div>
   </div>
 </div>
+
 <div class="container">
   <ul class="room-list">
     <% @rooms.each do |room| %>

@@ -16,10 +16,10 @@
 @input-border-focus: @input-border;
 @navbar-default-bg: fade(@tc-accent-color, 95%);
 @navbar-default-brand-color: #fff;
-@navbar-default-link-color: #fff;
+@navbar-default-link-color: @tc-base-color;
+@navbar-default-link-hover-color: darken(@tc-base-color, @tc-color-amount-2);
 @navbar-default-color: #fff;
-@navbar-default-brand-color: #fff;
-// body {
+@navbar-default-brand-color: #fff; // body {
 //   font-family: 'LogoTypeGothic', 'sans-serif';
 // }
 // @font-face {
@@ -32,10 +32,11 @@ html {
   min-height: 100%;
 }
 body {
-  margin-top: 46px;
+  margin-top: 45+1px;
   margin-bottom: 55px;
 }
-.container {
+.container,
+.container-fluid {
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -51,10 +52,37 @@ body {
 input.form-control {
   -webkit-appearance: none;
 }
-.navbar-brand {
-  font-size: @font-size-base;
+.navbar-header {
+  width: 100%;
+  .navbar-nav {
+    margin-top: 0;
+    margin-bottom: 0;
+    float: left;
+    li {
+      a {
+        padding: 7px;
+      }
+    }
+  }
+  .navbar-right {
+    float: right;
+  }
+  .navbar-brand {
+    font-size: @font-size-base;
+    margin-left: 70px;
+    margin-right: 70px;
+    float: none;
+    text-align: center;
+    color: @tc-base-color;
+    &:hover {
+      color: @tc-base-color;
+    }
+  }
 }
-.navbar i.fa {
-  margin-left: 0.3em;
-  margin-right: 0.3em;
+@media (max-width: @screen-phone) {
+  .navbar-brand {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
