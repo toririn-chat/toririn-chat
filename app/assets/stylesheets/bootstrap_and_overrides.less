@@ -6,7 +6,7 @@
 @tc-color-amount-3: 18%;
 @tc-color-amount-4: 24%;
 @font-size-base: 16px;
-@navbar-height: 53px;
+@navbar-height: 50px;
 @brand-primary: @tc-accent-color;
 @navbar-padding-horizontal: 0;
 @container-tablet: (640px + @grid-gutter-width);
@@ -32,21 +32,21 @@ html {
   min-height: 100%;
 }
 body {
-  margin-top: 53+1px;
+  margin-top: @navbar-height+5+1px;
   margin-bottom: 55px;
 }
 .container,
 .container-fluid {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   border-top: solid 1px darken(fade(#f8f8f8, 95%), 6.5%);
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   background-color: fade(#f8f8f8, 95%);
 }
 input.form-control {
@@ -63,8 +63,8 @@ input.form-control {
       height: 100%;
       a {
         height: 100%;
-        padding: 7px;
-        line-height: 38px;
+        padding: 0;
+        line-height: @navbar-height;
       }
     }
   }
@@ -73,10 +73,11 @@ input.form-control {
   }
   .navbar-brand {
     font-size: @font-size-base;
-    margin-left: 61.8px;
-    margin-right: 61.8px;
+    margin-left: 51.8px;
+    margin-right: 51.8px;
     float: none;
     text-align: center;
+    font-weight: bold;
     color: @tc-base-color;
     &:hover {
       color: @tc-base-color;
