@@ -19,8 +19,8 @@ document.addEventListener 'turbolinks:request-start', ->
     App.room.unsubscribe()
 
 document.addEventListener 'turbolinks:load', ->
-  window.scrollTo(0, document.body.scrollHeight)
   if current_room_ch()?
+    window.scrollTo(0, document.body.scrollHeight)
     App.room = App.cable.subscriptions.create current_room_ch() ,
       received: (data) ->
         $('#messages').append data['message']
