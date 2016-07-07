@@ -8,7 +8,10 @@
   <div class="media-body">
     <p class="message-header">
       <strong><%= message.user.name %></strong>
-      <small><%= message.created_at %></small>
+      <small><%=l message.created_at %></small>
+
+
+
     </p>
     <p class="message-content">
       <span><%= message.content %></span>
