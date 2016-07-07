@@ -1,30 +1,42 @@
-unless gon?
-  return
-room = gon
-unless room.id?
-  return
-App.room = App.cable.subscriptions.create {channel: 'RoomChannel', room_id: room.id} ,
+App.room = null
 
-  connected: ->
+current_user_id = ->
+  0
 
-  disconnected: ->
+current_room_id = ->
+  $('#room').data('id')
 
-  received: (data) ->
-    $('#messages').append data['message']
-    window.scrollTo(0, document.body.scrollHeight)
+current_room_ch = ->
+  id = current_room_id()
+  if id?
+    return {channel: 'RoomChannel', room_id: id}
+  else
+    return null
 
-  speak: (user_id, room_id, content) ->
-    @perform 'speak', {
-      user_id: user_id
-      room_id: room_id
-      content: content
-    }
+
+document.addEventListener 'turbolinks:request-start', ->
+  if current_room_ch()?
+    App.room.unsubscribe()
+
+document.addEventListener 'turbolinks:load', ->
+  window.scrollTo(0, document.body.scrollHeight)
+  if current_room_ch()?
+    App.room = App.cable.subscriptions.create current_room_ch() ,
+      received: (data) ->
+        $('#messages').append data['message']
+        window.scrollTo(0, document.body.scrollHeight)
+      speak: (user_id, room_id, content) ->
+        @perform 'speak', {
+          user_id: user_id
+          room_id: room_id
+          content: content
+        }
 
 $(document).on 'keypress', '#text', (event) ->
   if event.keyCode is 13
     value = event.target.value
     if value.length != 0
-      App.room.speak(0, room.id, value)
+      App.room.speak(current_user_id(), current_room_id(), value)
       event.target.value = ''
       event.preventDefault()
 
@@ -32,4 +44,4 @@ $(document).on 'click', '#button', (event) ->
   value = $('#text').val()
   if value.length != 0
     $('#text').val('')
-    App.room.speak(0, room.id, value)
+    App.room.speak(current_user_id(), current_room_id(), value)
