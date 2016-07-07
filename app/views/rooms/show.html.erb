@@ -15,7 +15,6 @@
     </div>
   </div>
 </div>
-
 <div class="container">
   <ul class="media-list" id="messages">
     <%= render Message.includes(:user).where(room_id:@room.id) %>
