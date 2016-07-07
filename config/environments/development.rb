@@ -53,4 +53,12 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.web_console.whitelisted_ips = '0.0.0.0/0'
   config.action_cable.allowed_request_origins = [ /http:\/\/.*/ ]
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.console = true
+    Bullet.bullet_logger = true
+    Bullet.rails_logger = true
+  end
+
 end
