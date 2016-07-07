@@ -41,9 +41,12 @@ ul.room-list {
       }
       &:hover {
         color: @tc-base-color;
-        background-color: lighten(@tc-accent-color, @tc-color-amount-1);
+        background-color: darken(@tc-base-color, @tc-color-amount-1);
+        p.room-list-item-heading {
+          color: darken(@tc-accent-color,@tc-color-amount-1);
+        }
         hr {
-          background-color: darken(@tc-base-color, @tc-color-amount-1);
+          background-color: darken(@tc-base-color, @tc-color-amount-3);
         }
       }
     }
