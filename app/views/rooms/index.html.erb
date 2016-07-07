@@ -8,18 +8,38 @@
   </div>
 </div>
 <div class="container">
-  <ul class="room-list">
-    <% @rooms.each do |room| %>
-    <li>
-      <%= link_to room do %>
-      <p class="room-list-item-heading">
-        <%= fa_icon :comments %>
-        <span class="title"><%= room.name %></span>
-        <span class="badge"><%= room.messages.size %></span>
-      </p>
-      <hr>
-      <% end %>
-    </li>
+  <h5>
+    <strong><%= fa_icon 'user' %> ユーザ</strong>
+  </h5>
+
+  <div class="media">
+    <div class="media-left">
+      <div class="pull-left">
+        <%= image_tag "icons/animal-#{('01'..'16').to_a.sample}.png", size:'40x40', class:'media-object img-circle' %>
+      </div>
+    </div>
+    <!-- TODO -->
+    <div class="media-body">
+      <h5 class="media-heading"><%= User.find(0).name %></h5>
+      <p>とりりん「鳥取県の鳥である「オシドリ」をモチーフにキャラクター化 したもので、地域とともに発展する本学の姿を表しています。手に持っている青い本は、常に探求心をもち「知識」を深めていくことを、角帽は大学人らしさを表現しています。」</p>
+      <p>※開発中につきユーザは変更できません。ユーザのアイコンはランダムに表示されます。This icon is <a href="http://www.freepik.com" target="_blank">designed by Freepik.</a></p>
+    </div>
+  </div>
+<h5>
+  <strong><%= fa_icon 'comments' %> チャットルーム</strong>
+</h5>
+<ul class="room-list">
+  <% @rooms.each do |room| %>
+  <li>
+    <%= link_to room do %>
+    <p class="room-list-item-heading">
+      <%= fa_icon :comments %>
+      <span class="title"><%= room.name %></span>
+      <span class="badge"><%= room.messages.size %></span>
+    </p>
+    <hr>
     <% end %>
-  </ul>
+  </li>
+  <% end %>
+</ul>
 </div>

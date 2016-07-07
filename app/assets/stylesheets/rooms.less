@@ -1,13 +1,15 @@
 @import 'bootstrap_and_overrides';
 ul.room-list {
   padding: 0;
+  margin-left: -2.5px;
+  margin-right: -2.5px;
   list-style: none;
   li {
     float: left;
-    width: 46%;
+    width: 48%;
     height: 115px;
     padding: 0;
-    margin: 5px;
+    margin: 2.5px;
     background-color: @tc-base-color;
     border: 1px solid darken(@tc-base-color, @tc-color-amount-2);
     a {
@@ -39,9 +41,12 @@ ul.room-list {
       }
       &:hover {
         color: @tc-base-color;
-        background-color: lighten(@tc-accent-color, @tc-color-amount-1);
+        background-color: darken(@tc-base-color, @tc-color-amount-1);
+        p.room-list-item-heading {
+          color: darken(@tc-accent-color,@tc-color-amount-1);
+        }
         hr {
-          background-color: darken(@tc-base-color, @tc-color-amount-1);
+          background-color: darken(@tc-base-color, @tc-color-amount-3);
         }
       }
     }
@@ -61,6 +66,15 @@ div.message {
     padding-top: 2.5px;
     p.message-header {
       margin-bottom: 0;
+      line-height: @font-size-base;
+      strong {
+        vertical-align: middle;
+      }
+      small.relative-timestamp {
+        vertical-align: middle;
+        font-size: @font-size-base * 0.75;
+        color: lighten(@text-color, @tc-color-amount-3);
+      }
     }
     p.message-content {
       margin: 0;
