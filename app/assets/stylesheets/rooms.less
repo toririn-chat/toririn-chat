@@ -63,6 +63,15 @@ div.message {
     padding-top: 2.5px;
     p.message-header {
       margin-bottom: 0;
+      line-height: @font-size-base;
+      strong {
+        vertical-align: middle;
+      }
+      small.relative-timestamp {
+        vertical-align: middle;
+        font-size: @font-size-base * 0.75;
+        color: lighten(@text-color, @tc-color-amount-3);
+      }
     }
     p.message-content {
       margin: 0;
