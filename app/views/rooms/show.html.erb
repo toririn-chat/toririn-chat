@@ -18,10 +18,9 @@
 
 <div class="container">
   <ul class="media-list" id="messages">
-    <%= render @room.messages %>
+    <%= render Message.includes(:user).where(room_id:@room.id) %>
   </ul>
 </div>
-
 <footer class="footer">
   <div class="container">
     <div class="input-group">
