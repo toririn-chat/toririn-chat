@@ -4,7 +4,7 @@ current_user_id = ->
   0
 
 current_room_id = ->
-  $('#room').data('id')
+  $('#rooms-show').data('id')
 
 current_room_ch = ->
   id = current_room_id()

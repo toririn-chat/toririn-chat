@@ -1,45 +1,97 @@
-<div class="navbar navbar-default navbar-header navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <div class="navbar-brand">
-        <span>とりりん<%= fa_icon :star %>チャット</span>
+<div id="rooms-index">
+  <div class="navbar navbar-default navbar-header navbar-fixed-top tc-header">
+    <div class="container">
+      <div class="navbar-header">
+        <div class="navbar-brand">
+          <span>とりりん<%= fa_icon :star %>チャット</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container">
-  <h5>
-    <strong><%= fa_icon 'user' %> ユーザ</strong>
-  </h5>
+  <div class="container tc-contents">
+    <h5>
+      <strong><%= fa_icon 'user' %>
+        ユーザ</strong>
+    </h5>
+    <div class="media">
+      <div class="media-left">
+        <div class="pull-left">
+          <%= image_tag "icons/animal-#{('01'..'16').to_a.sample}.png", size:'40x40', class:'media-object img-circle' %>
+        </div>
+      </div>
+      <!-- TODO -->
+      <div class="media-body">
+        <h5 class="media-heading"><%= User.find(0).name %></h5>
+        <p>※開発中につきユーザ設定は変更できません。ユーザのアイコンはランダムに表示されます。</a>
+        </p>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+          変更
+        </button>
+      </div>
+    </div>
+    <h5>
+      <strong><%= fa_icon 'comments' %>
+        チャットルーム</strong>
+    </h5>
+    <ul class="room-list">
+      <% @rooms.each do |room| %>
+      <li>
+        <%= link_to room do %>
+        <p class="room-list-item-heading">
+          <%= fa_icon :comments %>
+          <span class="title"><%= room.name %></span>
+          <span class="badge"><%= room.messages.size %></span>
+        </p>
+        <hr>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <footer class="footer tc-footer">
+    <div class="container">
+      <ul>
+        <li><%= link_to 'このアプリについて', about_path %></li>
+        <li><%= fa_icon :star %></li>
+        <li><%= link_to '運営者・お問い合わせ', about_path(anchor:'contact') %></div>
+      </li>
+    </ul>
+  </div>
+</footer>
 
-  <div class="media">
-    <div class="media-left">
-      <div class="pull-left">
-        <%= image_tag "icons/animal-#{('01'..'16').to_a.sample}.png", size:'40x40', class:'media-object img-circle' %>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title" id="myModalLabel">ユーザ設定</h5>
+      </div>
+      <div class="modal-body">
+        ※開発中につきユーザは変更できません。
+        <%= form_for(@rooms.first.messages[1].user) do |f| %>
+        <div class="form-group form-group-sm">
+          <%= f.label :name, class:'control-label' %>
+          <%= f.text_field :name, class:'form-control input-sm' %>
+        </div>
+        <div class="form-group form-group-sm">
+          <%= f.label :icon, class:'control-label' %>
+          <ul class="animal-list">
+            <% ('01'..'16').to_a.each do |n| %>
+            <li>
+              <%= image_tag "icons/animal-#{n}.png", size:'40x40', class:'media-object img-circle' %>
+            </li>
+            <% end %>
+          </ul>
+          <div style="clear:both;"></div>
+        </div>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">閉じる</button>
+        <button type="button" class="btn btn-sm btn-primary">決定</button>
       </div>
     </div>
-    <!-- TODO -->
-    <div class="media-body">
-      <h5 class="media-heading"><%= User.find(0).name %></h5>
-      <p>とりりん「鳥取県の鳥である「オシドリ」をモチーフにキャラクター化 したもので、地域とともに発展する本学の姿を表しています。手に持っている青い本は、常に探求心をもち「知識」を深めていくことを、角帽は大学人らしさを表現しています。」</p>
-      <p>※開発中につきユーザは変更できません。ユーザのアイコンはランダムに表示されます。This icon is <a href="http://www.freepik.com" target="_blank">designed by Freepik.</a></p>
-    </div>
   </div>
-<h5>
-  <strong><%= fa_icon 'comments' %> チャットルーム</strong>
-</h5>
-<ul class="room-list">
-  <% @rooms.each do |room| %>
-  <li>
-    <%= link_to room do %>
-    <p class="room-list-item-heading">
-      <%= fa_icon :comments %>
-      <span class="title"><%= room.name %></span>
-      <span class="badge"><%= room.messages.size %></span>
-    </p>
-    <hr>
-    <% end %>
-  </li>
-  <% end %>
-</ul>
 </div>
