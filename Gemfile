@@ -27,6 +27,7 @@ group :development, :test do
   gem 'hirb'
   gem 'hirb-unicode'
   gem 'awesome_print'
+  gem 'i18n-tasks', require: false
 end
 
 group :development do
