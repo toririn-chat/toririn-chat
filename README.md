@@ -4,6 +4,15 @@ This chat system currently is under development. This is a chat system to conduc
 
 * Demo Site https://toririn-chat.herokuapp.com/
 
+## 2016-07-07
+
+* Support for ActionCable with Turbolinks
+* Support for users' icon
+* Support for displaying a user information on the root_path page
+* Change the icon of the button to submit a message from :envelope to :pencil
+
+![](screenshots/toririn-chat-20160707.png)
+
 ## 2016-07-06
 
 * Support for chat rooms

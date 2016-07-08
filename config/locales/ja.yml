@@ -142,6 +142,10 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+    label:
+      user:
+        name: 名前
+        icon: アイコン
   number:
     currency:
       format:
