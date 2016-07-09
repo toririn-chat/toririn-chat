@@ -6,7 +6,7 @@
 @tc-link-color-hover: lighten(@tc-link-color, 50%);
 @tc-link-background-color-hover: lighten(@tc-accent-color, 50%);
 @tc-background-color: #eeeeee;
-@tc-footer-background-color: fade(#f8f8f8, 95%);
+@tc-footer-background-color: fade(#f8f8f8, 90%);
 @tc-footer-border-color: darken(fade(#f8f8f8, 95%), 6.5%);
 @tc-footer-font-size: @font-size-base*0.85;
 @tc-footer-height: 43px;
@@ -68,6 +68,23 @@ p {
 input.form-control {
   -webkit-appearance: none;
 }
+.modal-content {
+  .modal-header {
+    padding: 10px;
+  }
+  .modal-body {
+    padding: 10px;
+    .form-group {
+      margin: 0;
+    }
+    .form-group+ .form-group {
+      margin-top: 15px;
+    }
+  }
+  .modal-footer {
+    padding: 10px;
+  }
+}
 .navbar-header {
   width: 100%;
   .navbar-nav {
@@ -123,8 +140,8 @@ ul.animal-list {
   list-style: none;
   li {
     float: left;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     padding: 0;
     margin: 5px;
     a {

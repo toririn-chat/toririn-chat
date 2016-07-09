@@ -1,10 +1,11 @@
+<div id="params" data-user-id="<%= current_user.id %>" data-room-id="<%= @room.id %>">
 <div id="rooms-show" data-id="<%= @room.id %>">
   <div class="navbar navbar-default navbar-header navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <ul class="nav navbar-nav">
           <li>
-            <%= link_to root_path do %>
+            <%= link_to rooms_path do %>
             <%= fa_icon 'chevron-left' %>
             <span>戻る</span>
             <% end %>

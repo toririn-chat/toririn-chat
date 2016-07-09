@@ -8,13 +8,13 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
-gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.5'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', git:'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'font-awesome-rails'
 gem 'foreman'
+gem 'underscore-string-rails'
 
 group :production do
   gem 'pg'
@@ -31,6 +31,7 @@ group :development, :test do
   gem 'hirb'
   gem 'hirb-unicode'
   gem 'awesome_print'
+  gem 'i18n-tasks', require: false
 end
 
 group :development do

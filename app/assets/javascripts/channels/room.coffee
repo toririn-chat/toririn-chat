@@ -1,10 +1,10 @@
 App.room = null
 
 current_user_id = ->
-  0
+  $('#params').data('user-id')
 
 current_room_id = ->
-  $('#rooms-show').data('id')
+  $('#params').data('room-id')
 
 current_room_ch = ->
   id = current_room_id()
