@@ -14,6 +14,7 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails', git:'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'font-awesome-rails'
 gem 'foreman'
+gem 'underscore-string-rails'
 
 group :production, :development, :test do
   gem 'sqlite3'
