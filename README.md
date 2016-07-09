@@ -36,3 +36,7 @@ This chat system currently is under development. This is a chat system to conduc
 * Support for messaging via WebSocket
 
 ![](screenshots/toririn-chat-20160703.png)
+
+## References
+
+[JSPS科研費16K01114](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-16K01114/)
