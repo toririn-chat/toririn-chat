@@ -142,6 +142,9 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+      user:
+        create: OK
+        update: OK
     label:
       user:
         name: 名前
@@ -204,3 +207,8 @@ ja:
       long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       short: "%y/%m/%d %H:%M"
     pm: 午後
+  rooms:
+    index:
+      users:
+        new:
+          title: ユーザ設定
