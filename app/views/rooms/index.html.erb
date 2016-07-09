@@ -8,31 +8,28 @@
       </div>
     </div>
   </div>
-  <div class="container tc-contents">
-    <h5>
-      <strong><%= fa_icon 'user' %>
-        ユーザ</strong>
-    </h5>
-    <div class="media">
-      <div class="media-left">
-        <div class="pull-left">
-          <%= image_tag "icons/animal-#{('01'..'16').to_a.sample}.png", size:'40x40', class:'media-object img-circle' %>
+  <div class="container">
+    <div id="user">
+      <h1><%= fa_icon :user %>ユーザ</h1>
+      <div class="media">
+        <div class="media-left">
+          <div class="pull-left">
+            <% if current_user %>
+            <%= image_tag current_user&.icon, size:'40x40', class:'media-object img-circle user icon' %>
+            <% else %>
+            <%= image_tag 'icons/blank.png', size:'40x40', class:'media-object img-circle user icon', style:'opacity:0.2;' %>
+            <% end %>
+          </div>
+        </div>
+        <div class="media-body">
+          <h5 class="media-heading"><span class="user name"><%= current_user&.name %></span></h5>
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#user-modal">
+            変更
+          </button>
         </div>
       </div>
-      <!-- TODO -->
-      <div class="media-body">
-        <h5 class="media-heading"><%= User.find(0).name %></h5>
-        <p>※開発中につきユーザ設定は変更できません。ユーザのアイコンはランダムに表示されます。</a>
-        </p>
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-          変更
-        </button>
-      </div>
     </div>
-    <h5>
-      <strong><%= fa_icon 'comments' %>
-        チャットルーム</strong>
-    </h5>
+    <h1><%= fa_icon :comments %>チャットルーム</h1>
     <ul class="room-list">
       <% @rooms.each do |room| %>
       <li>
@@ -63,35 +60,32 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h5 class="modal-title" id="myModalLabel">ユーザ設定</h5>
+        <h1 class="modal-title"><%=t '.users.new.title'%></h1>
       </div>
+      <%= form_for(current_user || User.new, remote:true, format:'json') do |f| %>
       <div class="modal-body">
-        ※開発中につきユーザは変更できません。
-        <%= form_for(@rooms.first.messages[1].user) do |f| %>
         <div class="form-group form-group-sm">
           <%= f.label :name, class:'control-label' %>
           <%= f.text_field :name, class:'form-control input-sm' %>
         </div>
         <div class="form-group form-group-sm">
           <%= f.label :icon, class:'control-label' %>
+          <%= f.hidden_field :icon %>
           <ul class="animal-list">
             <% ('01'..'16').to_a.each do |n| %>
             <li>
-              <%= image_tag "icons/animal-#{n}.png", size:'40x40', class:'media-object img-circle' %>
+              <% src = "icons/animal-#{n}.png" %>
+              <%= image_tag src, size:'40x40', class:'media-object img-circle', 'data-path':src %>
             </li>
             <% end %>
           </ul>
           <div style="clear:both;"></div>
         </div>
-        <% end %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">閉じる</button>
-        <button type="button" class="btn btn-sm btn-primary">決定</button>
+        <%= f.submit class:'btn btn-sm btn-primary' %>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

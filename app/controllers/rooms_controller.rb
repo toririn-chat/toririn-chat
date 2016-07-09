@@ -2,7 +2,8 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
   def index
-    @rooms = Room.all.includes(:messages)
+    @rooms = Room.all
+    @user = User.first
   end
 
   def show
