@@ -4,6 +4,5 @@
 トリピー小学校出前授業2016
 ).each.with_index do |name, index| %>
 room_<%= index %>:
-  id: <%= index %>
   name: <%= name %>
 <% end %>

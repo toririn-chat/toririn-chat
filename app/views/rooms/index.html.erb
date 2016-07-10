@@ -1,14 +1,14 @@
-<div id="rooms-index">
-  <div class="navbar navbar-default navbar-header navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <div class="navbar-brand">
-          <span>とりりん<%= fa_icon :star %>チャット</span>
-        </div>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <div class="navbar-brand">
+        <span>とりりん<%= fa_icon :star %>チャット</span>
       </div>
     </div>
   </div>
-  <div class="container">
+</nav>
+<article class="container">
+  <section>
     <div id="user">
       <h1><%= fa_icon :user %>ユーザ</h1>
       <div class="media">
@@ -16,21 +16,25 @@
           <div class="pull-left">
             <% if current_user %>
             <%= image_tag current_user&.icon, size:'40x40', class:'media-object img-circle user icon' %>
-            <% else %>
+          <% else %>
             <%= image_tag 'icons/blank.png', size:'40x40', class:'media-object img-circle user icon', style:'opacity:0.2;' %>
             <% end %>
           </div>
         </div>
         <div class="media-body">
-          <h5 class="media-heading"><span class="user name"><%= current_user&.name %></span></h5>
+          <h5 class="media-heading">
+            <span class="user name"><%= current_user&.name %></span>
+          </h5>
           <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#user-modal">
             変更
           </button>
         </div>
       </div>
     </div>
+  </section>
+  <section>
     <h1><%= fa_icon :comments %>チャットルーム</h1>
-    <ul class="room-list">
+    <ul class="rooms">
       <% @rooms.each do |room| %>
       <li>
         <%= link_to room do %>
@@ -44,13 +48,14 @@
       </li>
       <% end %>
     </ul>
-  </div>
-  <footer class="footer">
-    <div class="container">
-      <ul>
-        <li><%= link_to 'このアプリについて', about_path %></li>
-        <li><%= fa_icon :star %></li>
-        <li><%= link_to '運営者・お問い合わせ', about_path(anchor:'contact') %></div>
+  </section>
+</article>
+<footer class="footer">
+  <div class="container">
+    <ul>
+      <li><%= link_to 'このアプリについて', about_path %></li>
+      <li><%= fa_icon :star %></li>
+      <li><%= link_to '運営者・お問い合わせ', about_path(anchor:'contact') %>
       </li>
     </ul>
   </div>
@@ -88,4 +93,3 @@
       <% end %>
     </div>
   </div>
-</div>

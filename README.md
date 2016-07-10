@@ -4,6 +4,16 @@ This chat system currently is under development. This is a chat system to conduc
 
 * Demo Site https://toririn-chat.herokuapp.com/
 
+## 2016-07-09
+
+* Support for user accounts (cookies' session only)
+* Add the home page
+* Add the about page
+
+![](screenshots/toririn-chat-20160709-1.png)
+![](screenshots/toririn-chat-20160709-2.png)
+![](screenshots/toririn-chat-20160709-3.png)
+
 ## 2016-07-07
 
 * Support for ActionCable with Turbolinks
@@ -26,3 +36,7 @@ This chat system currently is under development. This is a chat system to conduc
 * Support for messaging via WebSocket
 
 ![](screenshots/toririn-chat-20160703.png)
+
+## References
+
+[JSPS科研費16K01114](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-16K01114/)

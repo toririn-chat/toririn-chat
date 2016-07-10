@@ -1,28 +1,39 @@
 @import 'bootstrap_and_overrides';
-div#root-index {
+body.root.index {
   position: fixed;
-  margin-top: -51px;
-  height: 100%;
+  margin: 0;
   width: 100%;
-  background-color: @tc-accent-color;
+  height: 100%;
   text-align: center;
   display: table;
-  width: 100%;
-  height: 100%;
-  div.container {
+  background-color: @tc-accent-color;
+  article {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
     h1 {
       font-size: 32px;
+      margin-bottom: 0.5em;
       color: @tc-base-color;
-      margin-bottom: 20px;
     }
     a {
       color: @tc-link-color;
       background-color: @tc-link-background-color;
       &:hover {
         background-color: @tc-link-background-color-hover;
+      }
+    }
+  }
+}
+body.root.about {
+  article {
+    section {
+      a {
+        color: @tc-link-color;
+        background-color: @tc-link-background-color;
+        &:hover {
+          background-color: @tc-link-background-color-hover;
+        }
       }
     }
   }
