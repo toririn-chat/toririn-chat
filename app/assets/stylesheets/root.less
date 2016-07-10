@@ -7,7 +7,7 @@ body.root.index {
   text-align: center;
   display: table;
   background-color: @tc-accent-color;
-  div.container {
+  article {
     display: table-cell;
     text-align: center;
     vertical-align: middle;
@@ -26,12 +26,14 @@ body.root.index {
   }
 }
 body.root.about {
-  section {
-    a {
-      color: @tc-link-color;
-      background-color: @tc-link-background-color;
-      &:hover {
-        background-color: @tc-link-background-color-hover;
+  article {
+    section {
+      a {
+        color: @tc-link-color;
+        background-color: @tc-link-background-color;
+        &:hover {
+          background-color: @tc-link-background-color-hover;
+        }
       }
     }
   }
