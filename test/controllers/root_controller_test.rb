@@ -12,4 +12,14 @@ class RootControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test '/ has path to rooms_path in article' do
+    get root_url
+    assert_select 'article a[href=?]', rooms_path
+  end
+
+  test '/about has path to rooms_path in nav' do
+    get about_url
+    assert_select 'nav a[href=?]', rooms_path
+  end
+
 end
