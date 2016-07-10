@@ -18,7 +18,7 @@
 </nav>
 <article class="container">
   <section>
-    <ul class="media-list">
+    <ul class="media-list messages">
       <%= render @room.messages.includes(:user) %>
     </ul>
   </section>

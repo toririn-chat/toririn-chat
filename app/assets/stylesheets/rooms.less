@@ -1,6 +1,6 @@
 @import 'bootstrap_and_overrides';
 body.rooms.index {
-  ul.tc-rooms {
+  ul.rooms {
     padding: 0;
     margin-left: -2.5px;
     margin-right: -2.5px;
@@ -80,34 +80,32 @@ body.rooms.index {
   }
 }
 body.rooms.show {
-  article {
-    section {
-      .media {
-        margin-top: 5px;
-        margin-bottom: 10px;
-      }
-      .media-left {
-        padding-left: 0;
-        padding-right: 0;
-      }
-      .media-body {
-        padding-left: 5px;
-        padding-top: 2.5px;
-        p.message-header {
-          margin-bottom: 0;
-          line-height: @font-size-base;
-          strong {
-            vertical-align: middle;
-          }
-          small.relative-timestamp {
-            vertical-align: middle;
-            font-size: @font-size-base * 0.75;
-            color: lighten(@text-color, @tc-color-amount-3);
-          }
+  ul.messages {
+    .media {
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+    .media-left {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .media-body {
+      padding-left: 5px;
+      padding-top: 2.5px;
+      p.message-header {
+        margin-bottom: 0;
+        line-height: @font-size-base;
+        strong {
+          vertical-align: middle;
         }
-        p.message-content {
-          margin: 0;
+        small.relative-timestamp {
+          vertical-align: middle;
+          font-size: @font-size-base * 0.75;
+          color: lighten(@text-color, @tc-color-amount-3);
         }
+      }
+      p.message-content {
+        margin: 0;
       }
     }
   }
