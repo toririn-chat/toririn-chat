@@ -170,7 +170,7 @@
 ゴーシュはぼんやりしてしばらくゆうべのこわれたガラスからはいってくる風を吸っていましたが、町へ出て行くまで睡って元気をとり戻（もど）そうと急いでねどこへもぐり込（こ）みました。
 ).each.with_index do |text, index| %>
 message_<%= index %>:
-  user_id: <%= [0, 1, 2].sample %>
-  room_id: <%= [0, 1, 2].sample %>
+  user: user
+  room: room
   content: <%= text %>
 <% end %>
