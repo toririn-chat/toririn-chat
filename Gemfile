@@ -20,6 +20,7 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
   gem 'redis', '~> 3.0'
+  gem 'google-analytics-rails'
 end
 
 group :development, :test do
