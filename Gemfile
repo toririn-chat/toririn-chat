@@ -16,6 +16,10 @@ gem 'font-awesome-rails'
 gem 'foreman'
 gem 'underscore-string-rails'
 
+group :production do
+  gem 'google-analytics-rails'
+end
+
 group :production, :development, :test do
   gem 'sqlite3'
 end
