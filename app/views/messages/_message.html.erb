@@ -9,7 +9,7 @@
     <p class="message-header">
       <span>
         <strong><%= message.user.name %></strong>
-        <small class="relative-timestamp"><%= time_ago_in_words(message.created_at) %></small>
+        <small class="relative-timestamp"><%= l(message.created_at, format: :messages) %></small>
       </span>
     </p>
     <p class="message-content">
