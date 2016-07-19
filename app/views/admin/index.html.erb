@@ -1,0 +1,38 @@
+<article class="container">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-success" role="alert">
+      <%= content_tag(:div, value, class: "#{key}") %>
+    </div>
+  <% end %>
+  <h1>管理者用ページ</h1>
+  <p>※動作確認用です。認証機能はまだありません。</p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td>Room ID</td>
+        <td>Room Name</td>
+        <td># of messages in a aoom</td>
+        <td>Actions</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% Room.all.each do |room| %>
+      <tr>
+        <td><%= room.id %></td>
+        <td><%= room.name %></td>
+        <td><%= room.messages.count %></td>
+        <td><%= link_to 'チャットルームを削除', admin_room_path(room.id), method: :delete, class:'btn btn-sm btn-default' %>
+        <td><%= link_to 'メッセージを全て削除', destroy_all_admin_room_messages_path(room_id:room.id), method: :delete, class:'btn btn-sm btn-default' %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= form_for(Room.new, url:{controller:'admin/rooms', action:'create'}) do |f| %>
+  <div class="form-group form-group-sm">
+    <%= f.text_field :name, class:'form-control input-sm' %>
+  </div>
+  <%= f.submit class:'btn btn-sm btn-primary', value:'チャットルームを新規追加' %>
+  <% end %>
+
+</article>
