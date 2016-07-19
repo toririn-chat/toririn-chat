@@ -22,8 +22,8 @@
         <td><%= room.id %></td>
         <td><%= room.name %></td>
         <td><%= room.messages.count %></td>
-        <td><%= link_to 'チャットルームを削除', admin_room_path(room.id), method: :delete, class:'btn btn-sm btn-default' %>
-        <td><%= link_to 'メッセージを全て削除', destroy_all_admin_room_messages_path(room_id:room.id), method: :delete, class:'btn btn-sm btn-default' %></td>
+        <td><%= link_to 'チャットルームを削除', admin_room_path(room.id), method: :delete, class:'btn btn-sm btn-default btn-warning' %></td>
+        <td><%= link_to 'メッセージを全て削除', destroy_all_admin_room_messages_path(room_id:room.id), method: :delete, class:'btn btn-sm btn-default btn-danger' %></td>
       </tr>
       <% end %>
     </tbody>
