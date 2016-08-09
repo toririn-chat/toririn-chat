@@ -13,18 +13,28 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails', git:'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'font-awesome-rails'
-gem 'foreman'
 gem 'underscore-string-rails'
 
 group :production do
+  gem 'pg'
   gem 'google-analytics-rails'
 end
 
-group :production, :development, :test do
-  gem 'sqlite3'
+group :production, :development do
+  gem 'foreman'
 end
 
 group :development, :test do
+  gem 'sqlite3'
+  gem 'i18n-tasks', require:false
+end
+
+group :development do
+  gem 'bullet'
+  gem 'spring'
+  gem 'listen', '~> 3.0.5'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console'
   gem 'pry-rails'
   gem 'pry-doc', require: false
   gem 'pry-coolline'
@@ -32,15 +42,6 @@ group :development, :test do
   gem 'hirb'
   gem 'hirb-unicode'
   gem 'awesome_print'
-  gem 'i18n-tasks', require: false
-end
-
-group :development do
-  gem 'web-console'
-  gem 'listen', '~> 3.0.5'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'bullet'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
