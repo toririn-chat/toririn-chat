@@ -174,3 +174,10 @@ message_<%= index %>:
   room: room_<%= (0..2).to_a.sample %>
   text: <%= text %>
 <% end %>
+
+<% Dir.glob("public/images/stamps/**/*.png").shuffle.each.with_index do |file_path, index| %>
+message_stamp_<%= index %>:
+  user: user_<%= (0..2).to_a.sample %>
+  room: room_<%= (0..2).to_a.sample %>
+  stamp: <%= File.basename(file_path) %>
+<% end %>
