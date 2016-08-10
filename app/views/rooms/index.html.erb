@@ -2,11 +2,7 @@
   <div class="container">
     <div class="navbar-header">
       <ul class="nav navbar-nav">
-        <li>
-          <%= link_to root_path do %>
-          <span class="fa-before fa-chevron-left">戻る</span>
-          <% end %>
-        </li>
+        <li><%= link_to '戻る', root_path, class:'fa-before fa-chevron-left' %></li>
       </ul>
       <div class="navbar-brand">
         <span>とりりん<%= fa_icon :star %>チャット</span>
@@ -32,7 +28,7 @@
           <h5 class="media-heading">
             <span class="user name"><%= current_user&.name %></span>
           </h5>
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#users">
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#users">
             <span>変更</span>
           </button>
         </div>

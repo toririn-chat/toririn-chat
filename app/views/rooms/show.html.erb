@@ -3,11 +3,7 @@
   <div class="container">
     <div class="navbar-header">
       <ul class="nav navbar-nav">
-        <li>
-          <%= link_to rooms_path do %>
-          <span class="fa-before fa-chevron-left">戻る</span>
-          <% end %>
-        </li>
+        <li><%= link_to '戻る', rooms_path, class:'fa-before fa-chevron-left' %></li>
       </ul>
       <div class="navbar-brand">
         <span><%= @room.name %></span>
@@ -27,7 +23,7 @@
     <div class="input-group">
       <input type="text" class="form-control input-sm" id="text">
       <span class="input-group-btn">
-        <button class="btn btn-sm btn-primary" type="button" id="button">
+        <button class="btn btn-sm btn-primary" id="button">
           <%= fa_icon 'pencil' %>
         </button>
       </span>
