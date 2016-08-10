@@ -31,6 +31,11 @@ document.addEventListener 'turbolinks:load', ->
           room_id: room_id
           text: text
         }
+      stamp: (user_id, room_id, stamp) ->
+        @perform 'stamp', {
+          user_id: user_id
+          room_id: room_id
+          stamp: stamp
         }
 
 $(document).on 'keypress', '#text', (event) ->

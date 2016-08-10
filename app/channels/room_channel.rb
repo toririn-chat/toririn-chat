@@ -16,4 +16,13 @@ class RoomChannel < ApplicationCable::Channel
     Message.create! message
   end
 
+  def stamp(data)
+    message = {
+      user_id: data['user_id'],
+      room_id: data['room_id'],
+      stamp: data['stamp']
+    }
+    Message.create! message
+  end
+
 end

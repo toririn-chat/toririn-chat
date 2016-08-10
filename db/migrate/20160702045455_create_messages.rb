@@ -4,6 +4,7 @@ class CreateMessages < ActiveRecord::Migration[5.0]
       t.references :room
       t.references :user
       t.text :text
+      t.text :stamp
       t.timestamps
     end
   end

@@ -27,6 +27,38 @@
           <%= fa_icon 'pencil' %>
         </button>
       </span>
+      <span class="input-group-btn">
+        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#stamps">
+          <%= fa_icon 'smile-o' %>
+        </button>
+      </span>
     </div>
   </div>
 </footer>
+<div class="modal fade" id="stamps" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+        <h1 class="modal-title">スタンプ</h1>
+      </div>
+      <div class="modal-body">
+        <div class="gallery">
+          <div class="container-fluid">
+            <div class="row-fluid">
+              <% Dir.glob("public/images/stamps/**/*.png").each do |file_path| %>
+              <% name = File.basename(file_path) %>
+              <% src = File.join('stamps', name) %>
+              <div class="col col-xs-3">
+                <%= image_tag src, class:'img-responsive img-rounded', 'data-name':name %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

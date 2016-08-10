@@ -31,10 +31,6 @@ document.addEventListener 'turbolinks:load', ->
         # TODO
         console.log message
 
-  if $('body.rooms.show').exists()
-    users = $('#user-modal')
-    console.log 'wwwww'
-
 selectIcon = (name) ->
   icons = $('.gallery img')
   icons.css('opacity', '0.2')
