@@ -4,8 +4,7 @@
       <ul class="nav navbar-nav">
         <li>
           <%= link_to root_path do %>
-          <%= fa_icon 'chevron-left' %>
-          <span>戻る</span>
+          <span class="fa-before fa-chevron-left">戻る</span>
           <% end %>
         </li>
       </ul>
@@ -18,7 +17,7 @@
 <article class="container">
   <section>
     <div id="user">
-      <h1><%= fa_icon :user %>ユーザ</h1>
+      <h1 class="fa-before fa-user">ユーザ</h1>
       <div class="media">
         <div class="media-left">
           <div class="pull-left">
@@ -41,14 +40,13 @@
     </div>
   </section>
   <section>
-    <h1><%= fa_icon :comments %>チャットルーム</h1>
+    <h1 class="fa-before fa-comments">チャットルーム</h1>
     <ul class="rooms">
       <% @rooms.each do |room| %>
       <li>
         <%= link_to room do %>
         <p class="room-list-item-heading">
-          <%= fa_icon :comments %>
-          <span class="title"><%= room.name %></span>
+          <span class="title fa-before fa-comments"><%= room.name %></span>
           <span class="badge"><%= room.messages.size %></span>
         </p>
         <hr>
