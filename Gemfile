@@ -14,10 +14,10 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails', git:'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'font-awesome-rails'
 gem 'underscore-string-rails'
+gem 'google-analytics-rails'
 
 group :production do
   gem 'pg'
-  gem 'google-analytics-rails'
 end
 
 group :production, :development do
