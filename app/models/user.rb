@@ -3,7 +3,7 @@ class User < ApplicationRecord
   validate :name_cannot_be_blank
 
   def icon_path
-    ActionController::Base.helpers.asset_path(icon)
+    ActionController::Base.helpers.asset_path(File.join('images', 'icons', icon))
   end
 
   def name_cannot_be_blank

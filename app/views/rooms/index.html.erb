@@ -23,7 +23,7 @@
         <div class="media-left">
           <div class="pull-left">
             <% if current_user %>
-            <%= image_tag current_user&.icon, size:'40x40', class:'media-object img-circle user icon' %>
+            <%= image_tag current_user&.icon_path, size:'40x40', class:'media-object img-circle user icon' %>
           <% else %>
             <%= image_tag 'icons/blank.png', size:'40x40', class:'media-object img-circle user icon', style:'opacity:0.2;' %>
             <% end %>
@@ -33,8 +33,8 @@
           <h5 class="media-heading">
             <span class="user name"><%= current_user&.name %></span>
           </h5>
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#user-modal">
-            変更
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#users">
+            <span>変更</span>
           </button>
         </div>
       </div>
@@ -69,7 +69,7 @@
   </div>
 </footer>
 
-<div class="modal fade" id="user-modal" tabindex="-1">
+<div class="modal fade" id="users" tabindex="-1">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
@@ -84,15 +84,19 @@
         <div class="form-group form-group-sm">
           <%= f.label :icon, class:'control-label' %>
           <%= f.hidden_field :icon %>
-          <ul class="animal-list">
-            <% ('01'..'16').to_a.each do |n| %>
-            <li>
-              <% src = "icons/animal-#{n}.png" %>
-              <%= image_tag src, size:'40x40', class:'media-object img-circle', 'data-path':src %>
-            </li>
-            <% end %>
-          </ul>
-          <div style="clear:both;"></div>
+          <div class="gallery">
+            <div class="container-fluid">
+              <div class="row-fluid">
+                <% Dir.glob("public/images/icons/**/*.png").shuffle.each do |file_path| %>
+                <% name = File.basename(file_path) %>
+                <% src = File.join('icons', name) %>
+                <div class="col col-xs-3">
+                  <%= image_tag src, class:'img-responsive img-circle', 'data-name':name %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
