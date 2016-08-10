@@ -1,5 +1,8 @@
 ---
 en:
+  toririn: Toririn
+  chat: Chat
+  start: Start
   activerecord:
     errors:
       messages:

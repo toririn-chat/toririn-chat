@@ -3,7 +3,7 @@
   <div class="container">
     <div class="navbar-header">
       <ul class="nav navbar-nav">
-        <li><%= link_to '戻る', rooms_path, class:'fa-before fa-chevron-left' %></li>
+        <li><%= link_to t('back'), rooms_path, class:'fa-before fa-chevron-left' %></li>
       </ul>
       <div class="navbar-brand">
         <span><%= @room.name %></span>
@@ -42,7 +42,7 @@
         <button class="close" data-dismiss="modal">
           <span>&times;</span>
         </button>
-        <h1 class="modal-title">スタンプ</h1>
+        <h1 class="modal-title"><%= t('stamps') %></h1>
       </div>
       <div class="modal-body">
         <div class="gallery">

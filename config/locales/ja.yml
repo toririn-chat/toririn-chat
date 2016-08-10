@@ -1,5 +1,14 @@
 ---
 ja:
+  toririn: とりりん
+  chat: チャット
+  start: はじめる
+  back: 戻る
+  user: ユーザ
+  chatroom: チャットルーム
+  about: このアプリについて
+  authors: 運営者・お問い合わせ
+  stamps: スタンプ
   activerecord:
     errors:
       messages:
