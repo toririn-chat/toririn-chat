@@ -172,5 +172,5 @@
 message_<%= index %>:
   user: user_<%= (0..2).to_a.sample %>
   room: room_<%= (0..2).to_a.sample %>
-  content: <%= text %>
+  text: <%= text %>
 <% end %>
