@@ -1,15 +1,9 @@
 class User < ApplicationRecord
   has_many :messages
-  validate :name_cannot_be_blank
+  validates :name, :icon, presence: true
 
   def icon_path
     ActionController::Base.helpers.asset_path(File.join('images', 'icons', icon))
-  end
-
-  def name_cannot_be_blank
-   if !name.present? || name.strip.blank?
-     errors.add(:name, 'cannot be blank')
-   end
   end
 
 end

@@ -10,6 +10,17 @@ ja:
   authors: 運営者・お問い合わせ
   stamps: スタンプ
   activerecord:
+    attributes:
+      message:
+        user: ユーザ名
+        room: チャットルーム名
+        text_or_stamp: テキストかスタンプ
+      user:
+        name: ユーザ名
+        icon: アイコン
+      room:
+        name: チャットルーム名
+        icon: アイコン
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
