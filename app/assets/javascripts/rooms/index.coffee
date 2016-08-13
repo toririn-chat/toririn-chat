@@ -28,7 +28,13 @@ document.addEventListener 'turbolinks:load', ->
   $(document).on 'ajax:error', 'form.new_user', (event, xhr, status, error) ->
     $.each xhr.responseJSON, (index, message) ->
       # TODO
-      console.log message
+      console.error message
+  $('a#logout[data-remote=true]').on 'ajax:success', (event, data, status, xhr) ->
+    window.location.replace(Routes.root_path())
+  $('a#logout[data-remote=true]').on 'ajax:error', (event, xhr, status, error) ->
+    $.each xhr.responseJSON, (index, message) ->
+      # TODO
+      console.error message
 
 selectIcon = (name) ->
   icons = $('.gallery img')

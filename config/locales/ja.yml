@@ -230,6 +230,9 @@ ja:
     pm: 午後
   rooms:
     index:
+      logout: ログアウト
       users:
         new:
           title: ユーザ設定
+    show:
+      logout: ログアウト

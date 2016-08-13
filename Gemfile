@@ -15,6 +15,7 @@ gem 'twitter-bootstrap-rails', git:'https://github.com/seyhunak/twitter-bootstra
 gem 'font-awesome-rails'
 gem 'underscore-string-rails'
 gem 'google-analytics-rails'
+gem 'js-routes'
 
 group :production do
   gem 'pg'
