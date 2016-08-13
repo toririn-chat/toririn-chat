@@ -47,7 +47,11 @@
               <span class="title fa-before fa-comments"><%= room.name %></span>
               <span class="badge"><%= room.messages.size %></span>
             </p>
+              <% room.messages.includes(:user).map(&:user).uniq.each do |user| %>
+                <%= image_tag user.icon_path,  size:'35x35', class:'img-responsive img-circle', style:'display:inline;' %>
+              <% end %>
             <hr>
+            <p><small>最終更新日:<%= l(Message.where(room_id:room.id).order(created_at:'DESC').limit(1).first.created_at,  format: :messages) %></small></p>
             <% end %>
           </div>
         </div>
