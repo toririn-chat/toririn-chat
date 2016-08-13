@@ -36,21 +36,23 @@
       </div>
     </div>
   </section>
-  <section>
+  <section class="rooms">
     <h1 class="fa-before fa-comments"><%= t('chatroom') %></h1>
-    <ul class="rooms">
-      <% @rooms.each do |room| %>
-      <li>
-        <%= link_to room do %>
-        <p class="room-list-item-heading">
-          <span class="title fa-before fa-comments"><%= room.name %></span>
-          <span class="badge"><%= room.messages.size %></span>
-        </p>
-        <hr>
+      <div class="row">
+        <% @rooms.each do |room| %>
+        <div class="col col-xs-6">
+          <div class="room">
+            <%= link_to room do %>
+            <p>
+              <span class="title fa-before fa-comments"><%= room.name %></span>
+              <span class="badge"><%= room.messages.size %></span>
+            </p>
+            <hr>
+            <% end %>
+          </div>
+        </div>
         <% end %>
-      </li>
-      <% end %>
-    </ul>
+      </div>
   </section>
 </article>
 <footer class="footer">
