@@ -29,9 +29,9 @@
             <span class="user name"><%= current_user&.name %></span>
           </h5>
           <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#users">
-            <span>変更</span>
+            <span><%= t('edit') %></span>
           </button>
-          <%= link_to t('.logout'), logout_path, method: :delete, class:'btn btn-primary btn-sm', remote:true, id:'logout' %>
+          <%= link_to t('logout'), logout_path, method: :delete, class:'btn btn-primary btn-sm', remote:true, id:'logout' %>
         </div>
       </div>
     </div>
