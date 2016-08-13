@@ -33,16 +33,28 @@ document.addEventListener 'turbolinks:load', ->
     App.room = App.cable.subscriptions.create(current_room_ch(), subscription)
     window.scrollTo(0, document.body.scrollHeight)
 
-$(document).on 'keypress', '#text', (event) ->
-  if event.keyCode is 13
-    value = event.target.value
-    if value.length != 0
-      App.room.text(value)
-      event.target.value = ''
-      event.preventDefault()
+  updateButtonState = ->
+    if $('#text').val().length is 0
+      $('#button').attr('disabled', 'disabled')
+    else
+      $('#button').removeAttr('disabled')
 
-$(document).on 'click', '#button', (event) ->
-  value = $('#text').val()
-  if value.length != 0
-    $('#text').val('')
-    App.room.text(value)
+  updateButtonState()
+  $('#text').on 'keydown keyup keypress', (event) ->
+    updateButtonState()
+
+  $(document).on 'keypress', '#text', (event) ->
+    if event.keyCode is 13
+      value = event.target.value
+      if value.length != 0
+        App.room.text(value)
+        event.target.value = ''
+        event.preventDefault()
+      updateButtonState()
+
+  $(document).on 'click', '#button', (event) ->
+    value = $('#text').val()
+    if value.length != 0
+      $('#text').val('')
+      App.room.text(value)
+      updateButtonState()
