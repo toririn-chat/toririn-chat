@@ -20,12 +20,12 @@ document.addEventListener 'turbolinks:load', ->
   $('.gallery img').on 'click', (event) ->
     icon_name = $(event.target).data('name')
     selectIcon(icon_name)
-  $(document).on 'ajax:success', 'form.new_user', (event, data, status, xhr) ->
+  $('form.new_user, form.edit_user').on 'ajax:success', (event, data, status, xhr) ->
     $('img.user.icon').attr('src', data.icon_path)
     $('img.user.icon').css('opacity', '1.0')
     $('span.user.name').html(data.name)
     users.modal('hide')
-  $(document).on 'ajax:error', 'form.new_user', (event, xhr, status, error) ->
+  $('form.new_user, form.edit_user').on 'ajax:error', (event, xhr, status, error) ->
     $.each xhr.responseJSON, (index, message) ->
       # TODO
       console.error message
