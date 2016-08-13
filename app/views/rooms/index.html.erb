@@ -70,7 +70,7 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title"><%=t '.users.new.title'%></h1>
+        <h1 class="modal-title"><%=t 'user_settings'%></h1>
       </div>
       <%= form_for(current_user || User.new, remote:true, format:'json') do |f| %>
       <div class="modal-body">

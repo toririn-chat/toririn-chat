@@ -1,0 +1,4 @@
+en:
+  time:
+    formats:
+      messages: "%a, %d %b %Y %H:%M:%S %z"

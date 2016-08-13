@@ -1,0 +1,38 @@
+ja:
+  toririn: とりりん
+  chat: チャット
+  start: はじめる
+  back: 戻る
+  user: ユーザ
+  edit: 変更
+  logout: ログアウト
+  chatroom: チャットルーム
+  about: このアプリについて
+  authors: 運営者・お問い合わせ
+  stamps: スタンプ
+  user_settings: ユーザ設定
+  time:
+    formats:
+      messages: "%Y年%m月%d日 %H時%M分%S秒"
+  activerecord:
+    attributes:
+      message:
+        user: ユーザ
+        room: チャットルーム
+        text_or_stamp: テキストかスタンプ
+      user:
+        name: 名前
+        icon: アイコン
+      room:
+        name: チャットルーム名
+        icon: アイコン
+  helpers:
+    submit:
+      user:
+        create: OK
+        update: OK
+    label:
+      user:
+        title: タイトル
+        name: 名前
+        icon: アイコン

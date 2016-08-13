@@ -1,28 +1,6 @@
 ---
 ja:
-  toririn: とりりん
-  chat: チャット
-  start: はじめる
-  back: 戻る
-  user: ユーザ
-  chatroom: チャットルーム
-  about: このアプリについて
-  authors: 運営者・お問い合わせ
-  stamps: スタンプ
-  edit: 変更
-  logout: ログアウト
   activerecord:
-    attributes:
-      message:
-        user: ユーザ名
-        room: チャットルーム名
-        text_or_stamp: テキストかスタンプ
-      user:
-        name: ユーザ名
-        icon: アイコン
-      room:
-        name: チャットルーム名
-        icon: アイコン
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
@@ -164,13 +142,6 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
-      user:
-        create: OK
-        update: OK
-    label:
-      user:
-        name: 名前
-        icon: アイコン
   number:
     currency:
       format:
@@ -228,5 +199,4 @@ ja:
       default: "%Y/%m/%d %H:%M:%S"
       long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       short: "%y/%m/%d %H:%M"
-      messages: "%Y年%m月%d日 %H時%M分%S秒"
     pm: 午後
