@@ -1,8 +1,6 @@
 <article class="container">
   <section>
-    <h1>とりりん<%= fa_icon :star %>チャット</h1>
-    <%= link_to rooms_path, class:'btn btn-lg btn-primary' do %>
-    <span>はじめる</span>
-    <% end %>
+    <h1><%=t('toririn')%><%= fa_icon :star %><%=t('chat')%></h1>
+    <%= link_to t('start'), rooms_path, class:'btn btn-lg btn-primary' %>
   </section>
 </article>

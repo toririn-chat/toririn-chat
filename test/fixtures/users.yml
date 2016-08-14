@@ -5,5 +5,5 @@
 ).each.with_index do |name, index| %>
 user_<%= index %>:
   name: <%= name %>
-  icon: <%= "icons/animal-#{('01'..'16').to_a.sample}.png" %>
+  icon: <%= File.basename(Dir.glob("public/images/icons/**/*.png").sample) %>
 <% end %>

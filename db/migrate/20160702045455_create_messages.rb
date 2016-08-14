@@ -3,7 +3,8 @@ class CreateMessages < ActiveRecord::Migration[5.0]
     create_table :messages do |t|
       t.references :room
       t.references :user
-      t.text :content, null:false
+      t.text :text
+      t.text :stamp
       t.timestamps
     end
   end

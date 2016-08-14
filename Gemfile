@@ -15,16 +15,27 @@ gem 'twitter-bootstrap-rails', git:'https://github.com/seyhunak/twitter-bootstra
 gem 'font-awesome-rails'
 gem 'foreman'
 gem 'underscore-string-rails'
+gem 'google-analytics-rails'
+gem 'js-routes'
 
+# for Heroku
 group :production do
   gem 'pg'
   gem 'rails_12factor'
   gem 'redis', '~> 3.0'
-  gem 'google-analytics-rails'
 end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'i18n-tasks', require:false
+end
+
+group :development do
+  gem 'bullet'
+  gem 'spring'
+  gem 'listen', '~> 3.0.5'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console'
   gem 'pry-rails'
   gem 'pry-doc', require: false
   gem 'pry-coolline'
@@ -32,15 +43,6 @@ group :development, :test do
   gem 'hirb'
   gem 'hirb-unicode'
   gem 'awesome_print'
-  gem 'i18n-tasks', require: false
-end
-
-group :development do
-  gem 'web-console'
-  gem 'listen', '~> 3.0.5'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'bullet'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

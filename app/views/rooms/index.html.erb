@@ -1,8 +1,11 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
+      <ul class="nav navbar-nav">
+        <li><%= link_to t('back'), root_path, class:'fa-before fa-chevron-left' %></li>
+      </ul>
       <div class="navbar-brand">
-        <span>とりりん<%= fa_icon :star %>チャット</span>
+        <span><%= t('toririn') %><%= fa_icon :star %><%= t('chat') %></span>
       </div>
     </div>
   </div>
@@ -10,12 +13,12 @@
 <article class="container">
   <section>
     <div id="user">
-      <h1><%= fa_icon :user %>ユーザ</h1>
+      <h1 class="fa-before fa-user"><%= t('user') %></h1>
       <div class="media">
         <div class="media-left">
           <div class="pull-left">
             <% if current_user %>
-            <%= image_tag current_user&.icon, size:'40x40', class:'media-object img-circle user icon' %>
+            <%= image_tag current_user&.icon_path, size:'40x40', class:'media-object img-circle user icon' %>
           <% else %>
             <%= image_tag 'icons/blank.png', size:'40x40', class:'media-object img-circle user icon', style:'opacity:0.2;' %>
             <% end %>
@@ -25,47 +28,53 @@
           <h5 class="media-heading">
             <span class="user name"><%= current_user&.name %></span>
           </h5>
-          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#user-modal">
-            変更
+          <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#users">
+            <span><%= t('edit') %></span>
           </button>
+          <%= link_to t('logout'), logout_path, method: :delete, class:'btn btn-primary btn-sm', remote:true, id:'logout' %>
         </div>
       </div>
     </div>
   </section>
-  <section>
-    <h1><%= fa_icon :comments %>チャットルーム</h1>
-    <ul class="rooms">
-      <% @rooms.each do |room| %>
-      <li>
-        <%= link_to room do %>
-        <p class="room-list-item-heading">
-          <%= fa_icon :comments %>
-          <span class="title"><%= room.name %></span>
-          <span class="badge"><%= room.messages.size %></span>
-        </p>
-        <hr>
+  <section class="rooms">
+    <h1 class="fa-before fa-comments"><%= t('chatroom') %></h1>
+      <div class="row">
+        <% @rooms.each do |room| %>
+        <div class="col col-xs-6">
+          <div class="room">
+            <%= link_to room do %>
+            <p>
+              <span class="title fa-before fa-comments"><%= room.name %></span>
+              <span class="badge"><%= room.messages.size %></span>
+            </p>
+              <% room.messages.includes(:user).map(&:user).uniq.each do |user| %>
+                <%= image_tag user.icon_path,  size:'35x35', class:'img-responsive img-circle', style:'display:inline;' %>
+              <% end %>
+            <hr>
+            <p><small>最終更新日:<%= l(Message.where(room_id:room.id).order(created_at:'DESC').limit(1).first.created_at,  format: :messages) %></small></p>
+            <% end %>
+          </div>
+        </div>
         <% end %>
-      </li>
-      <% end %>
-    </ul>
+      </div>
   </section>
 </article>
 <footer class="footer">
   <div class="container">
     <ul>
-      <li><%= link_to 'このアプリについて', about_path %></li>
+      <li><%= link_to t('about'), about_path %></li>
       <li><%= fa_icon :star %></li>
-      <li><%= link_to '運営者・お問い合わせ', about_path(anchor:'contact') %>
+      <li><%= link_to t('authors'), about_path(anchor:'contact') %>
       </li>
     </ul>
   </div>
 </footer>
 
-<div class="modal fade" id="user-modal" tabindex="-1">
+<div class="modal fade" id="users" tabindex="-1">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title"><%=t '.users.new.title'%></h1>
+        <h1 class="modal-title"><%=t 'user_settings'%></h1>
       </div>
       <%= form_for(current_user || User.new, remote:true, format:'json') do |f| %>
       <div class="modal-body">
@@ -76,15 +85,19 @@
         <div class="form-group form-group-sm">
           <%= f.label :icon, class:'control-label' %>
           <%= f.hidden_field :icon %>
-          <ul class="animal-list">
-            <% ('01'..'16').to_a.each do |n| %>
-            <li>
-              <% src = "icons/animal-#{n}.png" %>
-              <%= image_tag src, size:'40x40', class:'media-object img-circle', 'data-path':src %>
-            </li>
-            <% end %>
-          </ul>
-          <div style="clear:both;"></div>
+          <div class="gallery">
+            <div class="container-fluid">
+              <div class="row-fluid">
+                <% Dir.glob("public/images/icons/**/*.png").shuffle.each do |file_path| %>
+                <% name = File.basename(file_path) %>
+                <% src = File.join('icons', name) %>
+                <div class="col col-xs-3">
+                  <%= image_tag src, class:'img-responsive img-circle', 'data-name':name %>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
@@ -93,3 +106,4 @@
       <% end %>
     </div>
   </div>
+</div>

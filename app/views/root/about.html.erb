@@ -2,12 +2,7 @@
   <div class="container">
     <div class="navbar-header">
       <ul class="nav navbar-nav">
-        <li>
-          <%= link_to rooms_path do %>
-          <%= fa_icon 'chevron-left' %>
-          <span>戻る</span>
-          <% end %>
-        </li>
+        <li><%= link_to '戻る', rooms_path, class:'fa-before fa-chevron-left' %></li>
       </ul>
       <div class="navbar-brand">
         <span>このアプリについて</span>

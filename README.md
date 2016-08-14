@@ -40,3 +40,14 @@ This chat system currently is under development. This is a chat system to conduc
 ## References
 
 [JSPS科研費16K01114](https://kaken.nii.ac.jp/ja/grant/KAKENHI-PROJECT-16K01114/)
+
+## Development
+
+```bash
+$ bundle install
+$ bundle exec rails server -b 0.0.0.0
+```
+
+```bash
+$ open http://localhost:3000/
+```
