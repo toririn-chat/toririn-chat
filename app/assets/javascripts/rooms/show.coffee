@@ -12,16 +12,10 @@ document.addEventListener 'turbolinks:load', ->
   sendText = ->
     value = $('#text').val()
     if value.length > 0
-      $('#text').val('')
       App.room.text(value)
-      updateButtonState()
+      $('#text').val('')
 
   # events
-
-  $('.gallery img').on 'click', (event) ->
-    stamp_name = $(event.target).data('name')
-    App.room.stamp(stamp_name)
-    $('#stamps').modal('hide')
 
   $('#text').on 'keydown keyup keypress', (event) ->
     updateButtonState()
@@ -29,10 +23,22 @@ document.addEventListener 'turbolinks:load', ->
   $('#text').on 'keypress', (event) ->
     if event.keyCode is 13
       sendText()
+      updateButtonState()
       event.preventDefault()
 
   $('#button').on 'click', (event) ->
     sendText()
+
+  $('#stamps .gallery img').on 'click', (event) ->
+    stamp_name = $(event.target).data('name')
+    App.room.stamp(stamp_name)
+    $('#stamps').modal('hide')
+
+  $('#stamps').on 'shown.bs.modal', ->
+    window.scrollTo(0, document.body.scrollHeight)
+
+  $('#stamps').on 'hidden.bs.modal', ->
+    window.scrollTo(0, document.body.scrollHeight)
 
   # main
 
