@@ -23,6 +23,7 @@ end
 
 group :production, :development do
   gem 'foreman'
+  gem 'annotate'
 end
 
 group :development, :test do
