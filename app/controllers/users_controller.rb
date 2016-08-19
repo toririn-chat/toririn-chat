@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        session[:id] = @user.id
+        session_create(@user.id)
         format.json { render :show, status: :created, location: @user }
       else
         format.json { render json: @user.errors.full_messages, status: :unprocessable_entity }
