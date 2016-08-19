@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id         :integer          not null, primary key
+#  room_id    :integer
+#  user_id    :integer
+#  text       :text
+#  stamp      :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Message < ApplicationRecord
 
   belongs_to :room
