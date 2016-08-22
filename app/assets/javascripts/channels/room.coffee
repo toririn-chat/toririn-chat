@@ -48,6 +48,7 @@ $(document).on 'turbolinks:load', ->
   if getRoomID()?
     room_identifier = { channel: 'RoomChannel', room_id: getRoomID() }
     App.room = App.cable.subscriptions.create(room_identifier, room_subscription)
+  scrollToBottom()
 
 $(document).on 'turbolinks:request-start', ->
   if getRoomID()?
