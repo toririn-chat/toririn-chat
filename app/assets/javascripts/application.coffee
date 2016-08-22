@@ -6,6 +6,7 @@
 #= require js-routes
 #= require_tree .
 
+# utils
 jQuery.fn.exists = ->
   Boolean(this.length > 0)
 
