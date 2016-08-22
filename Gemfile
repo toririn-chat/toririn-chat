@@ -21,14 +21,12 @@ group :production do
   gem 'pg'
 end
 
-group :production, :development do
-  gem 'foreman'
-  gem 'annotate'
-end
-
 group :development, :test do
   gem 'sqlite3'
-  gem 'i18n-tasks', require:false
+end
+
+group :production, :development do
+  gem 'foreman'
 end
 
 group :development do
@@ -44,6 +42,8 @@ group :development do
   gem 'hirb'
   gem 'hirb-unicode'
   gem 'awesome_print'
+  gem 'annotate'
+  gem 'i18n-tasks', require:false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
