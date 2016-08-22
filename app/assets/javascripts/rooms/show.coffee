@@ -1,7 +1,10 @@
-document.addEventListener 'turbolinks:load', ->
+$(document).on 'turbolinks:load', ->
   return unless $('body.rooms.show').exists()
 
   # functions
+
+  scrollToBottom = ->
+    window.scrollTo(0, document.body.scrollHeight)
 
   updateButtonState = ->
     if $('#text').val().length is 0
@@ -35,12 +38,11 @@ document.addEventListener 'turbolinks:load', ->
     $('#stamps').modal('hide')
 
   $('#stamps').on 'shown.bs.modal', ->
-    window.scrollTo(0, document.body.scrollHeight)
+    scrollToBottom()
 
   $('#stamps').on 'hidden.bs.modal', ->
-    window.scrollTo(0, document.body.scrollHeight)
+    scrollToBottom()
 
   # main
 
-  window.scrollTo(0, document.body.scrollHeight)
   updateButtonState()
