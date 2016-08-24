@@ -21,7 +21,6 @@ gem 'js-routes'
 # for Heroku
 group :production do
   gem 'pg'
-  gem 'rails_12factor'
   gem 'redis', '~> 3.0'
 end
 
