@@ -1,33 +1,63 @@
-App.room = null
-subscription =
+# functions
+
+getRoomID = ->
+  $('#params').data('room-id')
+
+getUnreadMessageIDs = ->
+  user_id = $('#params').data('user-id')
+  message_ids = ($(m).data('id') for m in $('.message') when (user_id not in $(m).data('readers')))
+  return message_ids
+
+appendMessage = (message) ->
+  $('.messages').append(message)
+
+updateMessage = (message) ->
+  id = $(message).data('id')
+  $(".message[data-id=#{id}]").html(message)
+
+scrollToBottom = ->
+  window.scrollTo(0, document.body.scrollHeight)
+
+room_subscription =
+  # WebSocket Events Handlers
+  connected: ->
+    this.mark('read', getUnreadMessageIDs())
+    scrollToBottom()
   received: (data) ->
-    $('ul.messages').append data['message']
-    window.scrollTo(0, document.body.scrollHeight)
+    if data['action'] == 'append'
+      appendMessage(data['message'])
+      this.mark('read', getUnreadMessageIDs())
+      scrollToBottom()
+    if data['action'] == 'update'
+      updateMessage(data['message'])
+  disconnected: ->
+    # noop
+  rejected: ->
+    # noop
+  # App defined Actions
   text: (text) ->
     @perform 'text', {
-      user_id: this.current_user_id()
-      room_id: this.current_room_id()
+      room_id: getRoomID()
       text: text
     }
   stamp: (stamp) ->
     @perform 'stamp', {
-      user_id: this.current_user_id()
-      room_id: this.current_room_id()
+      room_id: getRoomID()
       stamp: stamp
     }
-  current_user_id: ->
-    $('#params').data('user-id')
-  current_room_id: ->
-    $('#params').data('room-id')
+  mark: (type, message_ids) ->
+    if message_ids.length > 0
+      @perform 'mark', {
+        type: type,
+        message_ids: message_ids
+      }
 
-current_room_ch = ->
-  id = $('#params').data('room-id')
-  return {channel: 'RoomChannel', room_id: id} if id?
+$(document).on 'turbolinks:load', ->
+  if getRoomID()?
+    room_identifier = { channel: 'RoomChannel', room_id: getRoomID() }
+    App.room = App.cable.subscriptions.create(room_identifier, room_subscription)
+  scrollToBottom()
 
-document.addEventListener 'turbolinks:request-start', ->
-  if current_room_ch()?
+$(document).on 'turbolinks:request-start', ->
+  if getRoomID()?
     App.room.unsubscribe()
-
-document.addEventListener 'turbolinks:load', ->
-  if current_room_ch()?
-    App.room = App.cable.subscriptions.create(current_room_ch(), subscription)

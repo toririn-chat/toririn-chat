@@ -11,6 +11,12 @@ ja:
   authors: 運営者・お問い合わせ
   stamps: スタンプ
   user_settings: ユーザ設定
+  message:
+    read:
+      count:
+        zero: ''
+        one: "既読 %{count}"
+        other: "既読 %{count}"
   time:
     formats:
       messages: "%Y年%m月%d日 %H時%M分%S秒"

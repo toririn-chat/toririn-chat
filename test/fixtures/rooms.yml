@@ -1,8 +1,6 @@
-<% %w(
-ゲストルーム
-とりりん小学校出前授業2016
-トリピー小学校出前授業2016
-).each.with_index do |name, index| %>
+<% rooms = %w(ゲストルーム とりりん小学校出前授業2016 トリピー小学校出前授業2016) %>
+
+<% rooms.each.with_index do |name, index| %>
 room_<%= index %>:
   name: <%= name %>
 <% end %>
