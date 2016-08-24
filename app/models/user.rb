@@ -12,6 +12,7 @@
 class User < ApplicationRecord
 
   has_many :messages
+  has_many :user_messages
   validates :name, :icon, {presence: true}
 
   def icon_path

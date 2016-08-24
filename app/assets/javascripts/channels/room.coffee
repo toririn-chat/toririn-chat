@@ -8,8 +8,12 @@ getUnreadMessageIDs = ->
   message_ids = ($(m).data('id') for m in $('.message') when (user_id not in $(m).data('readers')))
   return message_ids
 
-addMessage = (message) ->
+appendMessage = (message) ->
   $('.messages').append(message)
+
+updateMessage = (message) ->
+  id = $(message).data('id')
+  $(".message[data-id=#{id}]").html(message)
 
 scrollToBottom = ->
   window.scrollTo(0, document.body.scrollHeight)
@@ -17,12 +21,15 @@ scrollToBottom = ->
 room_subscription =
   # WebSocket Events Handlers
   connected: ->
-    this.mark('read')
+    this.mark('read', getUnreadMessageIDs())
     scrollToBottom()
   received: (data) ->
-    addMessage(data['message'])
-    scrollToBottom()
-    this.mark('read')
+    if data['action'] == 'append'
+      appendMessage(data['message'])
+      this.mark('read', getUnreadMessageIDs())
+      scrollToBottom()
+    if data['action'] == 'update'
+      updateMessage(data['message'])
   disconnected: ->
     # noop
   rejected: ->
@@ -39,10 +46,11 @@ room_subscription =
       stamp: stamp
     }
   mark: (type, message_ids) ->
-    @perform 'mark', {
-      type: type,
-      message_ids: getUnreadMessageIDs()
-    }
+    if message_ids.length > 0
+      @perform 'mark', {
+        type: type,
+        message_ids: message_ids
+      }
 
 $(document).on 'turbolinks:load', ->
   if getRoomID()?

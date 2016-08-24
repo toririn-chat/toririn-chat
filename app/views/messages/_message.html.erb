@@ -1,4 +1,4 @@
-<div class="message">
+<div class="message" data-id="<%= message.id %>" data-readers="<%= message.readers.pluck(:id) %>">
 <li class="media">
   <div class="media-left">
     <div class="pull-left">
@@ -9,14 +9,15 @@
     <p class="message-header">
       <span>
         <strong><%= message.user.name %></strong>
-        <small class="relative-timestamp"><%= l(message.created_at, format: :messages) %></small>
+        <small class="timestamp"><%= l(message.created_at, format: :messages) %></small>
+        <small class="count"><%= t('message.read.count', count: message.readers.count) %></small>
       </span>
     </p>
     <p class="message-content">
       <% if message.text %>
-      <span><%= message.text %></span>
+        <span><%= message.text %></span>
       <% else %>
-      <span><%= image_tag asset_path(File.join('images', 'stamps', message.stamp)), size:'150x150', class:'img-responsive' %></span>
+        <span><%= image_tag asset_path(File.join('images', 'stamps', message.stamp)), size:'150x150', class:'img-responsive' %></span>
       <% end %>
     </p>
   </div>

@@ -1,0 +1,11 @@
+<% users = YAML::load(ERB.new(IO.read('test/fixtures/users.yml')).result) %>
+<% messages = YAML::load(ERB.new(IO.read('test/fixtures/messages.yml')).result) %>
+
+<% users.keys.each do |user| %>
+  <% messages.keys.each do |message| %>
+user_message_<%= user %>_<%= message %>:
+  user: <%= user %>
+  message: <%= message %>
+  read: <%= [true, false].sample %>
+  <% end %>
+<% end %>
