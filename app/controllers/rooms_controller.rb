@@ -5,7 +5,6 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
-    @user = User.first
   end
 
   def show
