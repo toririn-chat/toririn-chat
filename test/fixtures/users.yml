@@ -1,8 +1,6 @@
-<% %w(
-とりりん
-トリピー
-だらずさん
-).each.with_index do |name, index| %>
+<% users = %w(とりりん トリピー だらずさん) %>
+
+<% users.each.with_index do |name, index| %>
 user_<%= index %>:
   name: <%= name %>
   icon: <%= File.basename(Dir.glob("public/images/icons/**/*.png").sample) %>

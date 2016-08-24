@@ -1,4 +1,4 @@
-<% %w(
+<% texts = %w(
 ゴーシュは町の活動写真館でセロを弾く係りでした。
 けれどもあんまり上手でないという評判でした。
 上手でないどころではなく実は仲間の楽手のなかではいちばん下手でしたから、いつでも楽長にいじめられるのでした。
@@ -168,16 +168,20 @@
 そしておしまいまで来たときは今夜もまた東がぼうと明るくなっていました。
 「ああ夜が明けたぞ。どうもありがとう。」狸の子は大へんあわてて譜や棒きれをせなかへしょってゴムテープでぱちんととめておじぎを二つ三つすると急いで外へ出て行ってしまいました。
 ゴーシュはぼんやりしてしばらくゆうべのこわれたガラスからはいってくる風を吸っていましたが、町へ出て行くまで睡って元気をとり戻（もど）そうと急いでねどこへもぐり込（こ）みました。
-).each.with_index do |text, index| %>
+) %>
+<% users = YAML::load(ERB.new(IO.read('test/fixtures/users.yml')).result) %>
+<% rooms = YAML::load(ERB.new(IO.read('test/fixtures/rooms.yml')).result) %>
+
+<% texts.each.with_index do |text, index| %>
 message_<%= index %>:
-  user: user_<%= (0..2).to_a.sample %>
-  room: room_<%= (0..2).to_a.sample %>
+  user: <%= users.keys.sample %>
+  room: <%= rooms.keys.sample %>
   text: <%= text %>
 <% end %>
 
 <% Dir.glob("public/images/stamps/**/*.png").shuffle.each.with_index do |file_path, index| %>
 message_stamp_<%= index %>:
-  user: user_<%= (0..2).to_a.sample %>
-  room: room_<%= (0..2).to_a.sample %>
+  user: <%= users.keys.sample %>
+  room: <%= rooms.keys.sample %>
   stamp: <%= File.basename(file_path) %>
 <% end %>
