@@ -51,7 +51,10 @@
                 <%= image_tag user.icon_path,  size:'35x35', class:'img-responsive img-circle', style:'display:inline;' %>
               <% end %>
             <hr>
-            <p><small>最終更新日:<%= l(Message.where(room_id:room.id).order(created_at:'DESC').limit(1).first.created_at,  format: :messages) %></small></p>
+            <% r = Message.where(room_id:room.id).order(created_at:'DESC').limit(1).first %>
+            <% if r %>
+            <p><small>最終更新日:<%= l(Message.where(room_id:room.id).order(created_at:'DESC').limit(1).first&.created_at,  format: :messages) %></small></p>
+            <% end %>
             <% end %>
           </div>
         </div>
