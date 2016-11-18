@@ -1,4 +1,3 @@
-@import 'bootstrap_and_overrides';
 body.root.index {
   position: fixed;
   margin: 0;
@@ -6,7 +5,7 @@ body.root.index {
   height: 100%;
   text-align: center;
   display: table;
-  background-color: @tc-accent-color;
+  background-color: $tc-accent-color;
   article {
     display: table-cell;
     text-align: center;
@@ -14,13 +13,13 @@ body.root.index {
     h1 {
       font-size: 32px;
       margin-bottom: 0.5em;
-      color: @tc-base-color;
+      color: $tc-base-color;
     }
     a {
-      color: @tc-link-color;
-      background-color: @tc-link-background-color;
+      color: $tc-link-color;
+      background-color: $tc-link-background-color;
       &:hover {
-        background-color: @tc-link-background-color-hover;
+        background-color: $tc-link-background-color-hover;
       }
     }
   }
@@ -29,10 +28,10 @@ body.root.about {
   article {
     section {
       a {
-        color: @tc-link-color;
-        background-color: @tc-link-background-color;
+        color: $tc-link-color;
+        background-color: $tc-link-background-color;
         &:hover {
-          background-color: @tc-link-background-color-hover;
+          background-color: $tc-link-background-color-hover;
         }
       }
     }

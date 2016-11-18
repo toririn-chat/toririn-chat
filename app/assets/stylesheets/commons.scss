@@ -8,3 +8,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+div.gallery {
+  .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .col {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .col:nth-child(4n+1) {
+    clear: both;
+  }
+  img {
+    cursor: pointer;
+    display: inline;
+  }
+}
