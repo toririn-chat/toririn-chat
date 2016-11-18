@@ -44,6 +44,7 @@ group :development do
   gem 'awesome_print'
   gem 'annotate'
   gem 'i18n-tasks', require:false
+  gem 'guard-livereload', require:false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
