@@ -51,3 +51,7 @@ $ bundle exec rails server -b 0.0.0.0
 ```bash
 $ open http://localhost:3000/
 ```
+
+```bash
+$ bundle exec guard
+```
