@@ -2,7 +2,9 @@
 
 This chat system currently is under development. This is a chat system to conduct classes about information education for children in local area network. Children can learn safe usage of SNS (social networking service) in safe local area network.
 
-* Demo Site https://toririn-chat.herokuapp.com/
+Demo Site https://toririn-chat.herokuapp.com/
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/mh61503891/toririn-chat)
 
 ## 2016-07-09
 
