@@ -3,10 +3,14 @@
   "description": "Toririn Chat",
   "repository": "https://github.com/mh61503891/toririn-chat",
   "keywords": [
+    "chat",
     "rails 5",
     "action cable",
     "websocket"
   ],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
   "addons": ["heroku-postgresql"],
   "env": {}
 }
