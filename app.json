@@ -1,11 +1,12 @@
 {
   "name": "Toririn Chat",
-  "description": "TODO: Add a short description about Toririn Chat",
+  "description": "Toririn Chat",
+  "repository": "https://github.com/mh61503891/toririn-chat",
   "keywords": [
-    "small",
-    "sharp",
-    "tool"
+    "rails 5",
+    "action cable",
+    "websocket"
   ],
-  "addons": [],
+  "addons": ["heroku-postgresql"],
   "env": {}
 }
