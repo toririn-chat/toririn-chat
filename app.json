@@ -1,0 +1,19 @@
+{
+  "name": "Toririn Chat",
+  "description": "Toririn Chat",
+  "repository": "https://github.com/mh61503891/toririn-chat",
+  "website": "https://github.com/mh61503891/toririn-chat",
+  "keywords": [
+    "Chat",
+    "Education",
+    "Rails 5",
+    "ActionCable",
+    "Websocket"
+  ],
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate"
+  },
+  "addons": ["heroku-postgresql"],
+  "success_url": "/",
+  "env": {}
+}

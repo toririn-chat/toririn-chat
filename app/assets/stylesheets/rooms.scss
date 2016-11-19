@@ -1,4 +1,3 @@
-@import 'bootstrap_and_overrides';
 body.rooms.index {
   section.rooms {
     div.row {
@@ -12,8 +11,8 @@ body.rooms.index {
             padding: 10px;
             display: block;
             text-decoration: none;
-            background-color: @tc-base-color;
-            border: 1px solid darken(@tc-base-color, @tc-color-amount-2);
+            background-color: $tc-base-color;
+            border: 1px solid darken($tc-base-color, $tc-color-amount-2);
             p {
               span.title {
                 vertical-align: middle;
@@ -22,8 +21,8 @@ body.rooms.index {
               span.badge {
                 vertical-align: middle;
                 font-size: 10px;
-                color: darken(@tc-accent-color, @tc-color-amount-2);
-                background-color: darken(@tc-base-color, @tc-color-amount-2);
+                color: darken($tc-accent-color, $tc-color-amount-2);
+                background-color: darken($tc-base-color, $tc-color-amount-2);
               }
             }
             hr {
@@ -31,18 +30,18 @@ body.rooms.index {
               height: 1px;
               margin-top: 4px;
               margin-bottom: 4px;
-              background-color: darken(@tc-base-color, @tc-color-amount-2);
+              background-color: darken($tc-base-color, $tc-color-amount-2);
             }
             &:hover {
-              color: darken(@tc-accent-color,@tc-color-amount-1);
-              background-color: darken(@tc-base-color, @tc-color-amount-1);
+              color: darken($tc-accent-color,$tc-color-amount-1);
+              background-color: darken($tc-base-color, $tc-color-amount-1);
               p {
                 span.title {
-                  color: darken(@tc-accent-color,@tc-color-amount-1);
+                  color: darken($tc-accent-color,$tc-color-amount-1);
                 }
               }
               hr {
-                background-color: darken(@tc-base-color, @tc-color-amount-3);
+                background-color: darken($tc-base-color, $tc-color-amount-3);
               }
             }
           }
@@ -54,12 +53,12 @@ body.rooms.index {
     }
   }
   footer {
-    background-color: @tc-footer-background-color;
-    font-size: @tc-footer-font-size;
+    background-color: $tc-footer-background-color;
+    font-size: $tc-footer-font-size;
     div.container {
       text-align: center;
       ul {
-        height: @tc-footer-height;
+        height: $tc-footer-height;
         margin: 0;
         padding: 0;
         li {
@@ -73,7 +72,7 @@ body.rooms.index {
           display: block;
           width: 100%;
           height: 100%;
-          padding-top: (@tc-footer-height - @tc-footer-font-size)/2-2px;
+          padding-top: ($tc-footer-height - $tc-footer-font-size)/2-2px;
         }
       }
     }
@@ -94,15 +93,15 @@ body.rooms.show {
       padding-top: 2.5px;
       p.message-header {
         margin-bottom: 0;
-        line-height: @font-size-base;
+        line-height: $font-size-base;
         strong {
           vertical-align: middle;
         }
         small.count,
         small.timestamp {
           vertical-align: middle;
-          font-size: @font-size-base * 0.75;
-          color: lighten(@text-color, @tc-color-amount-3);
+          font-size: $font-size-base * 0.75;
+          color: lighten($text-color, $tc-color-amount-3);
         }
       }
       p.message-content {
