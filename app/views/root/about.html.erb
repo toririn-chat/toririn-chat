@@ -25,6 +25,9 @@
   </section>
   <section>
     <h1 id="libraries">利用ライブラリ</h1>
-    <p>ユーザアカウントのデフォルトアイコンは<%= link_to 'Freepik', 'http://www.freepik.com/', target:'_blank' %>のデザインによるものです。</p>
+    <% icons = YAML.load_file(Rails.root.join(*%w(public images icons license.yml))) %>
+    <p>ユーザアカウントのアイコンには「<%= icons['author'] %>」による「<%= link_to icons['name'], icons['url'], target:'_blank' %>」のイラストを<%= link_to icons['license']['name'], icons['license']['url'], target:'_blank' %>に基づき使用させて頂いております。</p>
+    <% stamps = YAML.load_file(Rails.root.join(*%w(public images stamps license.yml))) %>
+    <p>スタンプには「<%= stamps['author'] %>」による「<%= link_to stamps['name'], stamps['url'], target:'_blank' %>」のイラストを<%= link_to stamps['license']['name'], stamps['license']['url'], target:'_blank' %>に基づき使用させて頂いております。</p>
   </section>
 </article>

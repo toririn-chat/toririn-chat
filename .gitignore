@@ -19,8 +19,3 @@
 
 # Ignore Byebug command history file.
 .byebug_history
-
-/public/images/icons/*
-!/public/images/icons/.keep
-/public/images/stamps/*
-!/public/images/stamps/.keep
