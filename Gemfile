@@ -12,15 +12,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'therubyracer'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'font-awesome-rails'
-gem 'foreman'
 gem 'underscore-string-rails'
 gem 'google-analytics-rails'
 gem 'js-routes'
 
-# for Heroku
 group :production do
   gem 'pg'
-  gem 'redis', '~> 3.0'
 end
 
 group :development, :test do
