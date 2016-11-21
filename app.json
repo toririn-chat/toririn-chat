@@ -15,5 +15,9 @@
   },
   "addons": ["heroku-postgresql"],
   "success_url": "/",
-  "env": {}
+  "env": {
+    "RAILS_FORCE_SSL": {
+      "value": "enabled"
+    }
+  }
 }
