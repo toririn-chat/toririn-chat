@@ -12,6 +12,17 @@ macOS Sierra: コンピュータとコンピュータのネットワークを作
 https://support.apple.com/kb/PH25186?viewlocale=ja_JP&locale=ja_JP
 
 
+## ファイルの配置
+
+* Railsアプリ: `~/Documents/toririn-chat` に配置
+* 起動コマンド: `~/Desktop/toririn-chat.command` に配置
+
+`~/Desktop/toririn-chat.command` の内容は下記のとおり。ログは標準出力とRailsのデフォルトのログの保存場所に記録される。
+
+```bash
+cd ~/Documents/toririn-chat/
+sudo bundle exec foreman start | tee ~/Documents/toririn-chat/log/production.log
+```
 
 ## macOSの設定
 
