@@ -1,4 +1,4 @@
-インストール
+# インストール
 
 ## ソースコードの取得
 
@@ -7,48 +7,53 @@ $ git clone https://github.com/mh61503891/toririn-chat.git¬
 $ cd toririn-chat
 ```
 
-パッケージのインストール
+## パッケージのインストール
 
+```bash
+$ bundle config --local build.pg --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config
+$ bundle config --local build.nokogiri --use-system-libraries
+$ bundle install
+```
 
-bundle config --local build.pg
---with-pg-config=/Applications/Postgres.app/Contents/Versions/latest
-/bin/pg_config¬
-bundle config --local build.nokogiri --use-system-libraries¬
-bundle install
+## 環境変数ファイルの設定
 
-sudo xcodebuild -license
-環境変数ファイルの設定
+```bash
+$ cp .env.example .env
+```
 
-下記のように .env というファイルをRailsのプロジェクト直下に配置します。
-.env は foreman が読み込んで実行時に使用します。
+```bash
+$ cat .env
+PORT=80
+DATABASE_URL=postgres://postgres:@localhost:5432/toririn-chat_production
+TZ=Asia/Tokyo
+LANG=ja_JP.UTF-8
+RAILS_ENV=production
+RAILS_SERVE_STATIC_FILES=enabled
+RAILS_LOG_TO_STDOUT=enabled
+DISABLE_DATABASE_ENVIRONMENT_CHECK=1
+```
 
-echo "SECRET_KEY_BASE=`bundle exec rails secret`" >> .env¬
-echo PORT=80 >> .env¬
-echo TZ=Asia/Tokyo >> .env¬
-echo
-DATABASE_URL=postgres://postgres:@localhost:5432/toririn-chat_produc
-tion >> .env¬
-echo LANG=ja_JP.UTF-8 >> .env¬
-echo RAILS_ENV=production >> .env¬
-echo RAILS_SERVE_STATIC_FILES=enabled >> .env¬
-echo RAILS_LOG_TO_STDOUT=enabled >> .env¬
-echo DISABLE_DATABASE_ENVIRONMENT_CHECK=1 >> .env
-データベースの設定
+Set `SECRET_KEY_BASE` to a generated secret key via `bundle exec rails secret`.
 
+```bash
+$ echo "SECRET_KEY_BASE=`bundle exec rails secret`" >> .env
+```
 
-bundle exec foreman run rails db:migrate:reset
-アセットのプリコンパイル
+## データベースの設定
 
+```bash
+$ bundle exec foreman run rails db:migrate:reset
+$ bundle exec foreman run rails db:seed
+```
 
-bundle exec foreman run rails assets:precompile
-サーバの起動
+## アセットのプリコンパイル
 
+```bash
+$ bundle exec foreman run rails assets:precompile
+```
 
-sudo bundle exec foreman start
-Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.
-bundle exec rails db:environment:set RAILS_ENV=production
+## サーバの起動
 
-bundle exec rails db:drop RAILS_ENV=production DISABLE_DATABASE_ENVIRONMENT_CHECK=1
-
-
-sudo bundle exec foreman run rails db:migrate:reset
+```bash
+$ sudo bundle exec foreman start
+```
