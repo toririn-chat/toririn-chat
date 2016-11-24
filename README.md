@@ -6,6 +6,25 @@ Demo Site https://toririn-chat.herokuapp.com/
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/mh61503891/toririn-chat)
 
+## 2016-11-25
+
+* Support stamps ([Rubicle LINE stamp](http://rubicle.net/line_stamp.html))
+* Support 'Deploy to Heroku' Button
+* Add default data of seeds
+* Support foreman with '.env'
+* Change icons to [Irasutoya](http://www.irasutoya.com/)
+* Migrate a CSS pre-processor from LESS to SASS
+    * Migrate a CSS framework from twitter-bootstrap-rails to bootstrap-sass
+* Change the default backend database for ActionCable from Redis to PostgreSQL
+* Support Guard for development
+* Support messages' status
+
+![](screenshots/toririn-chat-20161125-1.png)
+![](screenshots/toririn-chat-20161125-2.png)
+![](screenshots/toririn-chat-20161125-3.png)
+![](screenshots/toririn-chat-20161125-4.png)
+![](screenshots/toririn-chat-20161125-5.png)
+
 ## 2016-07-09
 
 * Support for user accounts (cookies' session only)
