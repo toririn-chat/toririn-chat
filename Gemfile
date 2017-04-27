@@ -22,6 +22,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'license_finder'
 end
 
 group :production, :development do
