@@ -136,3 +136,9 @@ $ open http://localhost:3000/
 ```bash
 $ bundle exec guard
 ```
+
+Generate License Finder's Repost.
+
+```bash
+bundle exec license_finder report --format html > doc/licenses.html
+```
