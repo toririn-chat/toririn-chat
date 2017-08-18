@@ -15,6 +15,7 @@ gem 'font-awesome-rails'
 gem 'underscore-string-rails'
 gem 'google-analytics-rails'
 gem 'js-routes'
+gem 'devise'
 
 group :production do
   gem 'pg'
