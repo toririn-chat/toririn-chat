@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  root to: 'root#index'
+  get :about, to: 'root#about'
+
+
   devise_for :users, controllers: { confirmations: 'confirmations' }
 
   resources :rooms
@@ -16,8 +20,6 @@ Rails.application.routes.draw do
   end
   resources :users
   delete :logout, to:'sessions#destroy'
-  root to: 'root#index'
-  get :about, to: 'root#about'
   mount ActionCable.server => '/cable'
 
   if Rails.env.development?

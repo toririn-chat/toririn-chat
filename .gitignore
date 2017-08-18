@@ -22,3 +22,5 @@
 
 .env
 !.env.example
+/public/packs
+/node_modules
