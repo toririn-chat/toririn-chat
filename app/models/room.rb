@@ -10,6 +10,7 @@
 
 class Room < ApplicationRecord
 
+  belongs_to :teacher, class_name:'User'
   has_many :messages
   validates :name, {presence: true}
 

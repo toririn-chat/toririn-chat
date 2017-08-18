@@ -12,12 +12,12 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :messages
   has_many :user_messages
-  validates :name, :icon, {presence: true}
+  # validates :name, :icon, {presence: true}
 
   def icon_path
     ActionController::Base.helpers.asset_path(File.join('images', 'icons', icon))

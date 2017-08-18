@@ -1,4 +1,4 @@
-class Admin::MessagesController < ApplicationController
+class Teacher::MessagesController < ApplicationController
   before_action :set_room, only: [:destroy_all]
 
   def destroy_all

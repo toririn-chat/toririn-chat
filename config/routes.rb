@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+
+  devise_for :users, controllers: { confirmations: 'confirmations' }
+
   resources :rooms
 
-  get :admin, to: 'admin#index'
-  namespace :admin do
+  get :teacher, to: 'teacher#index'
+  namespace :teacher do
     resources :rooms do
       resources :messages do
         collection do
@@ -17,4 +19,9 @@ Rails.application.routes.draw do
   root to: 'root#index'
   get :about, to: 'root#about'
   mount ActionCable.server => '/cable'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  end
+
 end

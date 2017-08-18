@@ -46,6 +46,8 @@ group :development do
   gem 'annotate'
   gem 'i18n-tasks', require:false
   gem 'guard-livereload', require:false
+  gem 'letter_opener'
+  gem 'letter_opener_web'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
