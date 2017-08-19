@@ -34,7 +34,7 @@ styles:
   progress: false
   code: false
   breadcrumb: false
-  close: false
+  close: true
   dropdown: false
   carousel: false
-  modal: false
+  modal: true

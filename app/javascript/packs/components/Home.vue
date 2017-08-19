@@ -1,43 +1,82 @@
 <template>
-<div class="container">
-  <h1>とりりん<i class="fa fa-star"></i>チャット</h1>
-  <p>
-    <router-link :to="{name:'start'}" class="btn btn-primary">
-      <span>はじめる</span>
-    </router-link>
-  </p>
+<div class="tc-splash">
+  <div class="container">
+    <div class="row justify-content-center mb-3">
+      <div class="col-5 col-sm-3 text-center">
+        <img class="img-fluid" src="images/logo.png"></img>
+      </div>
+    </div>
+    <div class="row justify-content-center mb-3">
+      <div class="text-center">
+        <h1>とりりん<i class="fa fa-star"></i>チャット</h1>
+      </div>
+    </div>
+    <div class="row justify-content-center d-none d-sm-none d-md-flex mb-3">
+      <div class="col-6">
+        <b-btn variant="primary" block :to="{name:'signup'}">
+          <span>新規登録</span>
+        </b-btn>
+      </div>
+    </div>
+    <div class="row justify-content-center d-none d-sm-none d-md-flex mb-3">
+      <div class="col-6">
+        <b-btn variant="primary" block :to="{name:'signin'}">
+          <span>ログイン</span>
+        </b-btn>
+      </div>
+    </div>
+  </div>
+  <div class="container fixed-bottom d-md-none">
+    <div class="row justify-content-center mb-3">
+      <div class="col-12">
+        <b-btn variant="primary" block :to="{name:'signup'}">
+          <span>新規登録</span>
+        </b-btn>
+      </div>
+    </div>
+    <div class="row justify-content-center mb-3">
+      <div class="col-12">
+        <b-btn variant="primary" block :to="{name:'signin'}">
+          <span>ログイン</span>
+        </b-btn>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 <script>
+import Vue from 'vue'
+export default {
+  data: () => {
+    return {}
+  }
+}
 </script>
 <style lang="scss">
 @import "../styles/valiables";
-body {
-    position: fixed;
-    margin: 0;
-    width: 100%;
+body,
+div.tc-splash,
+html {
     height: 100%;
-    text-align: center;
-    display: table;
+    width: 100%;
     background-color: $tc-color-dark;
-    .container {
-        display: table-cell;
-        text-align: center;
-        vertical-align: middle;
-        h1 {
-            font-size: 32px;
-            margin-bottom: 0.5em;
-            color: $tc-color-light;
-        }
-        a {
-            border-radius: 0.6rem;
-            border: 0 none;
-            color: $tc-color-dark;
-            background-color: $tc-color-light;
-            &:hover {
-                color: lighten($tc-color-dark, 15%);
-                background-color: lighten($tc-color-light, 30%);
-            }
+}
+div.tc-splash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+        font-size: 32px;
+        color: $tc-color-light;
+    }
+    a {
+        border-radius: 0.25rem;
+        border: 0 none;
+        color: $tc-color-dark;
+        background-color: $tc-color-light;
+        &:hover {
+            color: lighten($tc-color-dark, 15%);
+            background-color: lighten($tc-color-light, 30%);
         }
     }
 }
