@@ -8,11 +8,16 @@
     "Education",
     "Rails 5",
     "ActionCable",
-    "Websocket"
+    "WebSocket"
   ],
   "scripts": {
     "postdeploy": "bundle exec rails db:migrate && bundle exec rails db:seed"
   },
+  "buildpacks": [{
+    "url": "heroku/nodejs"
+  }, {
+    "url": "heroku/ruby"
+  }],
   "addons": ["heroku-postgresql"],
   "success_url": "/",
   "env": {
