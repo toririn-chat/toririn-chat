@@ -1,12 +1,12 @@
 <template>
 <div class="tc-splash">
   <div class="container">
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center mb-4">
       <div class="col-5 col-sm-3 text-center">
         <img class="img-fluid" src="images/logo.png"></img>
       </div>
     </div>
-    <div class="row justify-content-center mb-3">
+    <div class="row justify-content-center mb-4">
       <div class="text-center">
         <h1>とりりん<i class="fa fa-star"></i>チャット</h1>
       </div>
@@ -55,16 +55,17 @@ export default {
 <style lang="scss">
 @import "../styles/valiables";
 body,
-div.tc-splash,
 html {
     height: 100%;
     width: 100%;
-    background-color: $tc-color-dark;
 }
 div.tc-splash {
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: $tc-color-dark;
     h1 {
         font-size: 32px;
         color: $tc-color-light;

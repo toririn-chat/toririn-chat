@@ -2,21 +2,21 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-import Home from './components/Home'
+import Root from './components/Root'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'root',
+    component: Root
   }, {
     path: '/signin',
     name: 'signin',
-    component: Home
+    component: Root
   }, {
     path: '/signup',
     name: 'signup',
-    component: Home
+    component: Root
   }
 ]
 export default new VueRouter({routes, mode: 'history'})
