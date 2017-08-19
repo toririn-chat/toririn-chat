@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   root to: 'root#index'
-  get :about, to: 'root#about'
+
+
+  # get :about, to: 'root#about'
 
 
   devise_for :users, controllers: { confirmations: 'confirmations' }

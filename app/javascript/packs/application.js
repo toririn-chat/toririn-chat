@@ -5,16 +5,5 @@ import router from './router'
 import App from './components/App.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({i18n, router, el: 'app', components:{App}})
+  const app = new Vue({ i18n, router, el: 'app', components: { App } })
 })
-
-
-// import Vue from 'vue'
-// import App from './app.vue'
-//
-//
-//
-// document.addEventListener('DOMContentLoaded', () => {
-//   document.body.appendChild(document.createElement('hello'))
-//   const app = new Vue(App).$mount('hello')
-// })

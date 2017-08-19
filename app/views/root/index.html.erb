@@ -1,8 +1,17 @@
-<div class="container">
-  <h1><%=t('toririn')%><%= fa_icon :star %><%=t('chat')%></h1>
-  <%= link_to 'はじめる',  new_user_registration_path, class:'btn btn-primary' %>
-
-  <!-- <%= link_to '先生用新規登録',  new_user_registration_path, class:'btn btn-primary' %>
-  <%= link_to '先生用ログイン', new_user_session_path, class:'btn btn-primary' %> -->
-  <!-- <%= link_to 'パスワードを忘れた場合', new_user_password_path, class:'btn btn-primary' %> -->
-</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>とりりん★チャット</title>
+    <%= analytics_init if Rails.env.production? && GoogleAnalytics.valid_tracker? %>
+    <%= javascript_pack_tag 'application' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <app></app>
+  </body>
+</html>

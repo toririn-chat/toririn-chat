@@ -1,10 +1,8 @@
 class RootController < ApplicationController
 
-  # TODO add admin authentication logic
-  def index
-  end
+  layout false
 
-  def about
+  def index
   end
 
 end

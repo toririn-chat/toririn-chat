@@ -1,0 +1,40 @@
+bootstrapVersion: 4
+loglevel: debug
+preBootstrapCustomizations: './app/assets/stylesheets/bootstrap-custom.scss'
+styleLoaders:
+  - style-loader
+  - css-loader
+  - sass-loader
+styles:
+  mixins: true
+  print: true
+  buttons: true
+  forms: true
+  grid: true
+  images: true
+  reboot: true
+  tables: true
+  type: true
+  alert: true
+  badge: true
+  button-group: true
+  card: true
+  custom-forms: true
+  input-group: true
+  jumbotron: true
+  list-group: true
+  media: true
+  nav: true
+  navbar: true
+  transitions: true
+  popover: true
+  tooltip: true
+  utilities: true
+  pagination: false
+  progress: false
+  code: false
+  breadcrumb: false
+  close: false
+  dropdown: false
+  carousel: false
+  modal: false

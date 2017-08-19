@@ -1,22 +1,9 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
-  </div>
+<router-view>
+</router-view>
 </template>
-
 <script>
-export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
-  }
-}
+import 'bootstrap-loader'
+import 'font-awesome-sass-loader'
+export default {}
 </script>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>

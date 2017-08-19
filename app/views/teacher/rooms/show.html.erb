@@ -1,0 +1,9 @@
+<%= link_to '戻る', teacher_rooms_path %>
+<article class="container">
+  <h1><%= @room.name %></h1>
+  <%= link_to @room.name, @room %>
+  <h1>短縮URL</h1>
+  TODO
+  <h1>QRコード</h1>
+  <%= qrcode_tag request.url, module_size: 4, class:'img' %>
+</article>
