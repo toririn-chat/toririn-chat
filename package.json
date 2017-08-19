@@ -1,5 +1,8 @@
 {
   "license": "MIT",
+  "engines": {
+    "node": "8.4.0"
+  },
   "dependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.26.0",
