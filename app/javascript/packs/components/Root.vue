@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="tc-theme-light">
-    <b-modal id="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル">
+    <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル" no-auto-focus>
       <b-form-group label="電子メールアドレス" description="入力した電子メールアドレスに新規登録用のURLを送信します。">
         <b-input-group>
           <b-form-input type="email"></b-form-input>
@@ -63,7 +63,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル">
+    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus>
       <b-form-group label="電子メールアドレス" description="登録した電子メールアドレスを入力してください。">
         <b-input-group>
           <b-form-input type="email"></b-form-input>
@@ -74,12 +74,33 @@
           <b-form-input type="password"></b-form-input>
         </b-input-group>
       </b-form-group>
+      <div class="text-right">
+        <b-btn variant="light" @click="switchSigninToReminder">
+          <span>パスワードを忘れた場合</span>
+          <i class="fa fa-chevron-right"></i>
+        </b-btn>
+      </div>
+    </b-modal>
+    <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" close-title="キャンセル" no-auto-focus>
+      <p>パスワードを再設定するには登録した電子メールアドレスを入力して送信ボタンを押してください。パスワードを再設定するためのURLを送信します。</p>
+      <b-form-group label="電子メールアドレス" description="登録した電子メールアドレスを入力してください。">
+        <b-input-group>
+          <b-form-input type="email"></b-form-input>
+        </b-input-group>
+      </b-form-group>
     </b-modal>
   </div>
 </div>
 </template>
 <script>
-export default {}
+export default {
+  methods: {
+    switchSigninToReminder() {
+      this.$refs.signin.hide();
+      this.$refs.reminder.show();
+    }
+  }
+}
 </script>
 <style lang="scss">
 @import "../styles/valiables";
