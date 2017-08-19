@@ -1,25 +1,25 @@
 <template>
 <div class="tc-splash">
   <div class="container">
-    <div class="row justify-content-center mb-4">
+    <div class="row justify-content-center mb-3">
       <div class="col-5 col-sm-3 text-center">
         <img class="img-fluid" src="images/logo.png"></img>
       </div>
     </div>
-    <div class="row justify-content-center mb-4">
+    <div class="row justify-content-center mb-3">
       <div class="text-center">
         <h1>とりりん<i class="fa fa-star"></i>チャット</h1>
       </div>
     </div>
     <div class="row justify-content-center d-none d-sm-none d-md-flex mb-3">
-      <div class="col-6">
+      <div class="col-4">
         <b-btn variant="primary" block :to="{name:'signup'}">
           <span>新規登録</span>
         </b-btn>
       </div>
     </div>
     <div class="row justify-content-center d-none d-sm-none d-md-flex mb-3">
-      <div class="col-6">
+      <div class="col-4">
         <b-btn variant="primary" block :to="{name:'signin'}">
           <span>ログイン</span>
         </b-btn>
