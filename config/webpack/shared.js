@@ -56,9 +56,7 @@ module.exports = {
       'node_modules'
     ],
     alias: {
-      vue$: `vue/dist/vue${env.NODE_ENV === 'production'
-        ? '.min'
-        : ''}.js`
+      vue$: `vue/dist/vue${env.NODE_ENV === 'production' ? '.min' : ''}.js`
     }
   },
 

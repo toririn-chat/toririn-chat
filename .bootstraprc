@@ -30,11 +30,11 @@ styles:
   popover: true
   tooltip: true
   utilities: true
-  pagination: false
-  progress: false
-  code: false
-  breadcrumb: false
+  pagination: true
+  progress: true
+  code: true
+  breadcrumb: true
   close: true
-  dropdown: false
-  carousel: false
+  dropdown: true
+  carousel: true
   modal: true
