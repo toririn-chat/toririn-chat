@@ -13,6 +13,8 @@ Rails.application.routes.draw do
         delete 'signout', to: 'sessions#destroy'
         get 'confirmations', to: 'confirmations#show'
         post 'confirmations', to: 'confirmations#create'
+        post 'passwords', to: 'passwords#create'
+        put 'passwords', to: 'passwords#update'
       end
     end
   end
