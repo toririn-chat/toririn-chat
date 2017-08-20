@@ -1,31 +1,23 @@
 Rails.application.routes.draw do
 
-  root to: 'root#index'
-
-
-  # get :about, to: 'root#about'
-
-
-  devise_for :users, controllers: { confirmations: 'confirmations' }
-
-  resources :rooms
-
-  get :teacher, to: 'teacher#index'
-  namespace :teacher do
-    resources :rooms do
-      resources :messages do
-        collection do
-          delete :destroy_all
-        end
-      end
-    end
-  end
-  resources :users
-  delete :logout, to:'sessions#destroy'
-  mount ActionCable.server => '/cable'
-
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
+
+  devise_for :users, skip: [:registrations, :sessions, :confirmations]
+  namespace :api, { format: 'json' } do
+    namespace :v2 do
+      devise_scope :user do
+        post 'signup', to: 'registrations#create'
+        post 'signin', to: 'sessions#create'
+        delete 'signout', to: 'sessions#destroy'
+        get 'confirmations', to: 'confirmations#show'
+      end
+    end
+  end
+
+  root to: 'root#index'
+  mount ActionCable.server => '/cable'
+  match "/*path", to: 'root#index', via: :get
 
 end
