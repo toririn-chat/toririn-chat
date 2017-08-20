@@ -75,6 +75,7 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.2.0)
     easy_translate (0.5.0)
       json
       thread
@@ -308,6 +309,7 @@ DEPENDENCIES
   bullet
   coffee-rails (~> 4.2)
   devise
+  devise-i18n
   font-awesome-rails
   foreman
   google-analytics-rails

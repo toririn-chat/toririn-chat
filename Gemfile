@@ -16,6 +16,7 @@ gem 'underscore-string-rails'
 gem 'google-analytics-rails'
 gem 'js-routes'
 gem 'devise'
+gem 'devise-i18n'
 gem 'webpacker'
 
 group :production do
