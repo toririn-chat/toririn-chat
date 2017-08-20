@@ -89,8 +89,14 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="confirmation" ref="confirmation" size="sm" title="新規登録用URLの送付" ok-only>
+    <b-modal ref="confirmation" size="sm" title="新規登録用URLの送付" ok-only>
       <p>{{email}}に新規登録用のURLを送付しました。メールをご確認ください。</p>
+    </b-modal>
+    <b-modal ref="finished" size="sm" title="お知らせ" ok-only @ok="redirectToRoot">
+      <p>新規登録が完了しました。ログインしてください。</p>
+    </b-modal>
+    <b-modal ref="confirmed" size="sm" title="お知らせ" ok-only @ok="redirectToRoot">
+      <p>既に新規登録は完了しています。ログインしてください。</p>
     </b-modal>
   </div>
 </div>
@@ -106,6 +112,31 @@ export default {
       email: "u11@example.net",
       password: "11111111",
       feedbacks: {},
+    }
+  },
+  mounted() {
+    var confirmation_token = this.$route.query.confirmation_token;
+    if (confirmation_token !== undefined) {
+      var vm = this;
+      var form = new FormData();
+      form.append('user[confirmation_token]', confirmation_token);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        }
+      };
+      axios
+        .get('/api/v2/confirmations', {
+          params: {
+            confirmation_token: confirmation_token
+          }
+        }, config)
+        .then(function(response) {
+          vm.$refs.finished.show();
+        })
+        .catch(function(error) {
+          vm.$refs.confirmed.show();
+        })
     }
   },
   computed: {
@@ -155,6 +186,11 @@ export default {
             })
           })
         })
+    },
+    redirectToRoot() {
+      this.$router.push({
+        name: 'root'
+      });
     },
     switchSigninToReminder() {
       this.$refs.signin.hide();
