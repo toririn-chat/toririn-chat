@@ -26,6 +26,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'license_finder'
+  gem 'dotenv-rails'
 end
 
 group :production, :development do
