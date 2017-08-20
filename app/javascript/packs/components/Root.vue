@@ -77,12 +77,26 @@
           <b-form-input type="password" v-model="password"></b-form-input>
         </b-input-group>
       </b-form-group>
+      <div class="text-right mb-1">
+        <b-btn size="sm" variant="light" @click="switchSigninToReconfirmation">
+          <span>新規登録用URLの再送付</span>
+          <i class="fa fa-chevron-right"></i>
+        </b-btn>
+      </div>
       <div class="text-right">
-        <b-btn variant="light" @click="switchSigninToReminder">
+        <b-btn size="sm" variant="light" @click="switchSigninToReminder">
           <span>パスワードを忘れた場合</span>
           <i class="fa fa-chevron-right"></i>
         </b-btn>
       </div>
+    </b-modal>
+    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="新規登録用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation">
+      <p>新規登録用URLを再送付するには登録した電子メールアドレスを入力して送信ボタンを押してください。新規登録用URLを再送信します。</p>
+      <b-form-group label="電子メールアドレス" description="登録した電子メールアドレスを入力してください。 ":feedback="feedbacks['email']" :state="states['email']">
+        <b-input-group>
+          <b-form-input type="email" v-model="email"></b-form-input>
+        </b-input-group>
+      </b-form-group>
     </b-modal>
     <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" close-title="キャンセル" no-auto-focus>
       <p>パスワードを再設定するには登録した電子メールアドレスを入力して送信ボタンを押してください。パスワードを再設定するためのURLを送信します。</p>
@@ -217,10 +231,45 @@ export default {
           }
         })
     },
+    reconfirmation(e) {
+      e.cancel();
+      var form = new FormData();
+      form.append('user[email]', this.email);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        }
+      };
+      var vm = this;
+      axios
+        .post('/api/v2/confirmations', form, config)
+        .then(function(response) {
+          vm.$refs.reconfirmation.hide();
+          vm.$refs.confirmation.show();
+        })
+        .catch(function(error) {
+          // cleanup feedbacks
+          Object.keys(vm.feedbacks).forEach((key) => {
+            Vue.delete(vm.feedbacks, key)
+          })
+          // set errors to fedbacks
+          var errors = error.response.data.errors
+          Object.keys(errors).forEach((key) => {
+            var messages = errors[key]
+            messages.forEach((message) => {
+              Vue.set(vm.feedbacks, key, `${vm.$t(key)}${message}`)
+            })
+          })
+        })
+    },
     redirectToRoot() {
       this.$router.push({
         name: 'root'
       });
+    },
+    switchSigninToReconfirmation() {
+      this.$refs.signin.hide();
+      this.$refs.reconfirmation.show();
     },
     switchSigninToReminder() {
       this.$refs.signin.hide();

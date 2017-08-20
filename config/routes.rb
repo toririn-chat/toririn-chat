@@ -12,6 +12,7 @@ Rails.application.routes.draw do
         post 'signin', to: 'sessions#create'
         delete 'signout', to: 'sessions#destroy'
         get 'confirmations', to: 'confirmations#show'
+        post 'confirmations', to: 'confirmations#create'
       end
     end
   end
