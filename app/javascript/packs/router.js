@@ -9,14 +9,6 @@ const routes = [
     path: '/',
     name: 'root',
     component: Root
-  }, {
-    path: '/signin',
-    name: 'signin',
-    component: Root
-  }, {
-    path: '/signup',
-    name: 'signup',
-    component: Root
   }
 ]
 export default new VueRouter({routes, mode: 'history'})
