@@ -117,6 +117,9 @@ export default {
       feedbacks: {},
     }
   },
+  beforeCreate: function() {
+    document.body.className = 'root';
+  },
   mounted() {
     var confirmation_token = this.$route.query.confirmation_token;
     if (confirmation_token !== undefined) {
@@ -228,8 +231,12 @@ export default {
 </script>
 <style lang="scss">
 @import "../styles/valiables";
-body,
 html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+body.root {
     background-color: $tc-color-dark;
     height: 100%;
     width: 100%;
