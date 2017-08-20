@@ -63,15 +63,18 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus>
-      <b-form-group label="電子メールアドレス" description="登録した電子メールアドレスを入力してください。" :feedback="feedbacks['email']">
+    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus @ok="signin">
+      <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
+        {{feedbacks['error']}}
+      </b-alert>
+      <b-form-group label="電子メールアドレス">
         <b-input-group>
-          <b-form-input type="email"></b-form-input>
+          <b-form-input type="email" v-model="email"></b-form-input>
         </b-input-group>
       </b-form-group>
-      <b-form-group label="パスワード" description="登録したパスワードを入力してください。">
+      <b-form-group label="パスワード">
         <b-input-group>
-          <b-form-input type="password"></b-form-input>
+          <b-form-input type="password" v-model="password"></b-form-input>
         </b-input-group>
       </b-form-group>
       <div class="text-right">
@@ -185,6 +188,30 @@ export default {
               Vue.set(vm.feedbacks, key, `${vm.$t(key)}${message}`)
             })
           })
+        })
+    },
+    signin(e) {
+      e.cancel();
+      var form = new FormData();
+      form.append('user[email]', this.email);
+      form.append('user[password]', this.password);
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        }
+      };
+      var vm = this;
+      axios
+        .post('/api/v2/signin', form, config)
+        .then(function(response) {
+          vm.$router.push({
+            name: 'dashboard'
+          });
+        })
+        .catch(function(error) {
+          if (error.response.data.error !== undefined) {
+            Vue.set(vm.feedbacks, 'error', error.response.data.error)
+          }
         })
     },
     redirectToRoot() {
