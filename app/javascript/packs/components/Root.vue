@@ -207,6 +207,35 @@ export default {
     }
   },
   methods: {
+    handleError(error) {
+      // handing error messsages
+      if (error.response === undefined) {
+        // tcp error
+        Vue.set(this.feedbacks, 'error', error.message)
+      } else if (error.response.data === undefined) {
+        // http error
+        Vue.set(this.feedbacks, 'error', error.response.statusText)
+      } else {
+        // not JSON
+        if (error.response.data.error === undefined) {
+          Vue.set(this.feedbacks, 'error', error.message)
+        } else if (error.response.data.error !== undefined) {
+          // is JSON
+          Vue.set(this.feedbacks, 'error', error.response.data.error)
+        } else if (error.response.data.errors != undefined) {
+          // multiple errors on appicatlion
+          var errors = error.response.data.errors
+          Object.keys(errors).forEach((key) => {
+            var messages = errors[key]
+            messages.forEach((message) => {
+              Vue.set(this.feedbacks, key, `${this.$t(key)}${message}`)
+            })
+          })
+        } else {
+          Vue.set(this.feedbacks, 'error', `Unknown error(s): ${error.message}`)
+        }
+      }
+    },
     state(key) {
       if (this.feedbacks[key] === undefined) {
         return 'valid';
@@ -265,33 +294,7 @@ export default {
           });
         })
         .catch(function(error) {
-          // handing error messsages
-          if (error.response === undefined) {
-            // tcp error
-            Vue.set(vm.feedbacks, 'error', error.message)
-          } else if (error.response.data === undefined) {
-            // http error
-            Vue.set(vm.feedbacks, 'error', error.response.statusText)
-          } else {
-            // not JSON
-            if (error.response.data.error === undefined) {
-              Vue.set(vm.feedbacks, 'error', error.message)
-            } else if (error.response.data.error !== undefined) {
-              // is JSON
-              Vue.set(vm.feedbacks, 'error', error.response.data.error)
-            } else if (error.response.data.errors != undefined) {
-              // multiple errors on appicatlion
-              var errors = error.response.data.errors
-              Object.keys(errors).forEach((key) => {
-                var messages = errors[key]
-                messages.forEach((message) => {
-                  Vue.set(vm.feedbacks, key, `${vm.$t(key)}${message}`)
-                })
-              })
-            } else {
-              Vue.set(vm.feedbacks, 'error', `Unknown error(s): ${error.message}`)
-            }
-          }
+          vm.handleError(error);
         })
     },
     reconfirmation(e) {
