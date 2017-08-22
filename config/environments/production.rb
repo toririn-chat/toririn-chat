@@ -68,6 +68,19 @@ Rails.application.configure do
     host: ENV['RAILS_MAILER_URL_DOMAIN'].presence,
     port: ENV['RAILS_MAILER_URL_PORT'].presence,
   }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV['RAILS_MAILER_SMTP_ADDRESS'].presence || 'localhost',
+    port: ENV['RAILS_MAILER_SMTP_PORT'].presence || '25',
+    domain: ENV['RAILS_MAILER_SMTP_DOMAIN'].presence || 'localhost',
+    user_name: ENV['RAILS_MAILER_SMTP_USER_NAME'].presence,
+    password: ENV['RAILS_MAILER_SMTP_PASSWORD'].presence,
+    authentication: ENV['RAILS_MAILER_SMTP_AUTHENTICATION'] == 'none' ? nil : ENV['RAILS_MAILER_SMTP_AUTHENTICATION'] || 'plain',
+    enable_starttls_auto: ENV['RAILS_MAILER_SMTP_ENABLE_STARTTLS_AUTO'].presence || true,
+    openssl_verify_mode: ENV['RAILS_MAILER_SMTP_OPENSSL_VERIFY_MODE'].presence,
+    ssl: ENV['RAILS_MAILER_SMTP_SSL'].present?,
+    tls: ENV['RAILS_MAILER_SMTP_TLS'].present?,
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
