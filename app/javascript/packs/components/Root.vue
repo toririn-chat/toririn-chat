@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="tc-theme-light">
-    <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル" no-auto-focus @ok="signup">
+    <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル" no-auto-focus @ok="signup" @shown="resetFeedbacks">
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
@@ -66,7 +66,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus @ok="signin">
+    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus @ok="signin" @shown="resetFeedbacks">
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
@@ -93,7 +93,7 @@
         </b-btn>
       </div>
     </b-modal>
-    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="新規登録用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation">
+    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="新規登録用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation" @shown="resetFeedbacks">
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
@@ -104,7 +104,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="resetpassword">
+    <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="resetpassword" @shown="resetFeedbacks">
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
@@ -115,7 +115,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="resetPasswordModal" ref="resetPasswordModal" size="sm" title="パスワードのリセット" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="savePassword">
+    <b-modal id="resetPasswordModal" ref="resetPasswordModal" size="sm" title="パスワードのリセット" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="savePassword" @shown="resetFeedbacks">
       <b-alert variant="danger" :show="feedbacks['reset_password_token'] !== undefined">
         {{feedbacks['reset_password_token']}}
       </b-alert>
@@ -216,6 +216,11 @@ export default {
     }
   },
   methods: {
+    resetFeedbacks(){
+      Object.keys(this.feedbacks).forEach((key) => {
+        Vue.delete(this.feedbacks, key)
+      })
+    },
     handleError(error) {
       // TCP Errors
       if (error.response === undefined) {
