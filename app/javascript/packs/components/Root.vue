@@ -265,8 +265,32 @@ export default {
           });
         })
         .catch(function(error) {
-          if (error.response.data.error !== undefined) {
-            Vue.set(vm.feedbacks, 'error', error.response.data.error)
+          // handing error messsages
+          if (error.response === undefined) {
+            // tcp error
+            Vue.set(vm.feedbacks, 'error', error.message)
+          } else if (error.response.data === undefined) {
+            // http error
+            Vue.set(vm.feedbacks, 'error', error.response.statusText)
+          } else {
+            // not JSON
+            if (error.response.data.error === undefined) {
+              Vue.set(vm.feedbacks, 'error', error.message)
+            } else if (error.response.data.error !== undefined) {
+              // is JSON
+              Vue.set(vm.feedbacks, 'error', error.response.data.error)
+            } else if (error.response.data.errors != undefined) {
+              // multiple errors on appicatlion
+              var errors = error.response.data.errors
+              Object.keys(errors).forEach((key) => {
+                var messages = errors[key]
+                messages.forEach((message) => {
+                  Vue.set(vm.feedbacks, key, `${vm.$t(key)}${message}`)
+                })
+              })
+            } else {
+              Vue.set(vm.feedbacks, 'error', `Unknown error(s): ${error.message}`)
+            }
           }
         })
     },
