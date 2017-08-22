@@ -52,6 +52,9 @@
   </div>
   <div class="tc-theme-light">
     <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル" no-auto-focus @ok="signup">
+      <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
+        {{feedbacks['error']}}
+      </b-alert>
       <b-form-group label="電子メールアドレス" description="入力した電子メールアドレスに新規登録用のURLを送信します。" :feedback="feedbacks['email']" :state="states['email']">
         <b-input-group>
           <b-form-input type="email" v-model="email"></b-form-input>
@@ -267,18 +270,7 @@ export default {
           vm.$refs.confirmation.show();
         })
         .catch(function(error) {
-          // cleanup feedbacks
-          Object.keys(vm.feedbacks).forEach((key) => {
-            Vue.delete(vm.feedbacks, key)
-          })
-          // set errors to fedbacks
-          var errors = error.response.data.errors
-          Object.keys(errors).forEach((key) => {
-            var messages = errors[key]
-            messages.forEach((message) => {
-              Vue.set(vm.feedbacks, key, `${vm.$t(key)}${message}`)
-            })
-          })
+          vm.handleError(error);
         })
     },
     signin(e) {
