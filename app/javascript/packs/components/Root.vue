@@ -240,9 +240,6 @@ export default {
         })
         return;
       }
-      console.log('www');
-      console.log(error.message);
-      Vue.delete(this.feedbacks, 'error')
       Vue.set(this.feedbacks, 'error', `Error: ${error.message}`)
     },
     state(key) {
