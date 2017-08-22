@@ -208,33 +208,39 @@ export default {
   },
   methods: {
     handleError(error) {
-      // handing error messsages
+      // TCP Errors
       if (error.response === undefined) {
-        // tcp error
-        Vue.set(this.feedbacks, 'error', error.message)
-      } else if (error.response.data === undefined) {
-        // http error
-        Vue.set(this.feedbacks, 'error', error.response.statusText)
-      } else {
-        // not JSON
-        if (error.response.data.error === undefined) {
-          Vue.set(this.feedbacks, 'error', error.message)
-        } else if (error.response.data.error !== undefined) {
-          // is JSON
-          Vue.set(this.feedbacks, 'error', error.response.data.error)
-        } else if (error.response.data.errors != undefined) {
-          // multiple errors on appicatlion
-          var errors = error.response.data.errors
-          Object.keys(errors).forEach((key) => {
-            var messages = errors[key]
-            messages.forEach((message) => {
-              Vue.set(this.feedbacks, key, `${this.$t(key)}${message}`)
-            })
-          })
-        } else {
-          Vue.set(this.feedbacks, 'error', `Unknown error(s): ${error.message}`)
-        }
+        Vue.set(this.feedbacks, 'error', error.message);
+        return;
       }
+      // HTTP Response does not have contents
+      if (error.response.data === undefined) {
+        Vue.set(this.feedbacks, 'error', error.response.statusText);
+        return;
+      }
+      // HTTP Response has JSON with an error
+      if (error.response.data.error !== undefined) {
+        return;
+      }
+      // HTTP Response has JSON with errors
+      if (error.response.data.errors !== undefined) {
+        // cleanup feedbacks
+        Object.keys(this.feedbacks).forEach((key) => {
+          Vue.delete(this.feedbacks, key)
+        })
+        // set errors to fedbacks
+        Object.keys(error.response.data.errors).forEach((key) => {
+          var messages = error.response.data.errors[key]
+          messages.forEach((message) => {
+            Vue.set(this.feedbacks, key, `${this.$t(key)}${message}`)
+          })
+        })
+        return;
+      }
+      console.log('www');
+      console.log(error.message);
+      Vue.delete(this.feedbacks, 'error')
+      Vue.set(this.feedbacks, 'error', `Error: ${error.message}`)
     },
     state(key) {
       if (this.feedbacks[key] === undefined) {
