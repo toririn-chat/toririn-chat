@@ -223,6 +223,7 @@ export default {
       }
       // HTTP Response has JSON with an error
       if (error.response.data.error !== undefined) {
+        Vue.set(this.feedbacks, 'error', error.response.data.error);
         return;
       }
       // HTTP Response has JSON with errors
