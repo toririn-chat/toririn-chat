@@ -31,22 +31,23 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {
     protocol: ENV['RAILS_MAILER_URL_PROTOCOL'].presence || 'http',
     host: ENV['RAILS_MAILER_URL_DOMAIN'].presence || 'localhost',
-    port: ENV['RAILS_MAILER_URL_PORT'].presence || '3000',
+    port: (ENV['RAILS_MAILER_URL_PORT'].presence || '3000').to_i,
   }
-  config.action_mailer.delivery_method = :letter_opener_web
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   address: ENV['RAILS_MAILER_SMTP_ADDRESS'].presence || 'localhost',
-  #   port: ENV['RAILS_MAILER_SMTP_PORT'].presence || '25',
-  #   domain: ENV['RAILS_MAILER_SMTP_DOMAIN'].presence || 'localhost',
-  #   user_name: ENV['RAILS_MAILER_SMTP_USER_NAME'].presence,
-  #   password: ENV['RAILS_MAILER_SMTP_PASSWORD'].presence,
-  #   authentication: ENV['RAILS_MAILER_SMTP_AUTHENTICATION'] == 'none' ? nil : ENV['RAILS_MAILER_SMTP_AUTHENTICATION'] || 'plain',
-  #   enable_starttls_auto: ENV['RAILS_MAILER_SMTP_ENABLE_STARTTLS_AUTO'].presence || true,
-  #   openssl_verify_mode: ENV['RAILS_MAILER_SMTP_OPENSSL_VERIFY_MODE'].presence,
-  #   ssl: ENV['RAILS_MAILER_SMTP_TLS'].present?,
-  #   tls: ENV['RAILS_MAILER_SMTP_TLS'].present?,
-  # }
+  config.action_mailer.delivery_method = (ENV['RAILS_MAILER_DELIVERY_METHOD'].presence || 'letter_opener_web').to_sym
+  if config.action_mailer.delivery_method == :smtp
+    config.action_mailer.smtp_settings = {
+      address: ENV['RAILS_MAILER_SMTP_ADDRESS'].presence || 'localhost',
+      port: (ENV['RAILS_MAILER_SMTP_PORT'].presence || '25').to_i,
+      domain: ENV['RAILS_MAILER_SMTP_DOMAIN'].presence || 'localhost',
+      user_name: ENV['RAILS_MAILER_SMTP_USER_NAME'].presence,
+      password: ENV['RAILS_MAILER_SMTP_PASSWORD'].presence,
+      authentication: ENV['RAILS_MAILER_SMTP_AUTHENTICATION'] == 'none' ? nil : ENV['RAILS_MAILER_SMTP_AUTHENTICATION'] || 'plain',
+      enable_starttls_auto: ENV['RAILS_MAILER_SMTP_ENABLE_STARTTLS_AUTO'].presence || true,
+      openssl_verify_mode: ENV['RAILS_MAILER_SMTP_OPENSSL_VERIFY_MODE'].presence,
+      ssl: ENV['RAILS_MAILER_SMTP_SSL'].present?,
+      tls: ENV['RAILS_MAILER_SMTP_TLS'].present?,
+    }
+  end
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
