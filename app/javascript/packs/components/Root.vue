@@ -277,9 +277,7 @@ export default {
           vm.$refs.signup.hide();
           vm.$refs.confirmation.show();
         })
-        .catch(function(error) {
-          vm.handleError(error);
-        })
+        .catch(vm.handleError)
     },
     signin(e) {
       e.cancel();
@@ -299,9 +297,7 @@ export default {
             name: 'dashboard'
           });
         })
-        .catch(function(error) {
-          vm.handleError(error);
-        })
+        .catch(vm.handleError)
     },
     reconfirmation(e) {
       e.cancel();
@@ -319,9 +315,7 @@ export default {
           vm.$refs.reconfirmation.hide();
           vm.$refs.confirmation.show();
         })
-        .catch(function(error) {
-          vm.handleError(error);
-        })
+        .catch(vm.handleError)
     },
     resetpassword(e) {
       e.cancel();
@@ -339,9 +333,7 @@ export default {
           vm.$refs.reminder.hide();
           vm.$refs.notifyPasswordReminder.show();
         })
-        .catch(function(error) {
-          vm.handleError(error);
-        })
+        .catch(vm.handleError)
     },
     savePassword(e) {
       e.cancel();
@@ -361,9 +353,7 @@ export default {
           vm.$refs.resetPasswordModal.hide()
           vm.$refs.finishSavePassword.show();
         })
-        .catch(function(error) {
-          vm.handleError(error);
-        })
+        .catch(vm.handleError)
     },
     redirectToRoot() {
       this.$router.push({
