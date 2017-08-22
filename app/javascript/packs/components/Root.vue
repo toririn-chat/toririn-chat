@@ -312,6 +312,8 @@ export default {
           vm.$refs.confirmation.show();
         })
         .catch(function(error) {
+
+
           // cleanup feedbacks
           Object.keys(vm.feedbacks).forEach((key) => {
             Vue.delete(vm.feedbacks, key)
