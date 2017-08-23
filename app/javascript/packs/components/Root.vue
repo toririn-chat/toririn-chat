@@ -173,10 +173,9 @@ import axios from 'axios'
 
 export default {
   data: function() {
-    // TODO remove test date
     return {
-      email: "u11@example.net",
-      password: "11111111",
+      email: '',
+      password: '',
       feedbacks: {},
     }
   },
