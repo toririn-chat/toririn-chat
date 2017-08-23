@@ -136,6 +136,9 @@
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
       </b-alert>
+      <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
+        {{feedbacks['error']}}
+      </b-alert>
       <b-alert variant="danger" :show="feedbacks['reset_password_token'] !== undefined">
         {{feedbacks['reset_password_token']}}
       </b-alert>
