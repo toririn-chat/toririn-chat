@@ -237,6 +237,7 @@ export default {
   },
   methods: {
     onUpload(progressEvent) {
+      // TODO Refactor
       Vue.set(this.feedbacks, 'info', '通信中')
     },
     onError(error) {
@@ -374,7 +375,6 @@ export default {
       e.cancel();
       var form = new FormData();
       form.append('user[password]', this.password);
-      console.log(this.$route.query.reset_password_token);
       form.append('user[reset_password_token]', this.$route.query.reset_password_token);
       var config = {
         headers: {
