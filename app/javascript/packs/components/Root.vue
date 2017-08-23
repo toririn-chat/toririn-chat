@@ -55,7 +55,7 @@
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
-      <b-form-group label="電子メールアドレス" description="入力した電子メールアドレスに新規登録用のURLを送信します。" :feedback="feedbacks['email']" :state="states['email']">
+      <b-form-group label="電子メールアドレス" description="入力した電子メールアドレスに本人確認用のURLを送信します。" :feedback="feedbacks['email']" :state="states['email']">
         <b-input-group>
           <b-form-input type="email" v-model="email"></b-form-input>
         </b-input-group>
@@ -82,7 +82,7 @@
       </b-form-group>
       <div class="text-right mb-1">
         <b-btn size="sm" variant="light" @click="switchSigninToReconfirmation">
-          <span>新規登録用URLの再送付</span>
+          <span>本人確認用URLの再送付</span>
           <i class="fa fa-chevron-right"></i>
         </b-btn>
       </div>
@@ -93,11 +93,11 @@
         </b-btn>
       </div>
     </b-modal>
-    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="新規登録用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation" @shown="resetFeedbacks">
+    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="本人確認用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation" @shown="resetFeedbacks">
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
-      <p>新規登録用URLを再送付するには登録した電子メールアドレスを入力して送信ボタンを押してください。新規登録用URLを再送信します。</p>
+      <p>本人確認用URLを再送付するには登録した電子メールアドレスを入力して送信ボタンを押してください。本人確認用URLを再送信します。</p>
       <b-form-group label="電子メールアドレス" description="登録した電子メールアドレスを入力してください。 " :feedback="feedbacks['email']" :state="states['email']">
         <b-input-group>
           <b-form-input type="email" v-model="email"></b-form-input>
@@ -126,11 +126,11 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal ref="confirmation" size="sm" title="新規登録用URLの送付" ok-only>
-      <p>{{email}}に新規登録用のURLを送付しました。メールをご確認ください。</p>
+    <b-modal ref="confirmation" size="sm" title="本人確認用URLの送付" ok-only>
+      <p>{{email}}に本人確認用のURLを送付しました。メールをご確認ください。</p>
     </b-modal>
-    <b-modal ref="notifyPasswordReminder" size="sm" title="パスワードリセット用URLの送付" ok-only>
-      <p>{{email}}にパスワードリセット用のURLを送付しました。メールをご確認ください。</p>
+    <b-modal ref="notifyPasswordReminder" size="sm" title="パスワード再設定用URLの送付" ok-only>
+      <p>{{email}}にパスワード再設定用のURLを送付しました。メールをご確認ください。</p>
     </b-modal>
     <b-modal ref="finished" size="sm" title="お知らせ" ok-only @ok="redirectToRoot">
       <p>新規登録が完了しました。ログインしてください。</p>
