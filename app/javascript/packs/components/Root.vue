@@ -52,6 +52,10 @@
   </div>
   <div class="tc-theme-light">
     <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル" no-auto-focus @ok="signup" @shown="resetFeedbacks">
+      <b-alert variant="info" :show="feedbacks['info'] !== undefined">
+        <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        <span>{{feedbacks['info']}}</span>
+      </b-alert>
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
@@ -67,6 +71,10 @@
       </b-form-group>
     </b-modal>
     <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus @ok="signin" @shown="resetFeedbacks">
+      <b-alert variant="info" :show="feedbacks['info'] !== undefined">
+        <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        <span>{{feedbacks['info']}}</span>
+      </b-alert>
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
@@ -94,6 +102,10 @@
       </div>
     </b-modal>
     <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="本人確認用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation" @shown="resetFeedbacks">
+      <b-alert variant="info" :show="feedbacks['info'] !== undefined">
+        <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        <span>{{feedbacks['info']}}</span>
+      </b-alert>
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
@@ -105,6 +117,10 @@
       </b-form-group>
     </b-modal>
     <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="resetpassword" @shown="resetFeedbacks">
+      <b-alert variant="info" :show="feedbacks['info'] !== undefined">
+        <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        <span>{{feedbacks['info']}}</span>
+      </b-alert>
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
@@ -116,6 +132,10 @@
       </b-form-group>
     </b-modal>
     <b-modal id="resetPasswordModal" ref="resetPasswordModal" size="sm" title="パスワードのリセット" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="savePassword" @shown="resetFeedbacks">
+      <b-alert variant="info" :show="feedbacks['info'] !== undefined">
+        <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+        <span>{{feedbacks['info']}}</span>
+      </b-alert>
       <b-alert variant="danger" :show="feedbacks['reset_password_token'] !== undefined">
         {{feedbacks['reset_password_token']}}
       </b-alert>
@@ -221,7 +241,12 @@ export default {
         Vue.delete(this.feedbacks, key)
       })
     },
+    onUpload(progressEvent) {
+      Vue.set(this.feedbacks, 'info', '通信中')
+    },
     handleError(error) {
+      // Disable an alert of info
+      Vue.delete(this.feedbacks, 'info')
       // TCP Errors
       if (error.response === undefined) {
         Vue.set(this.feedbacks, 'error', error.message);
@@ -274,7 +299,8 @@ export default {
       var config = {
         headers: {
           'content-type': 'multipart/form-data'
-        }
+        },
+        onUploadProgress: this.onUpload()
       };
       var vm = this;
       axios
@@ -293,7 +319,8 @@ export default {
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
-        }
+        },
+        onUploadProgress: this.onUpload()
       };
       var vm = this;
       axios
@@ -312,7 +339,8 @@ export default {
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
-        }
+        },
+        onUploadProgress: this.onUpload()
       };
       var vm = this;
       axios
@@ -330,7 +358,8 @@ export default {
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
-        }
+        },
+        onUploadProgress: this.onUpload()
       };
       var vm = this;
       axios
@@ -350,7 +379,8 @@ export default {
       var config = {
         headers: {
           'content-type': 'multipart/form-data',
-        }
+        },
+        onUploadProgress: this.onUpload()
       };
       var vm = this;
       axios
