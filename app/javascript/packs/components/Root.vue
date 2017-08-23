@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="tc-theme-light">
-    <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル" no-auto-focus @ok="signup" @shown="clearFeedbacks">
+    <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル" no-auto-focus @ok="signup" @shown="clearFeedbacks" :ok-disabled="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -70,7 +70,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus @ok="signin" @shown="clearFeedbacks">
+    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus @ok="signin" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -101,7 +101,7 @@
         </b-btn>
       </div>
     </b-modal>
-    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="本人確認用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation" @shown="clearFeedbacks">
+    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="本人確認用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -116,7 +116,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="resetpassword" @shown="clearFeedbacks">
+    <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="resetpassword" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -131,7 +131,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="resetPasswordModal" ref="resetPasswordModal" size="sm" title="パスワードのリセット" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="savePassword" @shown="clearFeedbacks">
+    <b-modal id="resetPasswordModal" ref="resetPasswordModal" size="sm" title="パスワードのリセット" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="savePassword" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
