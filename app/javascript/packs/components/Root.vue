@@ -244,7 +244,7 @@ export default {
     onUpload(progressEvent) {
       Vue.set(this.feedbacks, 'info', '通信中')
     },
-    handleError(error) {
+    onError(error) {
       // Disable an alert of info
       Vue.delete(this.feedbacks, 'info')
       // TCP Errors
@@ -309,7 +309,7 @@ export default {
           vm.$refs.signup.hide();
           vm.$refs.confirmation.show();
         })
-        .catch(vm.handleError)
+        .catch(vm.onError)
     },
     signin(e) {
       e.cancel();
@@ -330,7 +330,7 @@ export default {
             name: 'dashboard'
           });
         })
-        .catch(vm.handleError)
+        .catch(vm.onError)
     },
     reconfirmation(e) {
       e.cancel();
@@ -349,7 +349,7 @@ export default {
           vm.$refs.reconfirmation.hide();
           vm.$refs.confirmation.show();
         })
-        .catch(vm.handleError)
+        .catch(vm.onError)
     },
     resetpassword(e) {
       e.cancel();
@@ -368,7 +368,7 @@ export default {
           vm.$refs.reminder.hide();
           vm.$refs.notifyPasswordReminder.show();
         })
-        .catch(vm.handleError)
+        .catch(vm.onError)
     },
     savePassword(e) {
       e.cancel();
@@ -389,7 +389,7 @@ export default {
           vm.$refs.resetPasswordModal.hide()
           vm.$refs.finishSavePassword.show();
         })
-        .catch(vm.handleError)
+        .catch(vm.onError)
     },
     redirectToRoot() {
       this.$router.push({
