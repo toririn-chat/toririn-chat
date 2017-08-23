@@ -216,7 +216,7 @@ export default {
     }
   },
   methods: {
-    resetFeedbacks(){
+    resetFeedbacks() {
       Object.keys(this.feedbacks).forEach((key) => {
         Vue.delete(this.feedbacks, key)
       })
@@ -239,14 +239,15 @@ export default {
       }
       // HTTP Response has JSON with errors
       if (error.response.data.errors !== undefined) {
-        // cleanup feedbacks
+        // Cleanup feedbacks
         Object.keys(this.feedbacks).forEach((key) => {
           Vue.delete(this.feedbacks, key)
         })
-        // set errors to fedbacks
+        // Set errors to fedbacks
         Object.keys(error.response.data.errors).forEach((key) => {
           var messages = error.response.data.errors[key]
           messages.forEach((message) => {
+            // TODO Refactor
             if (key === 'reset_password_token') {
               Vue.set(this.feedbacks, key, 'このURLは既に使用されたか期限切れです。パスワードリセットするにはパスワードを再設定するためのURLの送信手続きを再度実施してください。')
             } else {
@@ -272,7 +273,7 @@ export default {
       form.append('user[password]', this.password);
       var config = {
         headers: {
-          'content-type': 'multipart/form-data',
+          'content-type': 'multipart/form-data'
         }
       };
       var vm = this;
