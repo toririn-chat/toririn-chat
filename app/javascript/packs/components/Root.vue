@@ -230,8 +230,8 @@ export default {
   computed: {
     states() {
       return {
-        email: this.state('email'),
-        password: this.state('password')
+        email: this.getState('email'),
+        password: this.getState('password')
       }
     }
   },
@@ -283,6 +283,13 @@ export default {
       Object.keys(this.feedbacks).forEach((key) => {
         Vue.delete(this.feedbacks, key)
       })
+    },
+    getState(key) {
+      if (this.feedbacks[key] === undefined) {
+        return 'valid';
+      } else {
+        return 'invalid';
+      }
     },
     signup(e) {
       e.cancel();
