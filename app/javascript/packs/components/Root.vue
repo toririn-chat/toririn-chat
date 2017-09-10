@@ -330,7 +330,7 @@ export default {
         .post('/api/v2/signin', form, config)
         .then(function(response) {
           vm.$router.push({
-            name: 'dashboard'
+            name: 'rooms'
           });
         })
         .catch(vm.onError)

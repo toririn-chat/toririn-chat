@@ -16,6 +16,8 @@ Rails.application.routes.draw do
         post 'passwords', to: 'passwords#create'
         put 'passwords', to: 'passwords#update'
       end
+      resources :rooms, only: [:index], format:'json' do
+      end
     end
   end
   resources :users

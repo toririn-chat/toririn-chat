@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Root from './components/Root'
-import Dashboard from './components/Dashboard'
+import Rooms from './components/Rooms'
 
 const routes = [
   {
@@ -11,9 +11,9 @@ const routes = [
     name: 'root',
     component: Root
   }, {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: Dashboard
+    path: '/rooms',
+    name: 'rooms',
+    component: Rooms
   }
 ]
 export default new VueRouter({routes, mode: 'history'})

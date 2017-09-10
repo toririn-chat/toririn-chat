@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818030252) do
+ActiveRecord::Schema.define(version: 20170910084834) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "room_id"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20170818030252) do
     t.datetime "updated_at", null: false
     t.index ["message_id"], name: "index_user_messages_on_message_id"
     t.index ["user_id"], name: "index_user_messages_on_user_id"
+  end
+
+  create_table "user_rooms", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "room_id"
+    t.index ["room_id"], name: "index_user_rooms_on_room_id"
+    t.index ["user_id"], name: "index_user_rooms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

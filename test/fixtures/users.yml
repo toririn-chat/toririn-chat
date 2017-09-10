@@ -1,7 +1,7 @@
 <% users = %w(とりりん トリピー だらずさん) %>
-
 <% users.each.with_index do |name, index| %>
 user_<%= index %>:
-  name: <%= name %>
-  icon: <%= File.basename(Dir.glob("public/images/icons/**/*.png").sample) %>
+  email: <%= "test_#{index}@example.net" %>
+  encrypted_password: <%= User.new.send(:password_digest, index.to_s * 8) %>
+  confirmed_at: <%= DateTime.now %>
 <% end %>
