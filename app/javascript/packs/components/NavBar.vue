@@ -1,7 +1,7 @@
 <template>
 <b-navbar toggleable type="dark">
-  <b-nav-toggle target="nav_collapse"></b-nav-toggle>
   <b-navbar-brand href="/">とりりん<i class="fa fa-star"></i>チャット</b-navbar-brand>
+  <b-nav-toggle target="nav_collapse"></b-nav-toggle>
   <b-collapse is-nav id="nav_collapse">
     <b-nav is-nav-bar>
       <b-nav-item href="rooms">
