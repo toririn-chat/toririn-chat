@@ -53,4 +53,9 @@ group :development do
   gem 'letter_opener_web'
 end
 
+group :test do
+  gem 'minitest-reporters'
+  gem 'minitest-power_assert'
+end
+
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
