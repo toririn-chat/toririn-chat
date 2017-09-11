@@ -3,8 +3,6 @@
 </router-view>
 </template>
 <script>
-// import 'bootstrap-loader'
-
 import Vue from 'vue'
 import 'font-awesome-sass-loader'
 import BootstrapVue from 'bootstrap-vue'
