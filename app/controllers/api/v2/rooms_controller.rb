@@ -5,7 +5,7 @@ class Api::V2::RoomsController < Api::V2::ApiController
 
   def index
     @rooms = current_user.rooms
-    render json: @rooms
+    render json: @rooms.sort{ |room| room.created_at }
   end
 
   def show
