@@ -11,11 +11,11 @@
     </b-nav>
     <b-nav is-nav-bar class="ml-auto">
       <b-nav-item-dropdown text="<i class='fa fa-user'></i>&nbsp;<span>アカウント</span>" right>
-        <b-dropdown-item href="#">
+        <!-- <b-dropdown-item href="#">
           <i class="fa fa-gear"></i>
           <span>設定</span>
-        </b-dropdown-item>
-        <b-dropdown-divider></b-dropdown-divider>
+        </b-dropdown-item> -->
+        <!-- <b-dropdown-divider></b-dropdown-divider> -->
         <b-dropdown-item @click="signout">
           <i class="fa fa-sign-out"></i>
           <span>ログアウト</span>
