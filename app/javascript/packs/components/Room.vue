@@ -12,6 +12,9 @@
     <h4>認可</h4>
     <h5>URL</h5>
     <p>作成中</p>
+    <p>
+      <router-link :to="{name:'chat',params:{id:room.id}}" target="_blank">/chats/{{room.id}}</router-link>
+    </p>
     <h5>QRコード発行</h5>
     <p>作成中</p>
     <table class="table table-hover">

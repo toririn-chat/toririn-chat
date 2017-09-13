@@ -16,7 +16,9 @@ Rails.application.routes.draw do
         post 'passwords', to: 'passwords#create'
         put 'passwords', to: 'passwords#update'
       end
-      resources :rooms, format:'json'
+      resources :rooms do
+        resources :messages, module:'rooms'
+      end
     end
   end
 
