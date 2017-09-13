@@ -37,11 +37,7 @@ class Api::V2::RoomsController < Api::V2::ApiController
   private
 
     def set_room
-      @room = Room
-        .includes(:users)
-        .where(rooms:{id:params[:id]})
-        .where(users:{id:current_user.id})
-        .first
+      @room = current_user.rooms.where(id:params[:id]).first
     end
 
     def room_params
