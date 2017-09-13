@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
 
+  devise_for :users, skip: %i(registrations sessions confirmations passwords)
   namespace :api, { format: 'json' } do
     namespace :v2 do
       devise_scope :user do
