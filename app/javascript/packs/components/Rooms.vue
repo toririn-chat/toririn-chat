@@ -7,14 +7,16 @@
       <b-button variant="primary" v-b-modal.new_room>
         新規作成
       </b-button>
+      <table class="table table-hover mt-3">
+        <tbody>
+          <tr v-for="room in rooms">
+            <td>
+              <router-link :to="{name:'room',params:{id:room.id}}">{{room.name}}</router-link>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table class="table table-hover mt-3">
-      <tbody>
-        <tr v-for="room in rooms">
-          <td>{{room.name}}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
   <div class="tc-theme-light">
     <b-modal id="new_room" ref="new_room" size="sm" title="新規作成" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="createRoom" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
@@ -161,6 +163,20 @@ div.tc-theme-light {
         &:hover {
             color: darken($tc-color-light, 15%);
             background-color: daraken($tc-color-dark, 30%);
+        }
+    }
+    table {
+        td {
+            padding: 0;
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                padding: 12px;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
         }
     }
 }
