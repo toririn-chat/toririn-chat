@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
 
-  devise_for :users, skip: [:registrations, :sessions, :confirmations]
   namespace :api, { format: 'json' } do
     namespace :v2 do
       devise_scope :user do
@@ -19,7 +18,6 @@ Rails.application.routes.draw do
       resources :rooms, format:'json'
     end
   end
-  resources :users
 
   root to: 'root#index'
   mount ActionCable.server => '/cable'
