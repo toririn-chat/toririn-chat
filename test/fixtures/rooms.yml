@@ -1,6 +1,10 @@
-<% rooms = %w(ゲストルーム とりりん小学校出前授業2016 トリピー小学校出前授業2016) %>
-
-<% rooms.each.with_index do |name, index| %>
-room_<%= index %>:
-  name: <%= name %>
+room_0:
+  title: テストルーム
+room_1:
+  title: テスト小学校出前授業
+room_2:
+  title: テスト中学校出前授業
+<% 3.upto(9) do |n| %>
+room_<%= n %>:
+  title: <%= Faker::Lorem.sentence %>
 <% end %>

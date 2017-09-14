@@ -53,7 +53,7 @@ export default {
     return {
       room: {
         id: '',
-        name: '',
+        title: '',
         updated_at: '',
         created_at: '',
       },
@@ -67,7 +67,7 @@ export default {
         href: '/rooms',
         active: false
       }, {
-        text: this.room.name
+        text: this.room.title
       }]
     },
 

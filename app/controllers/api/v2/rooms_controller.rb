@@ -41,7 +41,7 @@ class Api::V2::RoomsController < Api::V2::ApiController
     end
 
     def room_params
-      params.require(:room).permit(:id, :name)
+      params.require(:room).permit(:id, :title)
     end
 
 end

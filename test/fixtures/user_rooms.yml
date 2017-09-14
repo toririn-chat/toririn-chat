@@ -1,13 +1,16 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-user_room_0:
+user_room_0_0:
   user: user_0
   room: room_0
-
-user_room_1:
+user_room_0_1:
   user: user_0
   room: room_1
-
-user_room_2:
+user_room_0_2:
   user: user_0
   room: room_2
+<% 3.upto(9) do |u_n| %>
+<% (0..9).to_a.sample(Random.rand(1..9+1)).each do |r_n| %>
+user_room_<%= u_n %>:
+  user: user_<%= u_n %>
+  room: room_<%= r_n %>
+<% end %>
+<% end %>

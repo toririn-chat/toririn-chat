@@ -11,7 +11,7 @@
         <tbody>
           <tr v-for="room in rooms">
             <td>
-              <router-link :to="{name:'room',params:{id:room.id}}">{{room.name}}</router-link>
+              <router-link :to="{name:'room',params:{id:room.id}}">{{room.title}}</router-link>
             </td>
           </tr>
         </tbody>
@@ -27,9 +27,9 @@
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
-      <b-form-group label="チャットルーム名" :feedback="feedbacks['name']" :state="states['name']">
+      <b-form-group label="チャットルーム名" :feedback="feedbacks['title']" :state="states['title']">
         <b-input-group>
-          <b-form-input type="text" v-model="name"></b-form-input>
+          <b-form-input type="text" v-model="title"></b-form-input>
         </b-input-group>
       </b-form-group>
     </b-modal>
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       rooms: [],
-      name: '',
+      title: '',
       feedbacks: []
     }
   },
@@ -60,7 +60,7 @@ export default {
   computed: {
     states() {
       return {
-        name: this.getState('name')
+        title: this.getState('title')
       }
     }
   },
@@ -123,7 +123,7 @@ export default {
     createRoom(e) {
       e.cancel();
       var form = new FormData();
-      form.append('room[name]', this.name);
+      form.append('room[title]', this.title);
       var config = {
         headers: {
           'content-type': 'multipart/form-data'
@@ -136,7 +136,7 @@ export default {
         .then(function(response) {
           var room = response.data
           vm.rooms.unshift(room)
-          vm.name = ''
+          vm.title = ''
           vm.$refs.new_room.hide();
         })
         .catch(vm.onError)

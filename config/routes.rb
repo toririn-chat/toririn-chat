@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       end
       resources :rooms do
         resources :messages, module:'rooms'
+        resources :people, module:'rooms'
       end
     end
   end
