@@ -12,29 +12,27 @@
 
 ActiveRecord::Schema.define(version: 20170913142045) do
 
-  create_table "avatar_taggings", force: :cascade do |t|
-    t.integer "avatar_id", null: false
-    t.integer "avatar_tag_id", null: false
-    t.index ["avatar_id", "avatar_tag_id"], name: "index_avatar_taggings_on_avatar_id_and_avatar_tag_id"
-    t.index ["avatar_id"], name: "index_avatar_taggings_on_avatar_id"
-    t.index ["avatar_tag_id"], name: "index_avatar_taggings_on_avatar_tag_id"
-  end
-
-  create_table "avatar_tags", force: :cascade do |t|
-    t.string "title", default: "", null: false
+  create_table "avatar_groups", force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "title", null: false
     t.text "description", default: "", null: false
-    t.index ["description"], name: "index_avatar_tags_on_description"
-    t.index ["title"], name: "index_avatar_tags_on_title", unique: true
+    t.index ["description"], name: "index_avatar_groups_on_description"
+    t.index ["slug"], name: "index_avatar_groups_on_slug", unique: true
+    t.index ["title"], name: "index_avatar_groups_on_title", unique: true
   end
 
   create_table "avatars", force: :cascade do |t|
+    t.string "slug", null: false
     t.string "title", default: "", null: false
     t.text "description", default: "", null: false
     t.string "image", null: false
+    t.integer "avatar_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["avatar_group_id"], name: "index_avatars_on_avatar_group_id"
     t.index ["description"], name: "index_avatars_on_description"
     t.index ["image"], name: "index_avatars_on_image"
+    t.index ["slug"], name: "index_avatars_on_slug"
     t.index ["title"], name: "index_avatars_on_title"
   end
 
@@ -53,10 +51,10 @@ ActiveRecord::Schema.define(version: 20170913142045) do
 
   create_table "people", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "icon_id", null: false
+    t.integer "avater_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["icon_id"], name: "index_people_on_icon_id"
+    t.index ["avater_id"], name: "index_people_on_avater_id"
     t.index ["name"], name: "index_people_on_name"
   end
 
@@ -79,29 +77,27 @@ ActiveRecord::Schema.define(version: 20170913142045) do
     t.index ["title"], name: "index_rooms_on_title"
   end
 
-  create_table "stamp_taggings", force: :cascade do |t|
-    t.integer "stamp_id", null: false
-    t.integer "stamp_tag_id", null: false
-    t.index ["stamp_id", "stamp_tag_id"], name: "index_stamp_taggings_on_stamp_id_and_stamp_tag_id", unique: true
-    t.index ["stamp_id"], name: "index_stamp_taggings_on_stamp_id"
-    t.index ["stamp_tag_id"], name: "index_stamp_taggings_on_stamp_tag_id"
-  end
-
-  create_table "stamp_tags", force: :cascade do |t|
-    t.string "title", default: "", null: false
+  create_table "stamp_groups", force: :cascade do |t|
+    t.string "slug", null: false
+    t.string "title", null: false
     t.text "description", default: "", null: false
-    t.index ["description"], name: "index_stamp_tags_on_description"
-    t.index ["title"], name: "index_stamp_tags_on_title", unique: true
+    t.index ["description"], name: "index_stamp_groups_on_description"
+    t.index ["slug"], name: "index_stamp_groups_on_slug", unique: true
+    t.index ["title"], name: "index_stamp_groups_on_title", unique: true
   end
 
   create_table "stamps", force: :cascade do |t|
+    t.string "slug", null: false
     t.string "title", default: "", null: false
     t.text "description", default: "", null: false
     t.string "image", null: false
+    t.integer "stamp_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["description"], name: "index_stamps_on_description"
     t.index ["image"], name: "index_stamps_on_image"
+    t.index ["slug"], name: "index_stamps_on_slug"
+    t.index ["stamp_group_id"], name: "index_stamps_on_stamp_group_id"
     t.index ["title"], name: "index_stamps_on_title"
   end
 

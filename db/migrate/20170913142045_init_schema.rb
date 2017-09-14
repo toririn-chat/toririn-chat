@@ -18,33 +18,32 @@ class InitSchema < ActiveRecord::Migration[5.1]
 
     create_table :people do |t|
       t.string :name, null: false
-      t.references :icon, foreign_key: true, null: false
+      t.references :avater, foreign_key: true, null: false
       t.timestamps
     end
     add_index :people, :name
 
     create_table :avatars do |t|
+      t.string :slug, null: false
       t.string :title, null: false, default: ''
       t.text :description, null: false, default: ''
       t.string :image, null: false
+      t.references :avatar_group, foreign_key: true, null: false
       t.timestamps
     end
+    add_index :avatars, :slug
     add_index :avatars, :title
     add_index :avatars, :description
     add_index :avatars, :image
 
-    create_table :avatar_tags do |t|
-      t.string :title, null: false, default: ''
+    create_table :avatar_groups do |t|
+      t.string :slug, null: false
+      t.string :title, null: false
       t.text :description, null: false, default: ''
     end
-    add_index :avatar_tags, :title, unique: true
-    add_index :avatar_tags, :description
-
-    create_table :avatar_taggings do |t|
-      t.references :avatar, foreign_key: true, null: false
-      t.references :avatar_tag, foreign_key: true, null: false
-    end
-    add_index :avatar_taggings, [:avatar_id, :avatar_tag_id]
+    add_index :avatar_groups, :slug, unique: true
+    add_index :avatar_groups, :title, unique: true
+    add_index :avatar_groups, :description
 
     create_table :texts do |t|
       t.text :text, null: false
@@ -52,27 +51,26 @@ class InitSchema < ActiveRecord::Migration[5.1]
     end
 
     create_table :stamps do |t|
+      t.string :slug, null: false
       t.string :title, null: false, default: ''
       t.text :description, null: false, default: ''
       t.string :image, null: false
+      t.references :stamp_group, foreign_key: true, null: false
       t.timestamps
     end
+    add_index :stamps, :slug
     add_index :stamps, :title
     add_index :stamps, :description
     add_index :stamps, :image
 
-    create_table :stamp_tags do |t|
-      t.string :title, null: false, default: ''
+    create_table :stamp_groups do |t|
+      t.string :slug, null: false
+      t.string :title, null: false
       t.text :description, null: false, default: ''
     end
-    add_index :stamp_tags, :title, unique: true
-    add_index :stamp_tags, :description
-
-    create_table :stamp_taggings do |t|
-      t.references :stamp, foreign_key: true, null: false
-      t.references :stamp_tag, foreign_key: true, null: false
-    end
-    add_index :stamp_taggings, [:stamp_id, :stamp_tag_id], unique: true
+    add_index :stamp_groups, :slug, unique: true
+    add_index :stamp_groups, :title, unique: true
+    add_index :stamp_groups, :description
 
     create_table :users do |t|
       # Database authenticatable

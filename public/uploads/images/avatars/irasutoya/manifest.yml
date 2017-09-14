@@ -1,0 +1,97 @@
+slug: irasutoya
+title: いらすとや
+title_en: Irasutoya
+author:
+  name: みふねたかし
+  name_en: Takashi Mifune
+url: 'http://www.irasutoya.com/'
+date: 2016-11-19
+license:
+  name: 利用規定
+  name_en: Terms of Use
+  url: http://www.irasutoya.com/p/terms.html
+materials:
+  animal_arupaka.png:
+    title: アルパカ
+    description: あるぱか
+  animal_hamster.png:
+    title: ハムスター
+    description: はむすたー
+  animal_hiyoko.png:
+    title: ヒヨコ
+    description: ひよこ
+  animal_inu.png:
+    title: 犬
+    description: イヌ いぬ
+  animal_mitsubachi.png:
+    title: ミツバチ
+    description: ハチ みつばち はち
+  animal_neko.png:
+    title: 猫
+    description: ネコ ねこ にゃんこ にゃーん にゃん キャット キャッツ
+  animal_penguin.png:
+    title: ペンギン
+    description: ぺんぎん
+  animal_usagi.png:
+    title: ウサギ
+    description: うさぎ
+  boy_01.png:
+    title: 男の子
+    description:
+  boy_02.png:
+    title: 男の子
+    description:
+  boy_06.png:
+    title: 男の子
+    description:
+  boy_07.png:
+    title: 男の子
+    description:
+  boy_08.png:
+    title: 男の子
+    description:
+  boy_10.png:
+    title: 男の子
+    description:
+  boy_11.png:
+    title: 男の子
+    description:
+  boy_12.png:
+    title: 男の子
+    description:
+  girl_13.png:
+    title: 女の子
+    description:
+  girl_14.png:
+    title: 女の子
+    description:
+  girl_15.png:
+    title: 女の子
+    description:
+  girl_16.png:
+    title: 女の子
+    description:
+  girl_17.png:
+    title: 女の子
+    description:
+  girl_18.png:
+    title: 女の子
+    description:
+  girl_19.png:
+    title: 女の子
+    description:
+  girl_20.png:
+    title: 女の子
+    description:
+  girl_21.png:
+    title: 女の子
+    description:
+  girl_22.png:
+    title: 女の子
+    description:
+  girl_23.png:
+    title: 女の子
+    description:
+  girl_24.png:
+    title: 女の子
+    description:

@@ -18,6 +18,7 @@ gem 'js-routes'
 gem 'devise'
 gem 'devise-i18n'
 gem 'webpacker'
+gem 'carrierwave'
 
 group :production do
   gem 'pg'
@@ -27,6 +28,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'license_finder'
   gem 'dotenv-rails'
+  gem 'faker'
 end
 
 group :production, :development do
