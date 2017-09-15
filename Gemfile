@@ -34,10 +34,7 @@ group :development do
   gem 'pry-doc', require: false
   gem 'pry-coolline'
   gem 'pry-byebug', platforms: :mri
-  gem 'hirb'
-  gem 'hirb-unicode'
   gem 'awesome_print'
-  gem 'annotate'
   gem 'i18n-tasks', require:false
   gem 'guard-livereload', require:false
   gem 'letter_opener'
