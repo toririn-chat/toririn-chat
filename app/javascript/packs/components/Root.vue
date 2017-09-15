@@ -183,6 +183,15 @@ export default {
     document.body.className = 'root';
   },
   mounted() {
+    // ログイン済みであればroomsに移動する。
+    var vm = this;
+    axios
+      .get('/api/v2/signin')
+      .then(function(response) {
+        vm.$router.push({
+          name: 'rooms'
+        });
+      })
     var confirmation_token = this.$route.query.confirmation_token;
     if (confirmation_token !== undefined) {
       var vm = this;
