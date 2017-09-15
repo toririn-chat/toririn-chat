@@ -38,7 +38,7 @@ export default {
     signout() {
       var vm = this;
       axios
-        .delete('/api/v2/signout')
+        .delete('/api/v2/users/signout')
         .then(function(response) {
           vm.$router.push({
             name: 'root'

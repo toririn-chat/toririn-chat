@@ -186,7 +186,7 @@ export default {
     // ログイン済みであればroomsに移動する。
     var vm = this;
     axios
-      .get('/api/v2/signin')
+      .get('/api/v2/users/signin')
       .then(function(response) {
         vm.$router.push({
           name: 'rooms'
@@ -203,7 +203,7 @@ export default {
         }
       };
       axios
-        .get('/api/v2/confirmations', {
+        .get('/api/v2/users/confirmations', {
           params: {
             confirmation_token: confirmation_token
           }
@@ -220,7 +220,7 @@ export default {
     if (reset_password_token !== undefined) {
       var vm = this;
       axios
-        .get('/api/v2/passwords', {
+        .get('/api/v2/users/passwords', {
           params: {
             reset_password_token: reset_password_token
           }
@@ -316,7 +316,7 @@ export default {
       };
       var vm = this;
       axios
-        .post('/api/v2/signup', form, config)
+        .post('/api/v2/users/signup', form, config)
         .then(function(response) {
           vm.$refs.signup.hide();
           vm.$refs.confirmation.show();
@@ -336,7 +336,7 @@ export default {
       };
       var vm = this;
       axios
-        .post('/api/v2/signin', form, config)
+        .post('/api/v2/users/signin', form, config)
         .then(function(response) {
           vm.$router.push({
             name: 'rooms'
@@ -356,7 +356,7 @@ export default {
       };
       var vm = this;
       axios
-        .post('/api/v2/confirmations', form, config)
+        .post('/api/v2/users/confirmations', form, config)
         .then(function(response) {
           vm.$refs.reconfirmation.hide();
           vm.$refs.confirmation.show();
@@ -375,7 +375,7 @@ export default {
       };
       var vm = this;
       axios
-        .post('/api/v2/passwords', form, config)
+        .post('/api/v2/users/passwords', form, config)
         .then(function(response) {
           vm.$refs.reminder.hide();
           vm.$refs.notifyPasswordReminder.show();
@@ -395,7 +395,7 @@ export default {
       };
       var vm = this;
       axios
-        .put('/api/v2/passwords', form, config)
+        .put('/api/v2/users/passwords', form, config)
         .then(function(response) {
           vm.$refs.resetPasswordModal.hide()
           vm.$refs.finishSavePassword.show();
