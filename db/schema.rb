@@ -13,27 +13,19 @@
 ActiveRecord::Schema.define(version: 20170913142045) do
 
   create_table "avatar_groups", force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "title", null: false
-    t.text "description", default: "", null: false
-    t.index ["description"], name: "index_avatar_groups_on_description"
-    t.index ["slug"], name: "index_avatar_groups_on_slug", unique: true
-    t.index ["title"], name: "index_avatar_groups_on_title", unique: true
+    t.string "title"
+    t.string "author"
+    t.text "url"
+    t.string "license_name"
+    t.text "license_url"
   end
 
   create_table "avatars", force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "title", default: "", null: false
-    t.text "description", default: "", null: false
     t.string "image", null: false
     t.integer "avatar_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["avatar_group_id"], name: "index_avatars_on_avatar_group_id"
-    t.index ["description"], name: "index_avatars_on_description"
-    t.index ["image"], name: "index_avatars_on_image"
-    t.index ["slug"], name: "index_avatars_on_slug"
-    t.index ["title"], name: "index_avatars_on_title"
   end
 
   create_table "messages", force: :cascade do |t|

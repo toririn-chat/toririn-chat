@@ -1,0 +1,7 @@
+<% base_dir = 'test/fixtures/files/avatars/irasutoya' %>
+<% paths = Rails.root.join(base_dir).children.select{ |path| path.extname =~ /png/ } %>
+<% paths.each.with_index do |path, index| %>
+avatar_<%= index %>:
+  avatar_group: avatar_group_irasutoya
+  image: <%= path %>
+<% end %>
