@@ -28,7 +28,6 @@ class InitSchema < ActiveRecord::Migration[5.1]
       t.references :avatar_group, foreign_key: true, null: false
       t.timestamps
     end
-    add_index :avatars, :image
 
     create_table :avatar_groups do |t|
       t.string :title
@@ -53,7 +52,6 @@ class InitSchema < ActiveRecord::Migration[5.1]
       t.references :sticker_group, foreign_key: true, null: false
       t.timestamps
     end
-    add_index :stickers, :image
 
     create_table :sticker_groups do |t|
       t.string :title

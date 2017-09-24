@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20170913142045) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["avatar_group_id"], name: "index_avatars_on_avatar_group_id"
-    t.index ["image"], name: "index_avatars_on_image"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -93,7 +92,6 @@ ActiveRecord::Schema.define(version: 20170913142045) do
     t.integer "sticker_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["image"], name: "index_stickers_on_image"
     t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
   end
 
