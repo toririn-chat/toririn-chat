@@ -9,6 +9,7 @@
     <title>とりりん★チャット</title>
     <%= analytics_init if Rails.env.production? && GoogleAnalytics.valid_tracker? %>
     <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
   <body>
