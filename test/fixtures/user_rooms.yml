@@ -9,7 +9,7 @@ user_room_0_2:
   room: room_2
 <% 3.upto(9) do |u_n| %>
 <% (0..9).to_a.sample(Random.rand(1..9+1)).each do |r_n| %>
-user_room_<%= u_n %>:
+user_room_<%= u_n %>_<%= r_n %>:
   user: user_<%= u_n %>
   room: room_<%= r_n %>
 <% end %>
