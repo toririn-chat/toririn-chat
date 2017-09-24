@@ -2,7 +2,7 @@
 <div>
   <nav-bar></nav-bar>
   <div class="container">
-    <b-media v-for="message in messages">
+    <b-media v-for="message in messages" :key="message.id">
       <b-img blank width="64" height="64" slot="aside" blank-color="#abc" />
       <p>{{message.user_id}} {{message.created_at}}</p>
       <p v-show="message.text">{{message.text}}</p>

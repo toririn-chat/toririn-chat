@@ -192,6 +192,9 @@ export default {
           name: 'rooms'
         });
       })
+      .catch(function(error) {
+        // TODO
+      })
     var confirmation_token = this.$route.query.confirmation_token;
     if (confirmation_token !== undefined) {
       var vm = this;
