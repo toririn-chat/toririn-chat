@@ -1,6 +1,4 @@
-// Note: You must restart bin/webpack-dev-server for changes to take effect
-
+const environment = require('./environment')
+const custom = require('./custom')
 const merge = require('webpack-merge')
-const sharedConfig = require('./shared.js')
-
-module.exports = merge(sharedConfig, {})
+module.exports = merge(environment.toWebpackConfig(), custom)

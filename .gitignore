@@ -26,3 +26,4 @@
 /public/packs-test
 /public/uploads/tmp
 /node_modules
+*.log
