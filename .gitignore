@@ -24,6 +24,6 @@
 !.env.example
 /public/packs
 /public/packs-test
-/public/uploads/tmp
+/public/uploads
 /node_modules
 *.log

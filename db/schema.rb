@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(version: 20170913142045) do
     t.text "url"
     t.string "license_name"
     t.text "license_url"
+    t.index ["author"], name: "index_avatar_groups_on_author"
+    t.index ["license_name"], name: "index_avatar_groups_on_license_name"
+    t.index ["license_url"], name: "index_avatar_groups_on_license_url"
+    t.index ["title"], name: "index_avatar_groups_on_title"
+    t.index ["url"], name: "index_avatar_groups_on_url"
   end
 
   create_table "avatars", force: :cascade do |t|
@@ -26,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170913142045) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["avatar_group_id"], name: "index_avatars_on_avatar_group_id"
+    t.index ["image"], name: "index_avatars_on_image"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -69,28 +75,26 @@ ActiveRecord::Schema.define(version: 20170913142045) do
     t.index ["title"], name: "index_rooms_on_title"
   end
 
-  create_table "stamp_groups", force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "title", null: false
-    t.text "description", default: "", null: false
-    t.index ["description"], name: "index_stamp_groups_on_description"
-    t.index ["slug"], name: "index_stamp_groups_on_slug", unique: true
-    t.index ["title"], name: "index_stamp_groups_on_title", unique: true
+  create_table "sticker_groups", force: :cascade do |t|
+    t.string "title"
+    t.string "author"
+    t.text "url"
+    t.string "license_name"
+    t.text "license_url"
+    t.index ["author"], name: "index_sticker_groups_on_author"
+    t.index ["license_name"], name: "index_sticker_groups_on_license_name"
+    t.index ["license_url"], name: "index_sticker_groups_on_license_url"
+    t.index ["title"], name: "index_sticker_groups_on_title"
+    t.index ["url"], name: "index_sticker_groups_on_url"
   end
 
-  create_table "stamps", force: :cascade do |t|
-    t.string "slug", null: false
-    t.string "title", default: "", null: false
-    t.text "description", default: "", null: false
+  create_table "stickers", force: :cascade do |t|
     t.string "image", null: false
-    t.integer "stamp_group_id", null: false
+    t.integer "sticker_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["description"], name: "index_stamps_on_description"
-    t.index ["image"], name: "index_stamps_on_image"
-    t.index ["slug"], name: "index_stamps_on_slug"
-    t.index ["stamp_group_id"], name: "index_stamps_on_stamp_group_id"
-    t.index ["title"], name: "index_stamps_on_title"
+    t.index ["image"], name: "index_stickers_on_image"
+    t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
   end
 
   create_table "texts", force: :cascade do |t|

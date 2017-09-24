@@ -28,6 +28,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
       t.references :avatar_group, foreign_key: true, null: false
       t.timestamps
     end
+    add_index :avatars, :image
 
     create_table :avatar_groups do |t|
       t.string :title
@@ -36,33 +37,36 @@ class InitSchema < ActiveRecord::Migration[5.1]
       t.string :license_name
       t.text :license_url
     end
+    add_index :avatar_groups, :title
+    add_index :avatar_groups, :author
+    add_index :avatar_groups, :url
+    add_index :avatar_groups, :license_name
+    add_index :avatar_groups, :license_url
 
     create_table :texts do |t|
       t.text :text, null: false
       t.timestamps
     end
 
-    create_table :stamps do |t|
-      t.string :slug, null: false
-      t.string :title, null: false, default: ''
-      t.text :description, null: false, default: ''
+    create_table :stickers do |t|
       t.string :image, null: false
-      t.references :stamp_group, foreign_key: true, null: false
+      t.references :sticker_group, foreign_key: true, null: false
       t.timestamps
     end
-    add_index :stamps, :slug
-    add_index :stamps, :title
-    add_index :stamps, :description
-    add_index :stamps, :image
+    add_index :stickers, :image
 
-    create_table :stamp_groups do |t|
-      t.string :slug, null: false
-      t.string :title, null: false
-      t.text :description, null: false, default: ''
+    create_table :sticker_groups do |t|
+      t.string :title
+      t.string :author
+      t.text :url
+      t.string :license_name
+      t.text :license_url
     end
-    add_index :stamp_groups, :slug, unique: true
-    add_index :stamp_groups, :title, unique: true
-    add_index :stamp_groups, :description
+    add_index :sticker_groups, :title
+    add_index :sticker_groups, :author
+    add_index :sticker_groups, :url
+    add_index :sticker_groups, :license_name
+    add_index :sticker_groups, :license_url
 
     create_table :users do |t|
       # Database authenticatable
