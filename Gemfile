@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.4.2'
 
-gem 'rails', '~> 5.1.3'
-gem 'puma', '~> 3.0'
+gem 'rails', '~> 5.1.4'
+gem 'puma', '~> 3.7'
 gem 'google-analytics-rails'
 gem 'devise'
 gem 'devise-i18n'
@@ -15,6 +15,9 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'capybara', '~> 2.13'
+  gem 'selenium-webdriver'
   gem 'license_finder'
   gem 'dotenv-rails'
   gem 'faker'
@@ -26,8 +29,8 @@ end
 
 group :development do
   gem 'bullet'
+  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
-  gem 'listen', '~> 3.1.5'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console'
   gem 'pry-rails'
