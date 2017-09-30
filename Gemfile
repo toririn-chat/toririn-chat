@@ -8,6 +8,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'webpacker'
 gem 'carrierwave'
+gem 'active_model_serializers', '~> 0.10'
 
 group :production do
   gem 'pg'

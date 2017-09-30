@@ -1,26 +1,24 @@
 <template>
 <div>
-  <nav-bar></nav-bar>
+  <b-navbar toggleable type="dark" fixed="top" sticky>
+    <b-navbar-brand>{{room.title}}</b-navbar-brand>
+  </b-navbar>
   <div class="container">
     <b-media v-for="message in messages" :key="message.id">
-      <b-img blank width="64" height="64" slot="aside" blank-color="#abc" />
-      <p>{{message.user_id}} {{message.created_at}}</p>
+      <b-img width="64" height="64" slot="aside" blank-color="#abc" :src="message.person_avatar_image_url" />
+      <p>{{message.person_name}} {{message.created_at}}</p>
       <p v-show="message.text">{{message.text}}</p>
-      <b-img width="150" height="150" blank-width="150" blank-height="150" blank-color="#fbfbfb" :src="`/images/stamps/${message.stamp}`" v-show="message.stamp" />
+      <b-img width="150" height="150" blank-width="150" blank-height="150" blank-color="#fbfbfb" :src="message.sticker_image_url" v-show="message.sticker_image_url" />
     </b-media>
   </div>
 </div>
 </template>
 <script>
-import NavBar from './NavBar.vue'
 import Vue from 'vue'
 import axios from 'axios'
 export default {
-  components: {
-    NavBar
-  },
   beforeCreate() {
-    document.body.className = 'room';
+    document.body.className = 'chat';
   },
   mounted() {
     this.getRoom()
@@ -28,24 +26,15 @@ export default {
   },
   data() {
     return {
-      messages: [{
-        text: 'こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！こんにちは！',
-        user: {
-          name: 'とりりん',
-          icon: '/images/icons/animal_hamster.png'
-        }
-      }, {
-        text: 'さようなら！さようなら！さようなら！さようなら！さようなら！さようなら！',
-        user: {
-          name: 'キャット',
-          icon: '/images/icons/animal_penguin.png'
-        }
-      }],
+      messages: [],
       room: {
         id: '',
         name: '',
         updated_at: '',
         created_at: '',
+      },
+      person: {
+        id: ''
       },
       feedbacks: []
     }

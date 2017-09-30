@@ -1,9 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  name: MyString
-  icon: MyString
-
-two:
-  name: MyString
-  icon: MyString
+<% avatars = Avatar.all %>
+person_0:
+  name: とりりん
+  avatar_id: <%= avatars.sample.id %>
+person_1:
+  name: トリピー
+  avatar_id: <%= avatars.sample.id %>
+person_2:
+  name: すなば
+  avatar_id: <%= avatars.sample.id %>
+<% 3.upto(9) do |n| %>
+person_<%= n %>:
+  name: <%= Faker::Name.name %>
+  avatar_id: <%= avatars.sample.id %>
+<% end %>

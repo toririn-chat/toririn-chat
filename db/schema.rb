@@ -36,22 +36,21 @@ ActiveRecord::Schema.define(version: 20170913142045) do
   create_table "messages", force: :cascade do |t|
     t.integer "room_id", null: false
     t.integer "person_id", null: false
-    t.integer "text_id"
-    t.integer "stamp_id"
+    t.text "text"
+    t.integer "sticker_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["person_id"], name: "index_messages_on_person_id"
     t.index ["room_id"], name: "index_messages_on_room_id"
-    t.index ["stamp_id"], name: "index_messages_on_stamp_id"
-    t.index ["text_id"], name: "index_messages_on_text_id"
+    t.index ["sticker_id"], name: "index_messages_on_sticker_id"
   end
 
   create_table "people", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "avater_id", null: false
+    t.integer "avatar_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["avater_id"], name: "index_people_on_avater_id"
+    t.index ["avatar_id"], name: "index_people_on_avatar_id"
     t.index ["name"], name: "index_people_on_name"
   end
 
@@ -93,12 +92,6 @@ ActiveRecord::Schema.define(version: 20170913142045) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
-  end
-
-  create_table "texts", force: :cascade do |t|
-    t.text "text", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "user_rooms", force: :cascade do |t|

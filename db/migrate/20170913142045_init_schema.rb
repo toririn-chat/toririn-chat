@@ -5,8 +5,8 @@ class InitSchema < ActiveRecord::Migration[5.1]
     create_table :messages do |t|
       t.references :room, foreign_key: true, null: false
       t.references :person, foreign_key: true, null: false
-      t.references :text, foreign_key: true
-      t.references :stamp, foreign_key: true
+      t.text :text
+      t.references :sticker, foreign_key: true
       t.timestamps
     end
 
@@ -18,7 +18,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
 
     create_table :people do |t|
       t.string :name, null: false
-      t.references :avater, foreign_key: true, null: false
+      t.references :avatar, foreign_key: true, null: false
       t.timestamps
     end
     add_index :people, :name
@@ -42,11 +42,6 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :avatar_groups, :license_name
     add_index :avatar_groups, :license_url
 
-    create_table :texts do |t|
-      t.text :text, null: false
-      t.timestamps
-    end
-
     create_table :stickers do |t|
       t.string :image, null: false
       t.references :sticker_group, foreign_key: true, null: false
@@ -65,6 +60,14 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :sticker_groups, :url
     add_index :sticker_groups, :license_name
     add_index :sticker_groups, :license_url
+
+    # create_table :authorizations do |t|
+    #   t.references :room, foreign_key: true, null: false
+    #   t.integer :count, default: 0, null: false
+    #   t.datetime :begin_at
+    #   t.datetime :end_at
+    #   t.string :token
+    # end
 
     create_table :users do |t|
       # Database authenticatable
