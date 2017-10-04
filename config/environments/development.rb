@@ -79,4 +79,21 @@ Rails.application.configure do
     Bullet.rails_logger = true
   end
 
+  if ENV['AUTO_LOGIN'].present?
+    module AutoLogin
+      def authenticate_user!
+        true
+      end
+      def current_user
+        User.find_by_email('test@example.net')
+      end
+    end
+    ApplicationController.class_eval do
+      include AutoLogin
+    end
+    Api::V2::ApiController.class_eval do
+      include AutoLogin
+    end
+  end
+
 end
