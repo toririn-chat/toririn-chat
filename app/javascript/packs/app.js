@@ -1,4 +1,4 @@
-import 'es6-promise/auto' // for vuex
+import 'es6-promise/auto' // for vuex on IE 11
 import Vue from 'vue'
 import i18n from './i18n'
 import router from './router'
