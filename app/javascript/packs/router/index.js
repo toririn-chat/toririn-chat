@@ -2,16 +2,17 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-import Root from './components/Root'
-import Rooms from './components/Rooms'
-import Room from './components/Room'
-import Chat from './components/Chat'
+import ChatRoot from '../components/ChatRoot.vue'
+import Root from '../components/Root.vue'
+import Rooms from '../components/Rooms.vue'
+import Room from '../components/Room.vue'
+import Chat from '../components/Chat.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'root',
-    component: Root
+    name: 'chat_root',
+    component: ChatRoot
   }, {
     path: '/rooms',
     name: 'rooms',
