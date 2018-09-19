@@ -1,15 +1,22 @@
-class Api::V2::RoomsController < Api::V2::ApiController
+class Api::RoomsController < Api::V2::ApiController
 
   before_action :authenticate_user!
+  before_action :set_rooms, only: %i(index)
   before_action :set_room, only: %i(show update destroy)
 
   def index
-    @rooms = current_user.rooms
     render json: @rooms.sort{ |room| room.created_at }
   end
 
   def show
     render json: @room
+  end
+
+  def rqcode
+    @code = RQRCode::QRCode.new("http://github.com/").as_png
+    # binding.pry
+    # p @code
+    send_data(@code.to_s, disposition: 'inline', type: 'image/png')
   end
 
   def create
@@ -35,6 +42,10 @@ class Api::V2::RoomsController < Api::V2::ApiController
   end
 
   private
+
+    def set_rooms
+      @rooms = current_user.rooms.includes(:authorizations)
+    end
 
     def set_room
       @room = current_user.rooms.where(id:params[:id]).first

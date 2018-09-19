@@ -1,4 +1,4 @@
-class Api::V2::Rooms::MessagesController < Api::V2::ApiController
+class Api::Rooms::MessagesController < Api::V2::ApiController
 
   def index
     @messages = Message.includes({person:[:avatar]}, :sticker).where(room_id:params[:room_id])

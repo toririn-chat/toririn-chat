@@ -6,23 +6,24 @@ Rails.application.routes.draw do
 
   devise_for :users, skip: %i(registrations sessions confirmations passwords)
   namespace :api, { format: 'json' } do
-    namespace :v2 do
-      namespace :users do
-        devise_scope :user do
-          post 'signup', to: 'registrations#create'
-          post 'signin', to: 'sessions#create'
-          get 'signin', to: 'sessions#show'
-          delete 'signout', to: 'sessions#destroy'
-          get 'confirmations', to: 'confirmations#show'
-          post 'confirmations', to: 'confirmations#create'
-          post 'passwords', to: 'passwords#create'
-          put 'passwords', to: 'passwords#update'
-        end
+    namespace :users do
+      devise_scope :user do
+        post 'signup', to: 'registrations#create'
+        post 'signin', to: 'sessions#create'
+        get 'signin', to: 'sessions#show'
+        delete 'signout', to: 'sessions#destroy'
+        get 'confirmations', to: 'confirmations#show'
+        post 'confirmations', to: 'confirmations#create'
+        post 'passwords', to: 'passwords#create'
+        put 'passwords', to: 'passwords#update'
       end
-      resources :rooms do
-        resources :messages, module:'rooms'
-        resources :people, module:'rooms'
+    end
+    resources :rooms do
+      member do
+        get 'rqcode', {format: 'png'}
       end
+      resources :messages, module:'rooms'
+      resources :people, module:'rooms'
     end
   end
 
