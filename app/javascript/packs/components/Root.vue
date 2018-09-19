@@ -1,57 +1,51 @@
 <template>
 <div class="tc-splash">
-  <div class="container">
-    <div class="row justify-content-center mb-3">
-      <div class="col-5 col-sm-3 text-center">
-        <img class="img-fluid" src="images/logo.png"></img>
+  <div class="tc-theme-dark">
+    <div class="container">
+      <div class="row justify-content-center mb-3">
+        <div class="col-5 col-sm-3 text-center">
+          <b-img src="images/logo.png" fluid/>
+        </div>
       </div>
-    </div>
-    <div class="row justify-content-center mb-3">
-      <div class="text-center">
-        <h1>とりりん<i class="fa fa-star"></i>チャット</h1>
+      <div class="row justify-content-center mb-3">
+        <div class="text-center">
+          <h1>とりりん<i class="fa fa-star"></i>チャット</h1>
+        </div>
       </div>
-    </div>
-    <div class="row justify-content-center d-none d-sm-none d-md-flex mb-3">
-      <div class="col-4">
-        <div class="tc-theme-dark">
+      <div class="row justify-content-center d-none d-sm-none d-md-flex mb-3">
+        <div class="col-4">
+          <b-btn variant="primary" block v-b-modal.signin>
+            <span>ログイン</span>
+          </b-btn>
+        </div>
+      </div>
+      <div class="row justify-content-center d-none d-sm-none d-md-flex mb-3">
+        <div class="col-4">
           <b-btn variant="primary" block v-b-modal.signup>
             <span>新規登録</span>
           </b-btn>
         </div>
       </div>
     </div>
-    <div class="row justify-content-center d-none d-sm-none d-md-flex mb-3">
-      <div class="col-4">
-        <div class="tc-theme-dark">
+    <div class="container fixed-bottom d-md-none">
+      <div class="row justify-content-center mb-3">
+        <div class="col-12">
           <b-btn variant="primary" block v-b-modal.signin>
             <span>ログイン</span>
           </b-btn>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="container fixed-bottom d-md-none">
-    <div class="row justify-content-center mb-3">
-      <div class="col-12">
-        <div class="tc-theme-dark">
+      <div class="row justify-content-center mb-3">
+        <div class="col-12">
           <b-btn variant="primary" block v-b-modal.signup>
             <span>新規登録</span>
-          </b-btn>
-        </div>
-      </div>
-    </div>
-    <div class="row justify-content-center mb-3">
-      <div class="col-12">
-        <div class="tc-theme-dark">
-          <b-btn variant="primary" block v-b-modal.signin>
-            <span>ログイン</span>
           </b-btn>
         </div>
       </div>
     </div>
   </div>
   <div class="tc-theme-light">
-    <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" close-title="キャンセル" no-auto-focus @ok="signup" @shown="clearFeedbacks" :ok-disabled="feedbacks['info'] !== undefined">
+    <b-modal id="signup" ref="signup" size="sm" title="新規登録" ok-title="新規登録" cancel-title="キャンセル" @ok="signup" @shown="clearFeedbacks" :ok-disabled="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -59,7 +53,17 @@
       <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
         {{feedbacks['error']}}
       </b-alert>
-      <b-form-group label="電子メールアドレス" description="入力した電子メールアドレスに本人確認用のURLを送信します。" :feedback="feedbacks['email']" :state="states['email']">
+      <b-form-group label="氏名" description="本名を記入してください。（例: 鳥取太郎）" :feedback="feedbacks['person_name']" :state="states['person_name']">
+        <b-input-group>
+          <b-form-input type="text" v-model="person_name"></b-form-input>
+        </b-input-group>
+      </b-form-group>
+      <b-form-group label="組織名" description="所属する組織名を記入してください。（例: 鳥取学校）" :feedback="feedbacks['organization_name']" :state="states['organization_name']">
+        <b-input-group>
+          <b-form-input type="text" v-model="organization_name"></b-form-input>
+        </b-input-group>
+      </b-form-group>
+      <b-form-group label="電子メールアドレス" description="入力した電子メールアドレスに本人確認用のURLを送信しますのでお間違いの内容に入力してください。。" :feedback="feedbacks['email']" :state="states['email']">
         <b-input-group>
           <b-form-input type="email" v-model="email"></b-form-input>
         </b-input-group>
@@ -70,7 +74,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" close-title="キャンセル" no-auto-focus @ok="signin" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
+    <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" cancel-title="キャンセル" @ok="signin" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -101,7 +105,7 @@
         </b-btn>
       </div>
     </b-modal>
-    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="本人確認用URLの再送付" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="reconfirmation" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
+    <b-modal id="reconfirmation" ref="reconfirmation" size="sm" title="本人確認用URLの再送付" ok-title="送信" cancel-title="キャンセル" @ok="reconfirmation" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -116,7 +120,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="resetpassword" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
+    <b-modal id="reminder" ref="reminder" size="sm" title="パスワードを忘れた場合" ok-title="送信" cancel-title="キャンセル" @ok="resetpassword" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -131,7 +135,7 @@
         </b-input-group>
       </b-form-group>
     </b-modal>
-    <b-modal id="resetPasswordModal" ref="resetPasswordModal" size="sm" title="パスワードのリセット" ok-title="送信" close-title="キャンセル" no-auto-focus @ok="savePassword" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
+    <b-modal id="resetPasswordModal" ref="resetPasswordModal" size="sm" title="パスワードのリセット" ok-title="送信" cancel-title="キャンセル" @ok="savepassword" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
       <b-alert variant="info" :show="feedbacks['info'] !== undefined">
         <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
         <span>{{feedbacks['info']}}</span>
@@ -170,80 +174,74 @@
 <script>
 import Vue from 'vue'
 import axios from 'axios'
-
 export default {
-  data: function() {
+  data() {
     return {
+      person_name: '',
+      organization_name: '',
       email: '',
       password: '',
       feedbacks: {},
     }
   },
-  beforeCreate: function() {
+  beforeCreate() {
     document.body.className = 'root';
   },
   mounted() {
-    // ログイン済みであればroomsに移動する。
     var vm = this;
-    axios
-      .get('/api/v2/users/signin')
-      .then(function(response) {
-        vm.$router.push({
-          name: 'rooms'
-        });
+    // ログイン済みの場合
+    axios({
+      url: '/api/users/signin',
+      method: 'get'
+    }).then(function(response) {
+      vm.$router.push({
+        name: 'rooms'
+      });
+    })
+    .catch(function(error) {
+      // TODO ステータスコードで判定
+      // do nothing
+    })
+    // 本人の確認用トークンがある場合
+    let confirmation_token = this.$route.query.confirmation_token;
+    if (confirmation_token !== undefined) {
+      axios({
+        url: '/api/users/confirmations',
+        method: 'get',
+        params: { confirmation_token: confirmation_token },
+        headers: { 'content-type': 'multipart/form-data' }
+      }).then(function(response) {
+        vm.$refs.finished.show();
+      }).catch(function(error) {
+        // TODO ステータスコードで判定
+        // TODO 無効なトークンの場合の判定
+        vm.$refs.confirmed.show();
+      })
+    }
+    // パスワードのリセット用トークンがある場合
+    let reset_password_token = this.$route.query.reset_password_token;
+    if (reset_password_token !== undefined) {
+      axios({
+        url: '/api/users/passwords',
+        method: 'get',
+        params: { reset_password_token: reset_password_token }
+      }).then(function(response) {
+        // TODO パスワード変更ダイアログ
+        vm.$refs.resetPasswordModal.show();
+        console.log(response);
+        // vm.$refs.finished.show();
       })
       .catch(function(error) {
-        // TODO
+        console.log(error.response);
+        // vm.$refs.confirmed.show();
       })
-    var confirmation_token = this.$route.query.confirmation_token;
-    if (confirmation_token !== undefined) {
-      var vm = this;
-      var form = new FormData();
-      form.append('user[confirmation_token]', confirmation_token);
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-        }
-      };
-      axios
-        .get('/api/v2/users/confirmations', {
-          params: {
-            confirmation_token: confirmation_token
-          }
-        }, config)
-        .then(function(response) {
-          vm.$refs.finished.show();
-        })
-        .catch(function(error) {
-          vm.$refs.confirmed.show();
-        })
-    }
-    // パスワードのリセット
-    var reset_password_token = this.$route.query.reset_password_token;
-    if (reset_password_token !== undefined) {
-      var vm = this;
-      axios
-        .get('/api/v2/users/passwords', {
-          params: {
-            reset_password_token: reset_password_token
-          }
-        }, config)
-        .then(function(response) {
-          vm.$refs.resetPasswordModal.show();
-          // TODO パスワード変更ダイアログ
-
-          console.log(response);
-          // vm.$refs.finished.show();
-        })
-        .catch(function(error) {
-          console.log(error.response);
-          // vm.$refs.confirmed.show();
-        })
     }
   },
   computed: {
     states() {
       return {
+        person_name: this.getState('person_name'),
+        organization_name: this.getState('organization_name'),
         email: this.getState('email'),
         password: this.getState('password')
       }
@@ -307,103 +305,91 @@ export default {
       }
     },
     signup(e) {
-      e.cancel();
-      var form = new FormData();
-      form.append('user[email]', this.email);
-      form.append('user[password]', this.password);
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data'
-        },
+      e.preventDefault();
+      let vm = this;
+      let form = new FormData();
+      form.set('user[person_name]', this.person_name);
+      form.set('user[organization_name]', this.organization_name);
+      form.set('user[email]', this.email);
+      form.set('user[password]', this.password);
+      axios({
+        url: '/api/users/signup',
+        method: 'post',
+        headers: { 'content-type': 'multipart/form-data' },
+        data: form,
         onUploadProgress: this.onUpload()
-      };
-      var vm = this;
-      axios
-        .post('/api/v2/users/signup', form, config)
-        .then(function(response) {
-          vm.$refs.signup.hide();
-          vm.$refs.confirmation.show();
-        })
-        .catch(vm.onError)
+      }).then(function(response) {
+        vm.$refs.signup.hide();
+        vm.$refs.confirmation.show();
+      }).catch(vm.onError)
     },
     signin(e) {
-      e.cancel();
-      var form = new FormData();
-      form.append('user[email]', this.email);
-      form.append('user[password]', this.password);
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
+      e.preventDefault();
+      let vm = this;
+      let form = new FormData();
+      form.set('user[email]', this.email);
+      form.set('user[password]', this.password);
+      axios({
+        url: '/api/users/signin',
+        method: 'post',
+        headers: { 'content-type': 'multipart/form-data' },
+        data: form,
         onUploadProgress: this.onUpload()
-      };
-      var vm = this;
-      axios
-        .post('/api/v2/users/signin', form, config)
-        .then(function(response) {
-          vm.$router.push({
-            name: 'rooms'
-          });
-        })
-        .catch(vm.onError)
+      }).then(function(response) {
+        vm.$router.push({
+          name: 'rooms'
+        });
+      }).catch(vm.onError)
     },
     reconfirmation(e) {
-      e.cancel();
-      var form = new FormData();
-      form.append('user[email]', this.email);
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
+      e.preventDefault();
+      let vm = this;
+      let form = new FormData();
+      form.set('user[email]', this.email);
+      axios({
+        url: '/api/users/confirmations',
+        method: 'post',
+        headers: { 'content-type': 'multipart/form-data' },
+        data: form,
         onUploadProgress: this.onUpload()
-      };
-      var vm = this;
-      axios
-        .post('/api/v2/users/confirmations', form, config)
-        .then(function(response) {
-          vm.$refs.reconfirmation.hide();
-          vm.$refs.confirmation.show();
-        })
-        .catch(vm.onError)
+      }).then(function(response) {
+        vm.$refs.reconfirmation.hide();
+        vm.$refs.confirmation.show();
+      })
+      .catch(vm.onError)
     },
     resetpassword(e) {
-      e.cancel();
-      var form = new FormData();
-      form.append('user[email]', this.email);
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
+      e.preventDefault();
+      let vm = this;
+      let form = new FormData();
+      form.set('user[email]', this.email);
+      axios({
+        url: '/api/users/passwords',
+        method: 'post',
+        headers: { 'content-type': 'multipart/form-data' },
+        data: form,
         onUploadProgress: this.onUpload()
-      };
-      var vm = this;
-      axios
-        .post('/api/v2/users/passwords', form, config)
-        .then(function(response) {
-          vm.$refs.reminder.hide();
-          vm.$refs.notifyPasswordReminder.show();
-        })
-        .catch(vm.onError)
+      }).then(function(response) {
+        vm.$refs.reminder.hide();
+        vm.$refs.notifyPasswordReminder.show();
+      }).catch(vm.onError)
     },
-    savePassword(e) {
-      e.cancel();
-      var form = new FormData();
-      form.append('user[password]', this.password);
-      form.append('user[reset_password_token]', this.$route.query.reset_password_token);
-      var config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
+    savepassword(e) {
+      e.preventDefault();
+      let vm = this;
+      let form = new FormData();
+      form.set('user[password]', this.password);
+      form.set('user[reset_password_token]', this.$route.query.reset_password_token);
+      axios({
+        url: '/api/users/passwords',
+        method: 'put',
+        headers: { 'content-type': 'multipart/form-data' },
+        data: form,
         onUploadProgress: this.onUpload()
-      };
-      var vm = this;
-      axios
-        .put('/api/v2/users/passwords', form, config)
-        .then(function(response) {
-          vm.$refs.resetPasswordModal.hide()
-          vm.$refs.finishSavePassword.show();
-        })
-        .catch(vm.onError)
+      }).then(function(response) {
+        vm.$refs.resetPasswordModal.hide();
+        vm.$refs.finishSavePassword.show();
+      }).catch(vm.onError)
     },
     redirectToRoot() {
       this.$router.push({
