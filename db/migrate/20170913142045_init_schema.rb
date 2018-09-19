@@ -11,10 +11,10 @@ class InitSchema < ActiveRecord::Migration[5.1]
     end
 
     create_table :rooms do |t|
-      t.string :title, null: false
+      t.string :name, null: false
       t.timestamps
     end
-    add_index :rooms, :title
+    add_index :rooms, :name
 
     create_table :people do |t|
       t.string :name, null: false

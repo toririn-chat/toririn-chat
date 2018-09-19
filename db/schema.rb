@@ -67,10 +67,10 @@ ActiveRecord::Schema.define(version: 20170913142045) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_rooms_on_title"
+    t.index ["name"], name: "index_rooms_on_name"
   end
 
   create_table "sticker_groups", force: :cascade do |t|

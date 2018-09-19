@@ -1,25 +1,25 @@
 user_0:
-  name: テストユーザ
-  organization: テスト学校
-  email: test0@example.net
+  person_name: テストユーザ
+  organization_name: テスト学校
+  email: test@example.net
   encrypted_password: <%= User.new.send(:password_digest, '0'*8) %>
   confirmed_at: <%= DateTime.now %>
 user_1:
-  name: とりりん
-  organization: とりりん学校
-  email: test1@example.net
+  person_name: とりりん
+  organization_name: とりりん学校
+  email: toririn@example.net
   encrypted_password: <%= User.new.send(:password_digest, '0'*8) %>
   confirmed_at: <%= DateTime.now %>
 user_2:
-  name: トリピー
-  organization: トリピー学校
-  email: test2@example.net
+  person_name: トリピー
+  organization_name: トリピー学校
+  email: toripy@example.net
   encrypted_password: <%= User.new.send(:password_digest, '0'*8) %>
   confirmed_at: <%= DateTime.now %>
 <% 3.upto(9) do |n| %>
 user_<%= n %>:
-  name: <%= Faker::Name.name %>
-  organization: <%= Faker::Company.name %>
+  person_name: <%= Faker::Name.name %>
+  organization_name: <%= Faker::Company.name %>
   email: <%= Faker::Internet.safe_email %>
   encrypted_password: <%= User.new.send(:password_digest, Faker::Internet.password(8)) %>
   confirmed_at: <%= Faker::Date.between(3.years.ago, Date.today) %>

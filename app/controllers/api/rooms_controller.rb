@@ -1,4 +1,4 @@
-class Api::RoomsController < Api::V2::ApiController
+class Api::RoomsController < Api::ApiController
 
   before_action :authenticate_user!
   before_action :set_rooms, only: %i(index)
@@ -23,7 +23,7 @@ class Api::RoomsController < Api::V2::ApiController
     @room = Room.new(room_params)
     @room.users << current_user
     if @room.save
-      render json: @room, status: :created, location: api_v2_room_url(@room)
+      render json: @room, status: :created, location: api_room_url(@room)
     else
       render json: @room.errors, status: :unprocessable_entity
     end
@@ -52,7 +52,7 @@ class Api::RoomsController < Api::V2::ApiController
     end
 
     def room_params
-      params.require(:room).permit(:id, :title)
+      params.require(:room).permit(:id, :name)
     end
 
 end
