@@ -4,13 +4,13 @@
     <b-navbar-brand href="/">とりりん<i class="fa fa-star"></i>チャット</b-navbar-brand>
     <b-nav-toggle target="nav_collapse"></b-nav-toggle>
     <b-collapse is-nav id="nav_collapse">
-      <b-nav is-nav-bar>
+      <b-navbar-nav>
         <b-nav-item href="rooms">
           <i class="fa fa-comments"></i>
           <span>チャットルーム</span>
         </b-nav-item>
-      </b-nav>
-      <b-nav is-nav-bar class="ml-auto">
+      </b-navbar-nav>
+      <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown text="<i class='fa fa-user'></i>&nbsp;<span>アカウント</span>" right>
           <b-dropdown-item href="profile">
           <i class="fa fa-gear"></i>
@@ -22,7 +22,7 @@
           <span>ログアウト</span>
         </b-dropdown-item>
         </b-nav-item-dropdown>
-      </b-nav>
+      </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </div>
