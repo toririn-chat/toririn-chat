@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         put 'passwords', to: 'passwords#update'
       end
     end
+    resource :user, only: [:show]
     resources :rooms do
       member do
         get 'rqcode', {format: 'png'}

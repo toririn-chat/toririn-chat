@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Root from '../components/Root.vue'
-import ChatRoot from '../components/ChatRoot.vue'
+import Profile from '../components/Profile.vue'
 import Rooms from '../components/Rooms.vue'
 import Room from '../components/Room.vue'
 import Chat from '../components/Chat.vue'
@@ -13,6 +13,10 @@ const routes = [
     path: '/',
     name: 'root',
     component: Root
+  }, {
+    path: '/profile',
+    name: 'profile',
+    component: Profile
   }, {
     path: '/rooms',
     name: 'rooms',
