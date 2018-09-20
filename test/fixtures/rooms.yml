@@ -1,10 +1,10 @@
 room_0:
-  title: テストルーム
+  name: テストルーム
 room_1:
-  title: テスト小学校出前授業
+  name: テスト小学校授業
 room_2:
-  title: テスト中学校出前授業
+  name: テスト中学校授業
 <% 3.upto(9) do |n| %>
 room_<%= n %>:
-  title: <%= Faker::Lorem.sentence %>
+  name: <%= Faker::Lorem.sentence %>
 <% end %>
