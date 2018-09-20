@@ -36,7 +36,10 @@
           </b-form-group>
         </b-tab>
         <b-tab title="書き込み一覧">
-          開発中
+          書き込み内容の管理機能は開発中です。
+          <ul>
+            <li v-for="m in room.messages">{{ m.text }}</li>
+          </ul>
         </b-tab>
       </b-tabs>
     </b-card>

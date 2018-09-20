@@ -20,5 +20,6 @@ class RoomSerializer < ActiveModel::Serializer
   end
 
   has_many :users
+  has_many :messages
 
 end
