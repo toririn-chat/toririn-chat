@@ -135,7 +135,7 @@ export default {
       e.preventDefault();
       let vm = this;
       let form = new FormData();
-      form.append('room[name]', this.name);
+      form.set('room[name]', this.name);
       axios({
         url: '/api/rooms',
         method: 'post',
