@@ -1,10 +1,17 @@
 room_0:
   name: テストルーム
+  token: <%= Room.generate_token %>
 room_1:
   name: テスト小学校授業
+  token: <%= Room.generate_token %>
 room_2:
   name: テスト中学校授業
+  token: <%= Room.generate_token %>
 <% 3.upto(9) do |n| %>
 room_<%= n %>:
   name: <%= Faker::Lorem.sentence %>
+  begin_at: <%= 6.day.ago.to_s(:db) %>
+  end_at: <%= 6.day.after.to_s(:db) %>
+  token: <%= Room.generate_token %>
+  code: <%= 6.times.map{ Random.rand(0..9) }.join %>
 <% end %>

@@ -12,9 +12,19 @@ class InitSchema < ActiveRecord::Migration[5.1]
 
     create_table :rooms do |t|
       t.string :name, null: false
+      t.datetime :begin_at
+      t.datetime :end_at
+      t.string :token, null: false
+      t.string :code
+      t.boolean :active, null: false, default: false
       t.timestamps
     end
     add_index :rooms, :name
+    add_index :rooms, :begin_at
+    add_index :rooms, :end_at
+    add_index :rooms, :token, unique: true
+    add_index :rooms, :code
+    add_index :rooms, :active
 
     create_table :people do |t|
       t.string :name, null: false

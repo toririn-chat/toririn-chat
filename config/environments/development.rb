@@ -28,6 +28,11 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  Rails.application.routes.default_url_options = {
+    protocol: ENV['RAILS_MAILER_URL_PROTOCOL'].presence || 'http',
+    host: ENV['RAILS_MAILER_URL_DOMAIN'].presence || 'localhost',
+    port: (ENV['RAILS_MAILER_URL_PORT'].presence || '3000').to_i,
+  }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = {

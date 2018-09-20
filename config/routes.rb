@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resource :user, only: [:show]
     resources :rooms do
       member do
-        get 'rqcode', {format: 'png'}
+        get 'qrcode', { format: 'png' }
       end
       resources :messages, module:'rooms'
       resources :people, module:'rooms'

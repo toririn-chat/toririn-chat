@@ -68,9 +68,19 @@ ActiveRecord::Schema.define(version: 20170913142045) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "begin_at"
+    t.datetime "end_at"
+    t.string "token", null: false
+    t.string "code"
+    t.boolean "active", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["active"], name: "index_rooms_on_active"
+    t.index ["begin_at"], name: "index_rooms_on_begin_at"
+    t.index ["code"], name: "index_rooms_on_code"
+    t.index ["end_at"], name: "index_rooms_on_end_at"
     t.index ["name"], name: "index_rooms_on_name"
+    t.index ["token"], name: "index_rooms_on_token", unique: true
   end
 
   create_table "sticker_groups", force: :cascade do |t|
