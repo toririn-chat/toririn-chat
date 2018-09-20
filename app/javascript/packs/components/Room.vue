@@ -29,6 +29,11 @@
           <b-form-group label="有効期限の終了" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
             <b-form-input type="text"/>
           </b-form-group>
+          <b-form-group label="管理者" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
+            <ul>
+              <li v-for="user in room.users">{{ user.person_name }}（{{ user.organization_name }}）</li>
+            </ul>
+          </b-form-group>
         </b-tab>
         <b-tab title="書き込み一覧">
           開発中
@@ -82,6 +87,7 @@ export default {
         updated_at: '',
         created_at: '',
         messages: [],
+        users: []
       },
       feedbacks: []
     }

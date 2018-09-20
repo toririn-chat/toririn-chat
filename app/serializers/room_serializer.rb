@@ -19,4 +19,6 @@ class RoomSerializer < ActiveModel::Serializer
     object.users.count
   end
 
+  has_many :users
+
 end
