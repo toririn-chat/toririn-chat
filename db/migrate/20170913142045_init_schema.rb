@@ -37,7 +37,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
 
     create_table :avatars do |t|
       t.string :name
-      t.binary :data, limit: 10.megabyte, null: false
+      t.binary :content_data, limit: 10.megabyte, null: false
       t.string :content_type, null: false
       t.references :avatar_group, foreign_key: true, null: false
       t.timestamps

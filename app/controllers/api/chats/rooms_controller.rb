@@ -1,10 +1,9 @@
 class Api::Chats::RoomsController < Api::ApiController
 
-  # TODO
+  # TODO: auth
   def show
-    render json: {
-      name: 'チャットルーム'
-    }
+    @room = Room.find_by(token: params[:chat_token])
+    render json: @room
   end
 
 end

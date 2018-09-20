@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2017_09_13_142045) do
 
   create_table "avatars", force: :cascade do |t|
     t.string "name"
-    t.binary "data", limit: 10485760, null: false
+    t.binary "content_data", limit: 10485760, null: false
     t.string "content_type", null: false
     t.integer "avatar_group_id", null: false
     t.datetime "created_at", null: false

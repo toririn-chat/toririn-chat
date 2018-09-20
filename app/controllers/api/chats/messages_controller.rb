@@ -1,6 +1,9 @@
 class Api::Chats::MessagesController < Api::ApiController
-  # TODO
+
+  # TODO: auth
   def index
-    render json: Message.all
+    @messages = Room.find_by(token: params[:chat_token]).messages
+    render json: @messages
   end
+
 end
