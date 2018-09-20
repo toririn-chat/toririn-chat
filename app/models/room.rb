@@ -16,4 +16,13 @@ class Room < ApplicationRecord
     end
   end
 
+  def self.generate_code
+    code = 6.times.map{ Random.rand(0..9) }.join
+    if Room.where(code: code).exists?
+      return generate_code
+    else
+      code
+    end
+  end
+
 end

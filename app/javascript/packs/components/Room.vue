@@ -18,7 +18,7 @@
             <b-img :src="room.qrcode_url" fluid alt="QR code" />
           </b-form-group>
           <b-form-group label="暗証番号" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <b-form-input type="text"/>
+            <b-form-input type="text" :value="room.code" />
           </b-form-group>
           <b-form-group label="状態" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
             <b-form-input type="text"/>
