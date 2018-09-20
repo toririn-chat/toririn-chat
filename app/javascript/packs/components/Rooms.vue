@@ -12,6 +12,8 @@
           <tr>
             <th scope="col">チャットルーム名</th>
             <th scope="col">作成日時</th>
+            <th scope="col">管理者数</th>
+            <th scope="col">書き込み数</th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +22,8 @@
               <router-link :to="{ name: 'room', params: { id: room.id }}">{{ room.name }}</router-link>
             </td>
             <td>{{ room.created_at }}</td>
+            <td>{{ room.users_count }}</td>
+            <td>{{ room.messages_count }}</td>
           </tr>
         </tbody>
       </table>

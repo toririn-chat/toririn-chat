@@ -12,15 +12,12 @@ class Api::RoomsController < Api::ApiController
     render json: @room
   end
 
-  def qrcode
-    url = root_url + "chats/#{@room.token}"
-    @code = RQRCode::QRCode.new(url).as_png
-    send_data(@code.to_s, disposition: 'inline', type: 'image/png')
-  end
-
   def create
+    # TODO: transaction
     @room = Room.new(room_params)
     @room.users << current_user
+    @room.token = Room.generate_token
+    @room.code = Room.generate_code
     if @room.save
       render json: @room, status: :created, location: api_room_url(@room)
     else
@@ -40,6 +37,13 @@ class Api::RoomsController < Api::ApiController
     @room.destroy
   end
 
+  def qrcode
+    # TODO: refactoring
+    url = root_url + "chats/#{@room.token}"
+    @code = RQRCode::QRCode.new(url).as_png
+    send_data(@code.to_s, disposition: 'inline', type: 'image/png')
+  end
+
   private
 
     def set_rooms
@@ -47,7 +51,7 @@ class Api::RoomsController < Api::ApiController
     end
 
     def set_room
-      @room = current_user.rooms.where(id:params[:id]).first
+      @room = current_user.rooms.where(id: params[:id]).first
     end
 
     def room_params
