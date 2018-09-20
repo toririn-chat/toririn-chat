@@ -33,24 +33,36 @@ class InitSchema < ActiveRecord::Migration[5.1]
     end
     add_index :people, :name
 
+    # Avatars
+
     create_table :avatars do |t|
-      t.string :image, null: false
+      t.string :name
+      t.binary :data, limit: 10.megabyte, null: false
+      t.string :content_type, null: false
       t.references :avatar_group, foreign_key: true, null: false
       t.timestamps
     end
+    add_index :avatars, :name
 
     create_table :avatar_groups do |t|
-      t.string :title
+      t.string :name
       t.string :author
       t.text :url
       t.string :license_name
       t.text :license_url
+      t.timestamps null: false
     end
-    add_index :avatar_groups, :title
+    add_index :avatar_groups, :name
     add_index :avatar_groups, :author
     add_index :avatar_groups, :url
     add_index :avatar_groups, :license_name
     add_index :avatar_groups, :license_url
+
+    create_table :avatar_group_users do |t|
+      t.references :avatar_group, foreign_key: true, null: false
+      t.references :user, foreign_key: true, null: false
+    end
+    add_index :avatar_group_users, [:avatar_group, :user_id], unique: true
 
     create_table :stickers do |t|
       t.string :image, null: false
@@ -64,20 +76,13 @@ class InitSchema < ActiveRecord::Migration[5.1]
       t.text :url
       t.string :license_name
       t.text :license_url
+      t.timestamps null: false
     end
     add_index :sticker_groups, :title
     add_index :sticker_groups, :author
     add_index :sticker_groups, :url
     add_index :sticker_groups, :license_name
     add_index :sticker_groups, :license_url
-
-    # create_table :authorizations do |t|
-    #   t.references :room, foreign_key: true, null: false
-    #   t.integer :count, default: 0, null: false
-    #   t.datetime :begin_at
-    #   t.datetime :end_at
-    #   t.string :token
-    # end
 
     create_table :users do |t|
       # User information

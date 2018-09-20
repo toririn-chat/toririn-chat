@@ -98,8 +98,13 @@ Rails.application.configure do
     ApplicationController.class_eval do
       include AutoLogin
     end
-    Api::V2::ApiController.class_eval do
-      include AutoLogin
+    Api::ApiController.class_eval do
+      def authenticate_user!
+        true
+      end
+      def current_user
+        User.find_by_email('test@example.net')
+      end
     end
   end
 

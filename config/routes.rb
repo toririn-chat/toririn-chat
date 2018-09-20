@@ -23,11 +23,14 @@ Rails.application.routes.draw do
       member do
         get 'qrcode', { format: 'png' }
       end
-      resources :messages, module: 'rooms'
-      resources :people, module: 'rooms'
+    end
+    resources :chats, { param: :token } do
+      resource :room, only: [:show], module: 'chats'
+      resources :messages, only: [:index], module: 'chats'
+      resources :people, module: 'chats'
+      resources :avatars, only: [:show], module: 'chats'
     end
   end
-
   root to: 'root#index'
   mount ActionCable.server => '/cable'
   match "/*path", to: 'root#index', via: :get

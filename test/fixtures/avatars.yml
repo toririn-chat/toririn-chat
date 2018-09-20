@@ -1,0 +1,7 @@
+<% Rails.root.join(*%w[test fixtures files avatars irasutoya]).glob('*.png').each.with_index do |path, index| %>
+avatar_irasutoya_<%= index %>:
+  name: <%= path.basename('.png') %>
+  data: <%= FixtureUtils::file(path) %>
+  content_type: image/png
+  group: avatar_group_irasutoya
+<% end %>

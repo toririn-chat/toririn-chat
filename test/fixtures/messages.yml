@@ -8,10 +8,3 @@ message_text_<%= index %>:
   room: <%= rooms.keys.sample %>
   text: <%= Faker::Lorem.paragraph(2) %>
 <% end %>
-
-<% (0..99).each do |index| %>
-message_sticker_<%= index %>:
-  person: <%= people.keys.sample %>
-  room: <%= rooms.keys.sample %>
-  sticker_id: <%= stickers.sample.id %>
-<% end %>

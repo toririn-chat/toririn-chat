@@ -1,6 +1,9 @@
 class MessageSerializer < ActiveModel::Serializer
 
-  attributes :id, :text, :created_at, :person_id, :person_name, :person_avatar_image_url, :sticker_image_url
+  include Rails.application.routes.url_helpers
+  attributes :id, :text, :created_at, :person_id, :person_name, :person_avatar_image_url
+
+# , :person_avatar_image_url, :sticker_image_url
 
   def person_id
     object&.person&.id
@@ -11,11 +14,11 @@ class MessageSerializer < ActiveModel::Serializer
   end
 
   def person_avatar_image_url
-    object&.person&.avatar&.image_url
+    api_chat_avatar_url(chat_token: object.room.token, id: object&.person&.avatar.id)
   end
-
-  def sticker_image_url
-    object&.sticker&.image_url
-  end
+  #
+  # def sticker_image_url
+  #   object&.sticker&.image_url
+  # end
 
 end

@@ -1,15 +1,16 @@
-<% avatars = Avatar.all %>
+<% avatars = YAML::load(ERB.new(IO.read('test/fixtures/avatars.yml')).result) %>
+
 person_0:
   name: とりりん
-  avatar_id: <%= avatars.sample.id %>
+  avatar: <%= avatars.keys.sample %>
 person_1:
   name: トリピー
-  avatar_id: <%= avatars.sample.id %>
+  avatar: <%= avatars.keys.sample %>
 person_2:
   name: すなば
-  avatar_id: <%= avatars.sample.id %>
+  avatar: <%= avatars.keys.sample %>
 <% 3.upto(9) do |n| %>
 person_<%= n %>:
   name: <%= Faker::Name.name %>
-  avatar_id: <%= avatars.sample.id %>
+  avatar: <%= avatars.keys.sample %>
 <% end %>

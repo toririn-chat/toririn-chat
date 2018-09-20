@@ -10,27 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913142045) do
+ActiveRecord::Schema.define(version: 2017_09_13_142045) do
+
+  create_table "avatar_group_users", force: :cascade do |t|
+    t.integer "avatar_group_id", null: false
+    t.integer "user_id", null: false
+    t.index ["avatar_group_id"], name: "index_avatar_group_users_on_avatar_group_id"
+    t.index ["user_id"], name: "index_avatar_group_users_on_user_id"
+    t.index [nil, "user_id"], name: "index_avatar_group_users_on_avatar_group_and_user_id", unique: true
+  end
 
   create_table "avatar_groups", force: :cascade do |t|
-    t.string "title"
+    t.string "name"
     t.string "author"
     t.text "url"
     t.string "license_name"
     t.text "license_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author"], name: "index_avatar_groups_on_author"
     t.index ["license_name"], name: "index_avatar_groups_on_license_name"
     t.index ["license_url"], name: "index_avatar_groups_on_license_url"
-    t.index ["title"], name: "index_avatar_groups_on_title"
+    t.index ["name"], name: "index_avatar_groups_on_name"
     t.index ["url"], name: "index_avatar_groups_on_url"
   end
 
   create_table "avatars", force: :cascade do |t|
-    t.string "image", null: false
+    t.string "name"
+    t.binary "data", limit: 10485760, null: false
+    t.string "content_type", null: false
     t.integer "avatar_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["avatar_group_id"], name: "index_avatars_on_avatar_group_id"
+    t.index ["name"], name: "index_avatars_on_name"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -89,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170913142045) do
     t.text "url"
     t.string "license_name"
     t.text "license_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["author"], name: "index_sticker_groups_on_author"
     t.index ["license_name"], name: "index_sticker_groups_on_license_name"
     t.index ["license_url"], name: "index_sticker_groups_on_license_url"

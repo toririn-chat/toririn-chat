@@ -1,35 +1,50 @@
 <template>
 <div>
-  <b-navbar toggleable type="dark" fixed="top" sticky>
-    <b-navbar-brand>{{room.title}}</b-navbar-brand>
+  <b-navbar toggleable fixed="top" sticky class="tc-chat-header">
+    <b-navbar-brand>{{ room.name }}</b-navbar-brand>
   </b-navbar>
   <div class="container">
     <b-media v-for="message in messages" :key="message.id">
       <b-img width="64" height="64" slot="aside" blank-color="#abc" :src="message.person_avatar_image_url" />
-      <p>{{message.person_name}} {{message.created_at}}</p>
+      <p>{{ message.person_name }} {{ message.created_at }}</p>
       <p v-show="message.text">{{message.text}}</p>
       <b-img width="150" height="150" blank-width="150" blank-height="150" blank-color="#fbfbfb" :src="message.sticker_image_url" v-show="message.sticker_image_url" />
     </b-media>
   </div>
+  <footer class="fixed-bottom sticky-top tc-chat-footer">
+    <b-input-group class="p-1">
+      <b-input-group-prepend>
+        <b-btn size="lg">
+          <i class="fa fa-lg fa-smile-o"></i>
+        </b-btn>
+      </b-input-group-prepend>
+      <b-form-input size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" />
+      <b-input-group-append>
+        <b-btn size="lg" :disabled="messageDisabled" @click="sendText">
+          <i class="fa fa-lg fa-paper-plane-o"></i>
+        </b-btn>
+      </b-input-group-append>
+    </b-input-group>
+  </footer>
 </div>
 </template>
 <script>
 import Vue from 'vue'
 import axios from 'axios'
 export default {
-  beforeCreate() {
-    document.body.className = 'chat';
-  },
-  mounted() {
-    this.getRoom()
-    this.getMessages()
-  },
   data() {
     return {
+      message: {
+        text: '',
+        sticker: {
+          id: ''
+        },
+      },
       messages: [],
       room: {
         id: '',
         name: '',
+        token: '',
         updated_at: '',
         created_at: '',
       },
@@ -40,48 +55,111 @@ export default {
     }
   },
   computed: {
-    breadcrumb() {
-      return [{
-        text: 'チャットルーム',
-        href: '/rooms',
-        active: false
-      }, {
-        text: this.room.name
-      }]
+    messageDisabled() {
+      if (this.message.text === '') {
+        return true;
+      } else {
+        return false;
+      }
     },
-
+  },
+  beforeCreate() {
+    document.body.className = 'chat';
+  },
+  mounted() {
+    this.getChatRoom();
+    this.getMessages();
   },
   methods: {
-    getRoom() {
-      var vm = this;
-      axios
-        .get(`/api/v2/rooms/${vm.$route.params.id}`)
-        .then(function(response) {
+    getChatRoom() {
+      let vm = this;
+      axios({
+        url: `/api/chats/${vm.$route.params.id}/room`,
+        method: 'get'
+      }).then(function(response) {
           vm.room = response.data;
-        })
-        .catch(function(error) {
-          // TODO error handling
-          console.log(response.error);
-        })
+      }).catch(function(error) {
+        // TODO error handling
+        console.log(response.error);
+      })
     },
     getMessages() {
-      var vm = this;
-      axios
-        .get(`/api/v2/rooms/${vm.$route.params.id}/messages.json`)
-        .then(function(response) {
-          vm.messages = response.data;
+      let vm = this;
+      axios({
+        url: `/api/chats/${vm.$route.params.id}/messages`,
+        method: 'get'
+      }).then(function(response) {
+        vm.messages = [];
+        response.data.forEach((message) => {
+          vm.messages.push(message)
         })
-        .catch(function(error) {
-          // TODO error handling
-          console.log(response.error);
+        Vue.nextTick(function() {
+          window.scrollTo(0, document.body.scrollHeight);
         })
+      }).catch(function(error) {
+        // TODO error handling
+        console.log(error);
+      })
+    },
+    sendText() {
+      // TODO implement
+      console.log(this.message.text);
+      // // this.getMessages()
+      //
+      // console.log(this.message.text);
+      //       var vm = this;
+      //       var form = new FormData();
+      //       form.append('message[text]', this.message.text);
+      //
+      // // /api/v2/rooms/351937511/messages.json
+      //       axios
+      //         .post(`/api/v2/rooms/${vm.$route.params.id}/messages.json`)
+      //         .then(function(response) {
+      //           console.log(response);
+      //           // vm.messages = response.data;
+      //         })
+      //         .catch(function(error) {
+      //           // TODO error handling
+      //           console.log(response.error);
+      //         })
     }
   }
 }
 </script>
 <style lang="scss">
 @import "../styles/valiables";
-body {
-    background-color: lighten($tc-color-light, 30%);
+.tc-chat-header {
+  background-color: rgba(#3d4070, 0.95);
+  .navbar-brand {
+    color: rgba(#eeeeee, 0.95) !important;
+  }
+}
+.tc-chat-footer {
+    background-color: rgba(#F7F8FC, 0.95);
+    button.disabled {
+      color: #f0f0f0;
+      background-color: rgba(#FFFFFF, 0.0);
+      &:hover {
+        color: #f0f0f0;
+        background-color: rgba(#FFFFFF, 0.0);
+      }
+    }
+    button {
+      border: 0 none;
+      border-radius: 0;
+      color: #000000;
+      background-color: rgba(#FFFFFF, 0.0);
+      &:hover {
+        color: #000000;
+        background-color: darken(rgba(#F7F8FC, 0.95), 5%);
+      }
+    }
+    input {
+      border: 0 none;
+      background-color: rgba(#FFFFFF,0.0);
+      &:focus {
+        background-color: rgba(#FFFFFF,0.0);
+      }
+    }
 }
 </style>
