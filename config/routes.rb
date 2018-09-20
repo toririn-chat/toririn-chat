@@ -23,8 +23,8 @@ Rails.application.routes.draw do
       member do
         get 'qrcode', { format: 'png' }
       end
-      resources :messages, module:'rooms'
-      resources :people, module:'rooms'
+      resources :messages, module: 'rooms'
+      resources :people, module: 'rooms'
     end
   end
 
