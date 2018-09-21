@@ -1,7 +1,7 @@
-class Api::Chats::SessionsController < Api::ApiController
+class Api::Chats::SessionsController < Api::Chats::ApiController
 
   def show
-    if session[:chat_user_id].present?
+    if chat_session_exists?
       render json: true
     else
       render json: false, status: :unauthorized
@@ -9,17 +9,16 @@ class Api::Chats::SessionsController < Api::ApiController
   end
 
   def create
-    # トークンと暗証番号を称号
-    if Room.where(token: params[:chat_token], code: params[:chat_code]).exists?
-      # ユーザを作成
-      person = Person.create
-      # セッションにユーザIDを追加
-      session[:chat_user_id] = person.id
-      # 認証完了
+    if chat_session_create(params[:chat_token], params[:chat_code])
       render json: true
     else
       render json: false, status: :unauthorized
     end
+  end
+
+  def destroy
+    chat_session_destroy
+    render json: true
   end
 
 end

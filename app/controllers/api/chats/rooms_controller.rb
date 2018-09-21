@@ -1,8 +1,9 @@
-class Api::Chats::RoomsController < Api::ApiController
+class Api::Chats::RoomsController < Api::Chats::ApiController
 
-  # TODO: auth
+  before_action :chat_session_exists!
+
   def show
-    @room = Room.find_by(token: params[:chat_token])
+    @room = current_chat_room
     render json: @room
   end
 
