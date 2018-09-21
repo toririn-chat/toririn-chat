@@ -8,7 +8,7 @@ class Room < ApplicationRecord
     presence: true
 
   def self.generate_token
-    salt = ToririnChat::Application.secrets.secret_key_base
+    salt = Rails.application.credentials.secret_key_base
     token = Hashids.new(salt, 20).encode(SecureRandom.random_number(1 << 64))
     if Room.where(token: token).exists?
       return generate_token
