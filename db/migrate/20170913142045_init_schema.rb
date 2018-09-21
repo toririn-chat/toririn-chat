@@ -52,14 +52,6 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :people, :name
     add_index :people, :token, unique: true
 
-    create_table :messages do |t|
-      t.references :room, foreign_key: true, null: false
-      t.references :person, foreign_key: true, null: false
-      t.text :text
-      t.references :sticker, foreign_key: true
-      t.timestamps
-    end
-
     create_table :sticker_groups do |t|
       t.string :title
       t.string :author
@@ -77,6 +69,14 @@ class InitSchema < ActiveRecord::Migration[5.1]
     create_table :stickers do |t|
       t.string :image, null: false
       t.references :sticker_group, foreign_key: true, null: false
+      t.timestamps
+    end
+
+    create_table :messages do |t|
+      t.references :room, foreign_key: true, null: false
+      t.references :person, foreign_key: true, null: false
+      t.text :text
+      t.references :sticker, foreign_key: true
       t.timestamps
     end
 
