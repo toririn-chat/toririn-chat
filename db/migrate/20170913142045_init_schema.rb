@@ -18,33 +18,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :rooms, :code
     add_index :rooms, :active
 
-    create_table :messages do |t|
-      t.references :room, foreign_key: true, null: false
-      t.references :person, foreign_key: true, null: false
-      t.text :text
-      t.references :sticker, foreign_key: true
-      t.timestamps
-    end
-
-    create_table :people do |t|
-      t.string :name
-      t.references :avatar, foreign_key: true
-      t.string :token
-      t.timestamps
-    end
-    add_index :people, :name
-    add_index :people, :token, unique: true
-
     # Avatars
-
-    create_table :avatars do |t|
-      t.string :name
-      t.binary :content_data, limit: 10.megabyte, null: false
-      t.string :content_type, null: false
-      t.references :avatar_group, foreign_key: true, null: false
-      t.timestamps
-    end
-    add_index :avatars, :name
 
     create_table :avatar_groups do |t|
       t.string :name
@@ -60,15 +34,35 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :avatar_groups, :license_name
     add_index :avatar_groups, :license_url
 
+    create_table :avatars do |t|
+      t.string :name
+      t.binary :content_data, limit: 10.megabyte, null: false
+      t.string :content_type, null: false
+      t.references :avatar_group, foreign_key: true, null: false
+      t.timestamps
+    end
+    add_index :avatars, :name
+
     create_table :avatar_group_users do |t|
       t.references :avatar_group, foreign_key: true, null: false
       t.references :user, foreign_key: true, null: false
     end
     add_index :avatar_group_users, [:avatar_group, :user_id], unique: true
 
-    create_table :stickers do |t|
-      t.string :image, null: false
-      t.references :sticker_group, foreign_key: true, null: false
+    create_table :people do |t|
+      t.string :name
+      t.references :avatar, foreign_key: true
+      t.string :token
+      t.timestamps
+    end
+    add_index :people, :name
+    add_index :people, :token, unique: true
+
+    create_table :messages do |t|
+      t.references :room, foreign_key: true, null: false
+      t.references :person, foreign_key: true, null: false
+      t.text :text
+      t.references :sticker, foreign_key: true
       t.timestamps
     end
 
@@ -85,6 +79,12 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :sticker_groups, :url
     add_index :sticker_groups, :license_name
     add_index :sticker_groups, :license_url
+
+    create_table :stickers do |t|
+      t.string :image, null: false
+      t.references :sticker_group, foreign_key: true, null: false
+      t.timestamps
+    end
 
     create_table :users do |t|
       # User information
