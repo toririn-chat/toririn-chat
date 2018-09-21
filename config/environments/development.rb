@@ -29,9 +29,9 @@ Rails.application.configure do
   end
 
   Rails.application.routes.default_url_options = {
-    protocol: ENV['RAILS_APPLICATION_PROTOCOL'].presence || 'http',
-    host: ENV['RAILS_APPLICATION_HOST'].presence || 'localhost',
-    port: (ENV['RAILS_APPLICATION_PORT'].presence || '3000').to_i,
+    protocol: ENV['RAILS_APPLICATION_URL_PROTOCOL'].presence || 'http',
+    host: ENV['RAILS_APPLICATION_URL_HOST'].presence || 'localhost',
+    port: (ENV['RAILS_APPLICATION_URL_PORT'].presence || '3000').to_i,
   }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
