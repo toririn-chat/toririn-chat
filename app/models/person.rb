@@ -1,4 +1,5 @@
 class Person < ApplicationRecord
-  belongs_to :avatar
+  belongs_to :avatar, optional: true
   has_many :messages
+  has_secure_token :token
 end

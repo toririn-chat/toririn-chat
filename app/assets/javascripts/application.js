@@ -1,1 +1,1 @@
-// #= require ./cable
+//= require ./cable

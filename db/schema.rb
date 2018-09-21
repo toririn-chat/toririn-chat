@@ -59,12 +59,14 @@ ActiveRecord::Schema.define(version: 2017_09_13_142045) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "avatar_id", null: false
+    t.string "name"
+    t.integer "avatar_id"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["avatar_id"], name: "index_people_on_avatar_id"
     t.index ["name"], name: "index_people_on_name"
+    t.index ["token"], name: "index_people_on_token", unique: true
   end
 
   create_table "person_messages", force: :cascade do |t|

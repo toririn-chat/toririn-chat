@@ -29,6 +29,10 @@ Rails.application.routes.draw do
       resources :messages, only: [:index], module: 'chats'
       resources :people, module: 'chats'
       resources :avatars, only: [:show], module: 'chats'
+      scope module: 'chats' do
+        post 'signin', to: 'sessions#create'
+        get 'signin', to: 'sessions#show'
+      end
     end
   end
   root to: 'root#index'

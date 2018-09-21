@@ -19,3 +19,8 @@ $ ndenv rehash
 
 - http://localhost:3000
 - http://localhost:3000/letter_opener
+
+```sh
+$ bundle exec rails db:migrate:reset
+$ bundle exec rails db:fixtures:load FIXTURES=users,rooms,user_rooms,avatar_groups,avatars,people,messages
+```

@@ -27,11 +27,13 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :rooms, :active
 
     create_table :people do |t|
-      t.string :name, null: false
-      t.references :avatar, foreign_key: true, null: false
+      t.string :name
+      t.references :avatar, foreign_key: true
+      t.string :token
       t.timestamps
     end
     add_index :people, :name
+    add_index :people, :token, unique: true
 
     # Avatars
 

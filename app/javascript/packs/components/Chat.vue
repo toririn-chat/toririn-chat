@@ -67,10 +67,28 @@ export default {
     document.body.className = 'chat';
   },
   mounted() {
+    this.checkSession();
     this.getChatRoom();
     this.getMessages();
   },
   methods: {
+    checkSession() {
+      let vm = this;
+      axios({
+        url: `/api/chats/${vm.$route.params.id}/signin`,
+        method: 'get',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json'
+        },
+      }).then((response) => {
+        // do nothing
+      }).catch(function(error) {
+        vm.$router.push({
+          name: 'chat_signin'
+        });
+      })
+    },
     getChatRoom() {
       let vm = this;
       axios({
