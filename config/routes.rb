@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     end
   end
   root to: 'root#index'
-  mount ActionCable.server => '/cable'
+  # mount ActionCable.server => '/cable'
   match "/*path", to: 'root#index', via: :get
 
 end
