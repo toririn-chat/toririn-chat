@@ -20,6 +20,15 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+<% if Rails.env.production? %>
+<% production = Rails.application.credentials[Rails.env.to_sym][:database] %>
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: <%= production[:adapter] %>
+  host: <%= production[:host] %>
+  port: <%= production[:port] %>
+  database: <%= production[:database] %>
+  username: <%= production[:username] %>
+  password: <%= production[:password] %>
+  encoding: <%= production[:encoding] %>
+<% end %>
