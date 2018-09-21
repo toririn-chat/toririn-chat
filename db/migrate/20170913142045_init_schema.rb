@@ -136,7 +136,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
       t.references :avatar_group, foreign_key: true, null: false
       t.references :user, foreign_key: true, null: false
     end
-    add_index :avatar_group_users, [:avatar_group, :user_id], unique: true
+    add_index :avatar_group_users, [:avatar_group_id, :user_id], unique: true
 
   end
 end
