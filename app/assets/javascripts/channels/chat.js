@@ -1,15 +1,15 @@
-App.chat = App.cable.subscriptions.create('ChatChannel', {
-  connected() {
-    console.log('aaa');
-  },
-  disconnected() {
-    console.log('ccc');
-
-  },
-  received(data) {
-    console.log();
-  }
-});
+// App.chat = App.cable.subscriptions.create('ChatChannel', {
+//   connected() {
+//     console.log('aaa');
+//   },
+//   disconnected() {
+//     console.log('ccc');
+//
+//   },
+//   received(data) {
+//     console.log();
+//   }
+// });
 
 // var appendMessage,
 //   getRoomID,
