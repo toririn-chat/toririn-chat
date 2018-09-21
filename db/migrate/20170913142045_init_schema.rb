@@ -2,14 +2,6 @@ class InitSchema < ActiveRecord::Migration[5.1]
 
   def change
 
-    create_table :messages do |t|
-      t.references :room, foreign_key: true, null: false
-      t.references :person, foreign_key: true, null: false
-      t.text :text
-      t.references :sticker, foreign_key: true
-      t.timestamps
-    end
-
     create_table :rooms do |t|
       t.string :name, null: false
       t.datetime :begin_at
@@ -25,6 +17,14 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :rooms, :token, unique: true
     add_index :rooms, :code
     add_index :rooms, :active
+
+    create_table :messages do |t|
+      t.references :room, foreign_key: true, null: false
+      t.references :person, foreign_key: true, null: false
+      t.text :text
+      t.references :sticker, foreign_key: true
+      t.timestamps
+    end
 
     create_table :people do |t|
       t.string :name
