@@ -60,6 +60,11 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
+  Rails.application.routes.default_url_options = {
+    protocol: ENV['RAILS_APPLICATION_PROTOCOL'].presence || 'http',
+    host: ENV['RAILS_APPLICATION_HOST'].presence || 'example.net',
+    port: (ENV['RAILS_APPLICATION_PORT'].presence || '80').to_i,
+  }
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "toririn-chat_#{Rails.env}"
