@@ -43,12 +43,6 @@ class InitSchema < ActiveRecord::Migration[5.1]
     end
     add_index :avatars, :name
 
-    create_table :avatar_group_users do |t|
-      t.references :avatar_group, foreign_key: true, null: false
-      t.references :user, foreign_key: true, null: false
-    end
-    add_index :avatar_group_users, [:avatar_group, :user_id], unique: true
-
     create_table :people do |t|
       t.string :name
       t.references :avatar, foreign_key: true
@@ -137,6 +131,12 @@ class InitSchema < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :person_messages, [:person_id, :message_id], unique: true
+
+    create_table :avatar_group_users do |t|
+      t.references :avatar_group, foreign_key: true, null: false
+      t.references :user, foreign_key: true, null: false
+    end
+    add_index :avatar_group_users, [:avatar_group, :user_id], unique: true
 
   end
 end
