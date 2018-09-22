@@ -2,6 +2,22 @@
 <div>
   <b-navbar toggleable fixed="top" sticky class="tc-chat-header">
     <b-navbar-brand>{{ room.name }}</b-navbar-brand>
+    <b-nav-toggle target="nav_collapse" />
+    <b-collapse is-nav id="nav_collapse">
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item-dropdown text="<i class='fa fa-user'></i>&nbsp;<span>アカウント</span>" right>
+          <b-dropdown-item v-b-modal.profile>
+            <i class="fa fa-gear"></i>
+            <span>設定</span>
+          </b-dropdown-item>
+          <b-dropdown-divider/>
+          <b-dropdown-item @click="signout">
+            <i class="fa fa-sign-out"></i>
+            <span>ログアウト</span>
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-collapse>
   </b-navbar>
   <div class="container">
     <b-media v-for="message in messages" :key="message.id">
