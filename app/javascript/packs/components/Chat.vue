@@ -151,33 +151,36 @@ export default {
   .navbar-brand {
     color: rgba(#eeeeee, 0.95) !important;
   }
+  .nav-link {
+    color: rgba(#eeeeee, 0.95) !important;
+  }
 }
 .tc-chat-footer {
-    background-color: rgba(#F7F8FC, 0.95);
-    button.disabled {
+  background-color: rgba(#F7F8FC, 0.95);
+  button.disabled {
+    color: #f0f0f0;
+    background-color: rgba(#FFFFFF, 0.0);
+    &:hover {
       color: #f0f0f0;
       background-color: rgba(#FFFFFF, 0.0);
-      &:hover {
-        color: #f0f0f0;
-        background-color: rgba(#FFFFFF, 0.0);
-      }
     }
-    button {
-      border: 0 none;
-      border-radius: 0;
+  }
+  button {
+    border: 0 none;
+    border-radius: 0;
+    color: #000000;
+    background-color: rgba(#FFFFFF, 0.0);
+    &:hover {
       color: #000000;
-      background-color: rgba(#FFFFFF, 0.0);
-      &:hover {
-        color: #000000;
-        background-color: darken(rgba(#F7F8FC, 0.95), 5%);
-      }
+      background-color: darken(rgba(#F7F8FC, 0.95), 5%);
     }
-    input {
-      border: 0 none;
+  }
+  input {
+    border: 0 none;
+    background-color: rgba(#FFFFFF,0.0);
+    &:focus {
       background-color: rgba(#FFFFFF,0.0);
-      &:focus {
-        background-color: rgba(#FFFFFF,0.0);
-      }
     }
+  }
 }
 </style>
