@@ -21,7 +21,7 @@
   </b-navbar>
   <div class="container">
     <b-media v-for="message in messages" :key="message.id">
-      <b-img width="64" height="64" slot="aside" blank-color="#abc" :src="message.person_avatar_image_url" />
+      <b-img width="64" height="64" slot="aside" :src="message.person_avatar_image_url" />
       <p>{{ message.person_name }} {{ message.created_at }}</p>
       <p v-show="message.text">{{message.text}}</p>
       <b-img width="150" height="150" blank-width="150" blank-height="150" blank-color="#fbfbfb" :src="message.sticker_image_url" v-show="message.sticker_image_url" />
@@ -65,10 +65,11 @@ export default {
         created_at: '',
       },
       person: {
-        id: ''
-      },
-      feedbacks: []
-    }
+        id: '',
+        name: 'テスト',
+        avatar_image_url: 'http://localhost:3000/api/chats/VdpzdnBgY2l1NvpmYrgY/avatars/69380186'
+      }
+    };
   },
   computed: {
     messageDisabled() {
@@ -85,6 +86,7 @@ export default {
   mounted() {
     this.checkSession();
     this.getChatRoom();
+    this.getProfile();
     this.getMessages();
   },
   methods: {
@@ -96,7 +98,7 @@ export default {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Accept': 'application/json'
-        },
+        }
       }).then((response) => {
         // do nothing
       }).catch(function(error) {
@@ -135,6 +137,8 @@ export default {
         console.log(error);
       })
     },
+    getProfile() {
+    },
     sendText() {
       // TODO implement
       console.log(this.message.text);
@@ -156,6 +160,9 @@ export default {
       //           // TODO error handling
       //           console.log(response.error);
       //         })
+    },
+    signout() {
+      console.log('signout');
     }
   }
 }
