@@ -27,10 +27,6 @@ group :development, :test do
   gem 'ya_lorem_ja'
 end
 
-group :production, :development do
-  gem 'foreman'
-end
-
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -46,6 +42,7 @@ group :development do
   gem 'guard-livereload', require:false
   gem 'letter_opener'
   gem 'letter_opener_web'
+  gem 'foreman'
 end
 
 group :test do

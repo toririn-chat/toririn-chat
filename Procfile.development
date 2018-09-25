@@ -1,0 +1,3 @@
+web: bundle exec bin/rails server -p 5000
+browser-sync: yarn run browser-sync start --config bs-config.js
+webpack-dev-server: bundle exec bin/webpack-dev-server

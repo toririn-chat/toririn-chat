@@ -1,0 +1,2 @@
+env: .env.development
+procfile: Procfile.development
