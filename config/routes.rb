@@ -27,8 +27,8 @@ Rails.application.routes.draw do
     resources :chats, { param: :token } do
       resource :room, only: [:show], module: 'chats'
       resources :messages, only: [:index], module: 'chats'
-      resources :people, module: 'chats'
-      resources :avatars, only: [:show], module: 'chats'
+      resource :person, only: [:show, :update], module: 'chats'
+      resources :avatars, only: [:show, :index], module: 'chats'
       scope module: 'chats' do
         post 'signin', to: 'sessions#create'
         get 'signin', to: 'sessions#show'
