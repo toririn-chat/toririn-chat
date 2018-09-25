@@ -24,6 +24,7 @@ group :development, :test do
   gem 'license_finder'
   gem 'dotenv-rails'
   gem 'faker'
+  gem 'ya_lorem_ja'
 end
 
 group :production, :development do
