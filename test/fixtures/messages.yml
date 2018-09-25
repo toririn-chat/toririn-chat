@@ -2,9 +2,9 @@
 <% rooms = YAML::load(ERB.new(IO.read('test/fixtures/rooms.yml')).result) %>
 <% stickers = Sticker.all %>
 
-<% (0..99).each do |index| %>
+<% (0..999).each do |index| %>
 message_text_<%= index %>:
   person: <%= people.keys.sample %>
   room: <%= rooms.keys.sample %>
-  text: <%= Faker::Lorem.paragraph(2) %>
+  text: <%= YaLoremJa::Lorem.new.paragraph.gsub($/, '') %>
 <% end %>

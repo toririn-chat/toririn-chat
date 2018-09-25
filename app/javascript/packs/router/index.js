@@ -7,8 +7,6 @@ import Profile from '../components/Profile.vue'
 import Rooms from '../components/Rooms.vue'
 import Room from '../components/Room.vue'
 import Chat from '../components/Chat.vue'
-import ChatSignin from '../components/ChatSignin.vue'
-import ChatConfig from '../components/ChatConfig.vue'
 
 const routes = [
   {
@@ -31,14 +29,6 @@ const routes = [
     path: '/chats/:id',
     name: 'chat',
     component: Chat
-  }, {
-    path: '/chats/:id/signin',
-    name: 'chat_signin',
-    component: ChatSignin
-  }, {
-    path: '/chats/:id/config',
-    name: 'chat_config',
-    component: ChatConfig
   }
 ]
 export default new VueRouter({routes, mode: 'history'})
