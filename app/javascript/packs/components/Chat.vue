@@ -54,7 +54,7 @@
     </b-form-group>
   </b-modal>
   <!-- Profile -->
-  <!-- <b-modal id="profile" ref="profile" size="sm" title="設定" ok-title="OK" ok-only no-close-on-backdrop no-close-on-esc hide-header-close @ok="saveProfile" :visible="profileWindowVisible" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
+  <b-modal id="profile" ref="profile" size="sm" title="設定" ok-title="OK" ok-only no-close-on-backdrop no-close-on-esc hide-header-close @ok="saveProfile" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
     <b-alert variant="info" :show="feedbacks['info'] !== undefined">
       <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
       <span>{{ feedbacks['info'] }}</span>
@@ -78,7 +78,7 @@
         </div>
       </div>
     </b-form-group>
-  </b-modal> -->
+  </b-modal>
 </div>
 </template>
 <script>
@@ -94,7 +94,8 @@ export default {
         messages: []
       },
       person: {
-        name: ''
+        name: '',
+        exists: false
       },
       session: {
         token: '',
@@ -125,6 +126,11 @@ export default {
       if(value === true) {
         this.getRoom();
         this.getPerson();
+      }
+    },
+    'person.exists': function(value) {
+      if(value === undefined) {
+        this.$refs.profile.show();
       }
     }
   },
@@ -169,6 +175,10 @@ export default {
     sendMessage() {
       // TODO: impl
       console.log('sendMessage');
+    },
+    saveProfile() {
+      // TODO: impl
+      console.log('saveProfile');
     }
   },
   beforeCreate() {
