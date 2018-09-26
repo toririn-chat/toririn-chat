@@ -3,18 +3,14 @@ class Api::Chats::PeopleController < Api::Chats::ApiController
   before_action :chat_session_exists!
 
   def show
-    pp '---'
-    pp '---'
-    pp '---'
-    pp '---'
-    pp current_chat_person
-    render json: current_chat_person
+    render json: current_chat_person,
+      chat_token: current_chat_room.token
   end
 
   def update
     args = {
-      name: params[:name],
-      avatar_id: params[:avatar_id]
+      name: person_params[:name],
+      avatar_id: person_params[:avatar_id]
     }
     @person = current_chat_person
     if @person.update(args)
@@ -23,5 +19,11 @@ class Api::Chats::PeopleController < Api::Chats::ApiController
       render json: @person.errors, status: :unprocessable_entity
     end
   end
+
+  private
+
+    def person_params
+      params.require(:person).permit(:id, :name,:avatar_id)
+    end
 
 end

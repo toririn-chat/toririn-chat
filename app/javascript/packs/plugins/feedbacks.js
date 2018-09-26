@@ -25,10 +25,7 @@ const feedbacks = {
     onFeedbacksErrors(error) {
       // Disable an alert of info
       Vue.delete(this.feedbacks, 'info');
-
-      // Vue.set(this.feedbacks, 'error', error.response.statusText);
-      // return;
-
+      Vue.delete(this.feedbacks, 'error');
       // TCP Errors
       if (error.response === undefined) {
         Vue.set(this.feedbacks, 'error', error.message);
@@ -48,12 +45,15 @@ const feedbacks = {
         // Set errors to fedbacks
         Object.keys(error.response.data).forEach((attr) => {
           let resource = error.config.resource;
-          let key = `${resource}.${attr};`
+          let key = `${resource}.${attr}`;
           let messages = error.response.data[attr];
+          console.log(key);
+          console.log(this.$t(key));
+          console.log(messages);
           messages.forEach((message) => {
             Vue.set(this.feedbacks, key, `${this.$t(key)}${message}`)
-          })
-        })
+          });
+        });
         return;
       }
       Vue.set(this.feedbacks, 'error', `Error: ${error.message}`)

@@ -12,7 +12,10 @@ class Api::Chats::SessionsController < Api::Chats::ApiController
     if chat_session_create(params[:chat_token], params[:chat_code])
       render json: true
     else
-      render json: false, status: :unauthorized
+      error = {
+        chat_code: ['が違います。']
+      }
+      render json: error, status: :unauthorized
     end
   end
 

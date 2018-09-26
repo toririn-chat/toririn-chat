@@ -71,7 +71,7 @@
       <div class="gallery">
         <div class="container">
           <div class="row">
-            <div class="col col-sm-3" v-for="avatar in room.avatars">
+            <div class="col col-sm-3" v-for="avatar in avatars">
               <b-img rounded fluid-grow :src="avatar.image_url" :alt="avatar.name" v-bind:class="{ active: avatar.is_active, inactive: !avatar.is_active }" @click="selectPersonAvatar(avatar)" />
             </div>
           </div>
@@ -91,11 +91,16 @@ export default {
     return {
       room: {
         name: '',
-        messages: []
+        messages: [],
+        avatars: []
       },
       person: {
+        exists: false,
         name: '',
-        exists: false
+        avatar: {
+          id: '',
+          image_url: ''
+        }
       },
       session: {
         token: '',
@@ -119,6 +124,22 @@ export default {
       } else {
         return false;
       }
+    },
+    avatars() {
+      let vm = this;
+      if(vm.person.avatar_id === undefined || vm.person.avatar_id === null) {
+        return vm.room.avatars;
+      } else {
+        if(vm.room.avatars.length > 0) {
+          let avatar = vm.room.avatars.find(function(e) {
+            return e.id == vm.person.avatar_id;
+          });
+          vm.selectPersonAvatar(avatar);
+          return vm.room.avatars;
+        } else {
+          return vm.room.avatars;
+        }
+      }
     }
   },
   watch: {
@@ -129,7 +150,7 @@ export default {
       }
     },
     'person.exists': function(value) {
-      if(value === undefined) {
+      if(value !== true) {
         this.$refs.profile.show();
       }
     }
@@ -172,13 +193,37 @@ export default {
         Vue.set(vm.session, 'exists', true);
       }).catch(vm.onFeedbacksErrors)
     },
+    saveProfile(event) {
+      event.preventDefault();
+      let vm = this;
+      let form = new FormData();
+      form.set('person[name]', vm.person.name);
+      form.set('person[avatar_id]', vm.person.avatar_id);
+      axios({
+        resource: 'person',
+        url: `/api/chats/${vm.$route.params.id}/person`,
+        method: 'patch',
+        data: form,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json'
+        },
+        onUploadProgress: this.onFeedbacksProgress
+      }).then(function(response) {
+        vm.$refs.profile.hide();
+      }).catch(vm.onFeedbacksErrors)
+    },
+    selectPersonAvatar(avatar) {
+      let vm = this;
+      vm.room.avatars.forEach(function(avatar) {
+        Vue.set(avatar, 'is_active', false);
+      });
+      Vue.set(avatar, 'is_active', true);
+      Vue.set(vm.person, 'avatar_id', avatar.id);
+    },
     sendMessage() {
       // TODO: impl
       console.log('sendMessage');
-    },
-    saveProfile() {
-      // TODO: impl
-      console.log('saveProfile');
     }
   },
   beforeCreate() {
