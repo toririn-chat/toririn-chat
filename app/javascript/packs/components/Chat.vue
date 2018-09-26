@@ -183,7 +183,7 @@ export default {
         Vue.set(vm.session, 'exists', true);
       }).catch(function(error) {
         Vue.set(vm.session, 'exists', false);
-      })
+      });
     }
 }
 </script>
