@@ -237,7 +237,7 @@ export default {
   mounted() {
    let vm = this;
     axios({
-      url: `/api/chats/${vm.$route.params.id}/session`,
+      url: `/api/chats/${vm.$route.params.id}/signin`,
       method: 'get'
     }).then(function(response) {
       Vue.set(vm.session, 'exists', true);
