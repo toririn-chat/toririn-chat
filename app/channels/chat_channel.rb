@@ -29,8 +29,8 @@ class ChatChannel < ApplicationCable::Channel
 
   # receive a mark message
   def mark(data)
-    # TODO: impl
     pp 'mark(data)'
+    # TODO: implement
     # type = data['type']
     # message_ids = data['message_ids']
     # if type == 'read'
