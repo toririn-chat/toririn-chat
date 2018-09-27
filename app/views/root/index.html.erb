@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>とりりん★チャット</title>
     <%= analytics_init if Rails.env.production? && GoogleAnalytics.valid_tracker? %>
-    <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'app' %>
     <%= stylesheet_pack_tag 'app' %>
     <%= csrf_meta_tags %>
