@@ -5,8 +5,7 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform(action, message)
-    # html_message = ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
-    x = {
+    m = {
       id: message.id,
       text: message.text,
       created_at: message.created_at,
@@ -19,7 +18,7 @@ class MessageBroadcastJob < ApplicationJob
         }
       }
     }
-    ActionCable.server.broadcast("chat_#{message.room.token}", action:action, message: x)
+    ActionCable.server.broadcast("chat_#{message.room.token}", action: action, message: m)
   end
 
 end
