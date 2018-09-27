@@ -1,13 +1,83 @@
-// App.chat = App.cable.subscriptions.create('ChatChannel', {
+// App.room = App.cable.subscriptions.create({
+//   channel: 'ChatChannel',
+//   token: 'VdpzdnBgY2l1NvpmYrgY'
+//   }, {
 //   connected() {
-//     console.log('aaa');
+//     console.log('connected');
 //   },
 //   disconnected() {
-//     console.log('ccc');
-//
+//     console.log('disconnected');
 //   },
 //   received(data) {
-//     console.log();
+//     console.log('received');
+//   },
+//   text(text) {
+//     return this.perform('text', {
+//       room_id: 'VdpzdnBgY2l1NvpmYrgY',
+//       text: text
+//     });
+//   },
+// });
+
+
+// (function() {
+
+//
+// }).call(this);
+
+
+// var room_subscription = {
+//   connected: function() {
+//     // this.mark('read', getUnreadMessageIDs());
+//     // return scrollToBottom();
+//   },
+//   received: function(data) {
+//     // if (data['action'] === 'append') {
+//     //   appendMessage(data['message']);
+//     //   this.mark('read', getUnreadMessageIDs());
+//     //   scrollToBottom();
+//     // }
+//     // if (data['action'] === 'update') {
+//     //   return updateMessage(data['message']);
+//     // }
+//   },
+//   disconnected: function() {
+//   },
+//   rejected: function() {
+//
+//   },
+
+//   stamp: function(stamp) {
+//     // return this.perform('stamp', {
+//     //   room_id: getRoomID(),
+//     //   stamp: stamp
+//     // });
+//   },
+//   mark: function(type, message_ids) {
+//     // if (message_ids.length > 0) {
+//     //   return this.perform('mark', {
+//     //     type: type,
+//     //     message_ids: message_ids
+//     //   });
+//     // }
+//   }
+// };
+
+
+//
+// App.chat = App.cable.subscriptions.create('ChatChannel', {
+//   connected() {
+//     console.log('connected');
+//     let room_identifier = {
+//       channel: 'RoomChannel',
+//       room_id: getRoomID()
+//     };
+//   },
+//   disconnected() {
+//     console.log('disconnected');
+//   },
+//   received(data) {
+//     console.log('received', data);
 //   }
 // });
 
@@ -66,44 +136,7 @@
 //   return window.scrollTo(0, document.body.scrollHeight);
 // };
 //
-// room_subscription = {
-//   connected: function() {
-//     this.mark('read', getUnreadMessageIDs());
-//     return scrollToBottom();
-//   },
-//   received: function(data) {
-//     if (data['action'] === 'append') {
-//       appendMessage(data['message']);
-//       this.mark('read', getUnreadMessageIDs());
-//       scrollToBottom();
-//     }
-//     if (data['action'] === 'update') {
-//       return updateMessage(data['message']);
-//     }
-//   },
-//   disconnected: function() {},
-//   rejected: function() {},
-//   text: function(text) {
-//     return this.perform('text', {
-//       room_id: getRoomID(),
-//       text: text
-//     });
-//   },
-//   stamp: function(stamp) {
-//     return this.perform('stamp', {
-//       room_id: getRoomID(),
-//       stamp: stamp
-//     });
-//   },
-//   mark: function(type, message_ids) {
-//     if (message_ids.length > 0) {
-//       return this.perform('mark', {
-//         type: type,
-//         message_ids: message_ids
-//       });
-//     }
-//   }
-// };
+
 //
 // $(document).on('turbolinks:load', function() {
 //   var room_identifier;

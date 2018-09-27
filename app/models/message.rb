@@ -2,12 +2,13 @@ class Message < ApplicationRecord
 
   belongs_to :room
   belongs_to :person
-  belongs_to :sticker
+  belongs_to :sticker, required: false
   # has_many :user_messages
-  validates :text_or_sticker, {presence: true}
-  # after_create_commit {
-  #   MessageBroadcastJob.perform_later('append', self)
-  # }
+  # validates :text_or_sticker, {presence: true}
+
+  after_create_commit {
+    MessageBroadcastJob.perform_later('append', self)
+  }
   #
   # def readers
   #   User.find(user_messages.where(read:true).pluck(:user_id))

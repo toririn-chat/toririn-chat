@@ -89,6 +89,7 @@ export default {
   mixins: [feedbacks],
   data() {
     return {
+      channel: null,
       room: {
         name: '',
         messages: [],
@@ -223,23 +224,58 @@ export default {
     },
     sendMessage() {
       // TODO: impl
-      console.log('sendMessage');
+      let r = this.channel.text(this.message.text);
+      Vue.set(this.message, 'text', '');
+      // console.log(App.room);
+      // App.room.text(this.message.text);
+      // console.log('sendMessage');
     }
   },
   beforeCreate() {
     document.body.className = 'chat';
   },
   mounted() {
-     let vm = this;
-      axios({
-        url: `/api/chats/${vm.$route.params.id}/session`,
-        method: 'get'
-      }).then(function(response) {
-        Vue.set(vm.session, 'exists', true);
-      }).catch(function(error) {
-        Vue.set(vm.session, 'exists', false);
-      });
+   let vm = this;
+    axios({
+      url: `/api/chats/${vm.$route.params.id}/session`,
+      method: 'get'
+    }).then(function(response) {
+      Vue.set(vm.session, 'exists', true);
+    }).catch(function(error) {
+      Vue.set(vm.session, 'exists', false);
+    });
+  },
+  created() {
+    let vm = this;
+    let cid = {
+      channel: 'ChatChannel',
+      token: vm.token
     }
+    console.log(cid);
+    this.channel = this.$cable.subscriptions.create(cid, {
+      connected() {
+        console.log('connected');
+      },
+      disconnected() {
+        console.log('disconnected');
+      },
+      received(data) {
+        console.log(data);
+        console.log('received');
+        // this.messages.push(data)
+        vm.room.messages.push(data.message);
+        Vue.nextTick(function() {
+          window.scrollTo(0, document.body.scrollHeight);
+        });
+      },
+      text(text) {
+        return this.perform('text', {
+          room_id: vm.token,
+          text: text
+        });
+      }
+    })
+  }
 }
 </script>
 <style lang="scss">
