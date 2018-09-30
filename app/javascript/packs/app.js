@@ -1,4 +1,6 @@
-import 'es6-promise/auto' // for vuex on IE 11
+import 'babel-polyfill'
+import 'es6-promise/auto' // for IE 11 and Edge
+import 'formdata-polyfill' // for IE 11 and Edge
 import Vue from 'vue'
 import i18n from './i18n'
 import router from './router'

@@ -12,6 +12,7 @@
     "es6-promise": "^4.1.1",
     "font-awesome": "^4.7.0",
     "font-awesome-sass-loader": "^2.0.1",
+    "formdata-polyfill": "^3.0.12",
     "moment": "^2.18.1",
     "vue": "^2.5.17",
     "vue-i18n": "^7.2.0",
