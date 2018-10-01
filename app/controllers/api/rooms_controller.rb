@@ -6,7 +6,15 @@ class Api::RoomsController < Api::ApiController
   include Rails.application.routes.url_helpers
 
   def index
-    render json: @rooms.sort{ |room| room.created_at }
+    render json: @rooms.sort{ |room|
+      room.created_at
+    }.map{ |room|
+      {
+        id: room.id,
+        name: room.name,
+        created_at: room.created_at
+      }
+    }
   end
 
   def show
@@ -24,13 +32,12 @@ class Api::RoomsController < Api::ApiController
   end
 
   def create
-    # TODO: transaction
     @room = Room.new(room_params)
     @room.users << current_user
     @room.token = Room.generate_token
     @room.code = Room.generate_code
     if @room.save
-      render json: @room, status: :created, location: api_room_url(@room)
+      render json: @room, status: :created
     else
       render json: @room.errors, status: :unprocessable_entity
     end
