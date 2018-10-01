@@ -5,66 +5,53 @@
     <b-breadcrumb class="mt-3" :items="breadcrumb" />
     <h3 class="my-3">
       <i class="fa fa-comments-o"></i>
-      <span>{{room.name}}</span>
+      <span>{{ room.name }}</span>
     </h3>
     <b-card no-body>
       <b-tabs ref="tabs" card>
         <b-tab title="設定" active>
-          <b-form-group label="URL" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <a :href="room.url" target="_blank">{{ room.url }}</a>
-            <!-- <input type="text" readonly class="form-control-plaintext" :value="room.url"> -->
-          </b-form-group>
-          <b-form-group label="QR code" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <b-img :src="room.qrcode_image_url" fluid alt="QR code" />
-          </b-form-group>
-          <b-form-group label="暗証番号" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <b-form-input type="text" :value="room.code" />
-          </b-form-group>
-          <b-form-group label="状態" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <b-form-input type="text"/>
-          </b-form-group>
-          <b-form-group label="有効期限の開始" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <b-form-input type="text"/>
-          </b-form-group>
-          <b-form-group label="有効期限の終了" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <b-form-input type="text"/>
-          </b-form-group>
-          <b-form-group label="管理者" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <ul>
-              <li v-for="user in room.users">{{ user.person_name }}（{{ user.organization_name }}）</li>
-            </ul>
-          </b-form-group>
-        </b-tab>
-        <b-tab title="書き込み一覧">
-          書き込み内容の管理機能は開発中です。
-          <ul>
-            <li v-for="m in room.messages">{{ m.text }}</li>
-          </ul>
+          <b-card header="基本設定" class="mb-3">
+            <b-form-group label="チャットルーム名" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
+              <b-form-input type="text" :value="room.name" />
+            </b-form-group>
+            <b-form-group label="備考欄" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
+              <b-form-input type="text" :value="room.description" />
+            </b-form-group>
+            <b-form-group horizontal class="text-right mb-0">
+              <b-button variant="primary">保存</b-button>
+            </b-form-group>
+          </b-card>
+          <b-card header="リンク" class="mb-3">
+            <b-form-group label="URL" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm" class="align-bottom">
+              <a :href="room.url" class="form-control-plaintext" target="_blank">{{ room.url }}</a>
+            </b-form-group>
+            <b-form-group label="QR code" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
+              <b-img :src="room.qrcode_image_url" fluid alt="QR code" class="m-10" width="129" height="129" blank-color="#eee" />
+            </b-form-group>
+            <b-form-group horizontal class="text-right mb-0">
+              <b-button variant="primary">変更</b-button>
+            </b-form-group>
+          </b-card>
+          <b-card header="アクセス制限">
+            <b-form-group label="暗証番号" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
+              <b-form-input type="text" :value="room.code" />
+            </b-form-group>
+            <b-form-group horizontal class="text-right mb-0">
+              <b-button variant="primary">保存</b-button>
+            </b-form-group>
+          </b-card>
         </b-tab>
       </b-tabs>
     </b-card>
   </div>
-  <b-modal id="new_auth_uri" ref="new_auth_uri" size="sm" title="新規作成" ok-title="送信" cancel-title="キャンセル" @ok="" @shown="" :show="feedbacks['info'] !== undefined">
-    <b-alert variant="info" :show="feedbacks['info'] !== undefined">
-      <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
-      <span>{{feedbacks['info']}}</span>
-    </b-alert>
-    <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
-      {{feedbacks['error']}}
-    </b-alert>
-    <b-form-group label="チャットルーム名" :feedback="feedbacks['name']" :state="states['name']">
-      <b-input-group>
-        <b-form-input type="text" v-model="room.name" />
-      </b-input-group>
-    </b-form-group>
-  </b-modal>
 </div>
 </template>
 <script>
-import NavBar from './NavBar.vue'
 import Vue from 'vue'
 import axios from 'axios'
 import moment from 'moment'
+import NavBar from './NavBar.vue'
+import feedbacks from '../plugins/feedbacks'
 export default {
   components: {
     NavBar
@@ -73,27 +60,23 @@ export default {
     document.body.className = 'room';
   },
   mounted() {
-    this.getRoom()
-    // this.getMessages()
+    this.getRoom();
   },
   data() {
     return {
       room: {
         id: '',
         name: '',
-        begin_at: '',
-        end_at: '',
-        token: '',
+        description: '',
         url: '',
-        code: '',
-        qrcode_url: '',
-        updated_at: '',
+        qrcode_image_url: '',
         created_at: '',
-        messages: [],
-        users: []
-      },
-      feedbacks: []
-    }
+        token: '',
+        code: '',
+        begin_at: '',
+        end_at: ''
+      }
+    };
   },
   computed: {
     breadcrumb() {
@@ -103,12 +86,7 @@ export default {
       }, {
         text: this.room.name,
         active: true
-      }]
-    },
-    states() {
-      return {
-        name: this.getState('name')
-      }
+      }];
     }
   },
   filters: {
@@ -131,24 +109,6 @@ export default {
         console.log(response.error);
       })
     },
-    // getMessages() {
-    //   let vm = this;
-    //   axios({
-    //     url: `/api/rooms/${vm.$route.params.id}/messages`,
-    //     method: 'get'
-    //   }).then(function(response) {
-    //     vm.messages = [];
-    //     response.data.forEach((message) => {
-    //       vm.messages.push(message)
-    //     })
-    //     Vue.nextTick(function() {
-    //       window.scrollTo(0, document.body.scrollHeight);
-    //     })
-    //   }).catch(function(error) {
-    //     // TODO error handling
-    //     console.log(response.error);
-    //   })
-    // },
     createAuthURI() {
       let vm = this;
       let form = new FormData();
@@ -163,14 +123,7 @@ export default {
       }).catch(function(error) {
         console.log(error);
       })
-    },
-    getState(key) {
-      if (this.feedbacks[key] === undefined) {
-        return 'valid';
-      } else {
-        return 'invalid';
-      }
-    },
+    }
   }
 }
 </script>
