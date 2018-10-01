@@ -10,6 +10,7 @@
           <tr>
             <th scope="col">チャットルーム名</th>
             <th scope="col">作成日時</th>
+            <th scope="col">備考</th>
           </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
               <router-link :to="{ name: 'room', params: { id: room.id }}">{{ room.name }}</router-link>
             </td>
             <td>{{ room.created_at | moment }}</td>
+            <td>{{ room.description }}</td>
           </tr>
         </tbody>
       </table>
