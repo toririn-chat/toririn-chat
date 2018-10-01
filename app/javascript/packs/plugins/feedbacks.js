@@ -12,6 +12,15 @@ const feedbacks = {
         Vue.delete(this.feedbacks, key);
       })
     },
+    setSuccessFeedback() {
+      let vm = this;
+      setTimeout(function() {
+        Vue.set(vm.feedbacks, 'success', '保存しました。');
+      }, 100);
+      setTimeout(function() {
+        Vue.delete(vm.feedbacks, 'success');
+      }, 100 + 2000);
+    },
     getFeedbacksState(key) {
       if (this.feedbacks[key] === undefined) {
         return 'valid';

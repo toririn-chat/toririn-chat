@@ -127,7 +127,7 @@ export default {
         onUploadProgress: vm.onFeedbacksProgress()
       }).then(function(response) {
         vm.clearFeedbacks();
-        Vue.set(vm.feedbacks, 'success', '保存しました。')
+        vm.setSuccessFeedback();
       }).catch(vm.onFeedbacksErrors)
     }
   }
