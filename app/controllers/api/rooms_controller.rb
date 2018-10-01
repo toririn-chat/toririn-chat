@@ -58,7 +58,7 @@ class Api::RoomsController < Api::ApiController
   def qrcode
     # TODO: refactoring
     url = root_url + "chats/#{@room.token}"
-    @code = RQRCode::QRCode.new(url).as_png
+    @code = RQRCode::QRCode.new(url).as_png(border_modules: 1, module_px_size: 3)
     send_data(@code.to_s, disposition: 'inline', type: 'image/png')
   end
 
