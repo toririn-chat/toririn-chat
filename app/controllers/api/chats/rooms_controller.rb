@@ -1,13 +1,14 @@
 class Api::Chats::RoomsController < Api::Chats::ApiController
 
   before_action :chat_session_exists!
+
   include Rails.application.routes.url_helpers
 
   def show
     @room = current_chat_room
-    @json = {
+    render json: {
       name: @room.name,
-      messages: @room.messages.includes(:person).map { |message|
+      messages: @room.messages.includes(:person, person: [:avatar]).map { |message|
         {
           text: message.text,
           created_at: message.created_at,
@@ -29,7 +30,6 @@ class Api::Chats::RoomsController < Api::Chats::ApiController
         }
       }
     }
-    render json: @json
   end
 
 end

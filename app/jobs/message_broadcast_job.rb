@@ -18,7 +18,10 @@ class MessageBroadcastJob < ApplicationJob
         }
       }
     }
-    ActionCable.server.broadcast("chat_#{message.room.token}", action: action, message: m)
+    ActionCable.server.broadcast("chat_#{message.room.token}", {
+      action: action,
+      message: m
+    })
   end
 
 end

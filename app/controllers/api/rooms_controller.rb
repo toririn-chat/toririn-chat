@@ -3,13 +3,24 @@ class Api::RoomsController < Api::ApiController
   before_action :authenticate_user!
   before_action :set_rooms, only: %i(index)
   before_action :set_room, only: %i(show qrcode update destroy)
+  include Rails.application.routes.url_helpers
 
   def index
     render json: @rooms.sort{ |room| room.created_at }
   end
 
   def show
-    render json: @room
+    render json: {
+      id: @room.id,
+      name: @room.name,
+      begin_at: @room.begin_at,
+      end_at: @room.end_at,
+      token: @room.token,
+      code: @room.code,
+      created_at: @room.created_at,
+      url: "#{root_url}chats/#{@room.token}",
+      qrcode_image_url: qrcode_api_room_url(@room)
+    }
   end
 
   def create

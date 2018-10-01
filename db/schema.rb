@@ -15,9 +15,9 @@ ActiveRecord::Schema.define(version: 2017_09_13_142045) do
   create_table "avatar_group_users", force: :cascade do |t|
     t.integer "avatar_group_id", null: false
     t.integer "user_id", null: false
+    t.index ["avatar_group_id", "user_id"], name: "index_avatar_group_users_on_avatar_group_id_and_user_id", unique: true
     t.index ["avatar_group_id"], name: "index_avatar_group_users_on_avatar_group_id"
     t.index ["user_id"], name: "index_avatar_group_users_on_user_id"
-    t.index [nil, "user_id"], name: "index_avatar_group_users_on_avatar_group_and_user_id", unique: true
   end
 
   create_table "avatar_groups", force: :cascade do |t|

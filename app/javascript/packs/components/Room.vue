@@ -15,7 +15,7 @@
             <!-- <input type="text" readonly class="form-control-plaintext" :value="room.url"> -->
           </b-form-group>
           <b-form-group label="QR code" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-            <b-img :src="room.qrcode_url" fluid alt="QR code" />
+            <b-img :src="room.qrcode_image_url" fluid alt="QR code" />
           </b-form-group>
           <b-form-group label="暗証番号" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
             <b-form-input type="text" :value="room.code" />

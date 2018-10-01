@@ -24,11 +24,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    active_model_serializers (0.10.7)
-      actionpack (>= 4.1, < 6)
-      activemodel (>= 4.1, < 6)
-      case_transform (>= 0.2)
-      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (5.2.1)
       activesupport (= 5.2.1)
       globalid (>= 0.3.6)
@@ -75,8 +70,6 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
-    case_transform (0.2)
-      activesupport
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
     chromedriver-helper (2.1.0)
@@ -146,7 +139,6 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       terminal-table (>= 1.5.1)
     io-like (0.3.0)
-    jsonapi-renderer (0.2.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.6.0)
@@ -315,7 +307,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (~> 0.10)
   awesome_print
   bootsnap (>= 1.1.0)
   bullet
