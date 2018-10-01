@@ -12,6 +12,7 @@ class Api::RoomsController < Api::ApiController
       {
         id: room.id,
         name: room.name,
+        description: room.description,
         created_at: room.created_at
       }
     }
@@ -21,6 +22,7 @@ class Api::RoomsController < Api::ApiController
     render json: {
       id: @room.id,
       name: @room.name,
+      description: @room.description,
       begin_at: @room.begin_at,
       end_at: @room.end_at,
       token: @room.token,
@@ -73,7 +75,7 @@ class Api::RoomsController < Api::ApiController
     end
 
     def room_params
-      params.require(:room).permit(:id, :name)
+      params.require(:room).permit(:id, :name, :description)
     end
 
 end

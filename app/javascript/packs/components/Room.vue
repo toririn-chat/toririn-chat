@@ -7,18 +7,21 @@
       <i class="fa fa-comments-o"></i>
       <span>{{ room.name }}</span>
     </h3>
+    <b-alert variant="success" :show="feedbacks['success'] !== undefined" dismissible fade>
+      <span>{{ feedbacks['success'] }}</span>
+    </b-alert>
     <b-card no-body>
       <b-tabs ref="tabs" card>
         <b-tab title="設定" active>
           <b-card header="基本設定" class="mb-3">
-            <b-form-group label="チャットルーム名" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-              <b-form-input type="text" :value="room.name" />
+            <b-form-group label="チャットルーム名" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm" :feedback="feedbacks['room.name']" :state="states['room.name']">
+              <b-form-input type="text" v-model="room.name" />
             </b-form-group>
             <b-form-group label="備考欄" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-              <b-form-input type="text" :value="room.description" />
+              <b-form-input type="text" v-model="room.description" />
             </b-form-group>
             <b-form-group horizontal class="text-right mb-0">
-              <b-button variant="primary">保存</b-button>
+              <b-button variant="primary" @click="saveBasicRoomConfig">保存</b-button>
             </b-form-group>
           </b-card>
           <b-card header="リンク" class="mb-3">
@@ -53,6 +56,7 @@ import moment from 'moment'
 import NavBar from './NavBar.vue'
 import feedbacks from '../plugins/feedbacks'
 export default {
+  mixins: [feedbacks],
   components: {
     NavBar
   },
@@ -103,26 +107,28 @@ export default {
         method: 'get'
       }).then(function(response) {
         vm.room = response.data;
-      })
-      .catch(function(error) {
-        // TODO error handling
-        console.log(response.error);
-      })
+      }).catch(vm.onFeedbacksErrors)
     },
-    createAuthURI() {
+    saveBasicRoomConfig(event) {
+      event.preventDefault();
       let vm = this;
       let form = new FormData();
-      form.set('authorization[factor]', 'uri');
+      form.set('room[name]', vm.room.name);
+      form.set('room[description]', vm.room.description);
       axios({
-        url: `/api/rooms/${vm.$route.params.id}/authorizations`,
-        method: 'post',
-        data: form
+        resource: 'room',
+        url: `/api/rooms/${vm.room.id}`,
+        method: 'patch',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json'
+        },
+        data: form,
+        onUploadProgress: vm.onFeedbacksProgress()
       }).then(function(response) {
-        let authorization = response.data;
-        vm.room.authorizations.unshift(authorization);
-      }).catch(function(error) {
-        console.log(error);
-      })
+        vm.clearFeedbacks();
+        Vue.set(vm.feedbacks, 'success', '保存しました。')
+      }).catch(vm.onFeedbacksErrors)
     }
   }
 }

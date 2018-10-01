@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2017_09_13_142045) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "name", null: false
+    t.text "description", default: "", null: false
     t.datetime "begin_at"
     t.datetime "end_at"
     t.string "token", null: false

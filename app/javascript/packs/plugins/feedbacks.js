@@ -3,7 +3,7 @@ import Vue from 'vue'
 const feedbacks = {
   data() {
     return {
-      feedbacks: []
+      feedbacks: {}
     };
   },
   methods: {

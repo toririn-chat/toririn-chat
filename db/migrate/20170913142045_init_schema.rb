@@ -4,6 +4,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
 
     create_table :rooms do |t|
       t.string :name, null: false
+      t.text :description, null: false, default: ''
       t.datetime :begin_at
       t.datetime :end_at
       t.string :token, null: false
