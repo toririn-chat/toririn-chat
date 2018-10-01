@@ -177,7 +177,7 @@ GEM
     minitest-power_assert (0.3.0)
       minitest
       power_assert (>= 1.1)
-    minitest-reporters (1.3.4)
+    minitest-reporters (1.3.5)
       ansi
       builder
       minitest (>= 5.0)
