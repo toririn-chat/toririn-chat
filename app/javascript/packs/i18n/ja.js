@@ -5,7 +5,8 @@ const messages = {
   password: 'パスワード',
   reset_password_token: 'トークン',
   room: {
-    name: 'チャットルーム名'
+    name: 'チャットルーム名',
+    code: '暗証番号'
   },
   session: {
     chat_code: '暗証番号'

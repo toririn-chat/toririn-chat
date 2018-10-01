@@ -21,7 +21,7 @@
               <b-form-input type="text" v-model="room.description" />
             </b-form-group>
             <b-form-group horizontal class="text-right mb-0">
-              <b-button variant="primary" @click="saveBasicRoomConfig">保存</b-button>
+              <b-button variant="primary" @click="saveRoomBasicConfig">保存</b-button>
             </b-form-group>
           </b-card>
           <b-card header="リンク" class="mb-3">
@@ -36,11 +36,12 @@
             </b-form-group>
           </b-card>
           <b-card header="アクセス制限">
-            <b-form-group label="暗証番号" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-              <b-form-input type="text" :value="room.code" />
+            <b-form-group label="暗証番号" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm"  :feedback="feedbacks['room.code']" :state="states['room.code']">
+              <b-form-input type="text" v-model="room.code" />
+              <b-form-text>6〜20文字の数値を指定してください。</b-form-text>
             </b-form-group>
             <b-form-group horizontal class="text-right mb-0">
-              <b-button variant="primary">保存</b-button>
+              <b-button variant="primary" @click="saveRoomAccessConfig">保存</b-button>
             </b-form-group>
           </b-card>
         </b-tab>
@@ -109,12 +110,32 @@ export default {
         vm.room = response.data;
       }).catch(vm.onFeedbacksErrors)
     },
-    saveBasicRoomConfig(event) {
+    saveRoomBasicConfig(event) {
       event.preventDefault();
       let vm = this;
       let form = new FormData();
       form.set('room[name]', vm.room.name);
       form.set('room[description]', vm.room.description);
+      axios({
+        resource: 'room',
+        url: `/api/rooms/${vm.room.id}`,
+        method: 'patch',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json'
+        },
+        data: form,
+        onUploadProgress: vm.onFeedbacksProgress()
+      }).then(function(response) {
+        vm.clearFeedbacks();
+        vm.setSuccessFeedback();
+      }).catch(vm.onFeedbacksErrors)
+    },
+    saveRoomAccessConfig(event) {
+      event.preventDefault();
+      let vm = this;
+      let form = new FormData();
+      form.set('room[code]', vm.room.code);
       axios({
         resource: 'room',
         url: `/api/rooms/${vm.room.id}`,

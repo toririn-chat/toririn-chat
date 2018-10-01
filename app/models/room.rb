@@ -6,6 +6,10 @@ class Room < ApplicationRecord
 
   validates :name,
     presence: true
+  validates :code,
+    presence: true,
+    format: { with: /\A[\d]+\z/ },
+    length: { in: 6..20 }
 
   def self.generate_token
     salt = Rails.application.credentials.secret_key_base
