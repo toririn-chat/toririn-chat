@@ -12,7 +12,7 @@
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown text="<i class='fa fa-user'></i>&nbsp;<span>アカウント</span>" right>
-          <b-dropdown-item href="profile">
+          <b-dropdown-item href="/profile">
           <i class="fa fa-gear"></i>
           <span>設定</span>
         </b-dropdown-item>
