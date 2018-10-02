@@ -10,6 +10,7 @@ class Api::RoomsController < Api::ApiController
     }.map{ |room|
       {
         id: room.id,
+        status: room.status,
         name: room.name,
         description: room.description,
         created_at: room.created_at
@@ -109,6 +110,7 @@ class Api::RoomsController < Api::ApiController
       def to_object
         {
           id: @room.id,
+          status: @room.status,
           name: @room.name,
           description: @room.description,
           begin_at: @room.begin_at,

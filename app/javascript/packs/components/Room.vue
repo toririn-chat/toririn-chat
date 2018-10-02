@@ -13,6 +13,13 @@
     <b-card no-body>
       <b-tabs ref="tabs" card>
         <b-tab title="設定" active>
+          <b-card header="概要" class="mb-3">
+            <b-form-group label="状態" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
+              <span class="form-control-plaintext"><b-badge active :variant="roomStatusBadgeVariant(room.status)" v-show="roomStatusBadgeString(room.status)">{{ roomStatusBadgeString(room.status) }}</b-badge></span>
+            </b-form-group>
+            <p v-show="!roomStatusIsActive(room.status)">現在、このチャットルームはアクセスできません。アクセスできるようにするためにはアクセス用リンクと暗証番号を設定してください。</p>
+            <p v-show="roomStatusIsActive(room.status)">現在、このチャットルームはアクセス可能です。</p>
+          </b-card>
           <b-card header="基本設定" class="mb-3">
             <b-form-group label="チャットルーム名" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm" :feedback="feedbacks['room.name']" :state="states['room.name']">
               <b-form-input type="text" v-model="room.name" />
@@ -79,8 +86,9 @@ import axios from 'axios'
 import moment from 'moment'
 import NavBar from './NavBar.vue'
 import feedbacks from '../plugins/feedbacks'
+import rooms from '../plugins/rooms'
 export default {
-  mixins: [feedbacks],
+  mixins: [feedbacks, rooms],
   components: {
     NavBar
   },
@@ -94,6 +102,7 @@ export default {
     return {
       room: {
         id: '',
+        status: '',
         name: '',
         description: '',
         url: '',

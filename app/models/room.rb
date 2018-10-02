@@ -7,6 +7,14 @@ class Room < ApplicationRecord
   validates :name,
     presence: true
 
+  def status
+    if token.present? && code.present?
+      :active
+    else
+      :inactive
+    end
+  end
+
   def self.generate_token
     salt = Rails.application.credentials.secret_key_base
     token = Hashids.new(salt, 20).encode(SecureRandom.random_number(1 << 64))

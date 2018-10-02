@@ -8,6 +8,7 @@
       <table class="table table-hover mt-3">
         <thead class="thead-light">
           <tr>
+            <th scope="col">状態</th>
             <th scope="col">チャットルーム名</th>
             <th scope="col">作成日時</th>
             <th scope="col">備考</th>
@@ -15,6 +16,9 @@
         </thead>
         <tbody>
           <tr v-for="room in rooms">
+            <td>
+              <b-badge active :variant="roomStatusBadgeVariant(room.status)" v-if="roomStatusBadgeString(room.status)">{{ roomStatusBadgeString(room.status) }}</b-badge>
+            </td>
             <td>
               <router-link :to="{ name: 'room', params: { id: room.id }}">{{ room.name }}</router-link>
             </td>
@@ -49,8 +53,9 @@ import axios from 'axios'
 import moment from 'moment'
 import NavBar from './NavBar.vue'
 import feedbacks from '../plugins/feedbacks'
+import rooms from '../plugins/rooms'
 export default {
-  mixins: [feedbacks],
+  mixins: [feedbacks, rooms],
   components: {
     NavBar
   },
