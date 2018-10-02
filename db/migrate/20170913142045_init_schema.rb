@@ -7,7 +7,7 @@ class InitSchema < ActiveRecord::Migration[5.1]
       t.text :description, null: false, default: ''
       t.datetime :begin_at
       t.datetime :end_at
-      t.string :token, null: false
+      t.string :token
       t.string :code
       t.boolean :active, null: false, default: false
       t.timestamps

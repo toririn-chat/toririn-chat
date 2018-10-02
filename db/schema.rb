@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2017_09_13_142045) do
     t.text "description", default: "", null: false
     t.datetime "begin_at"
     t.datetime "end_at"
-    t.string "token", null: false
+    t.string "token"
     t.string "code"
     t.boolean "active", default: false, null: false
     t.datetime "created_at", null: false

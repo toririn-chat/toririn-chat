@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resources :rooms do
       member do
         get 'qrcode', { format: 'png' }
+        patch 'create_token'
+        patch 'delete_token'
       end
     end
     resources :chats, { param: :token } do

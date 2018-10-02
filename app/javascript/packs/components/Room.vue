@@ -1,7 +1,7 @@
 <template>
 <div>
   <nav-bar />
-  <div class="container">
+  <div class="container pb-3">
     <b-breadcrumb class="mt-3" :items="breadcrumb" />
     <h3 class="my-3">
       <i class="fa fa-comments-o"></i>
@@ -24,19 +24,27 @@
               <b-button variant="primary" @click="saveRoomBasicConfig">保存</b-button>
             </b-form-group>
           </b-card>
-          <b-card header="リンク" class="mb-3">
-            <b-form-group label="URL" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm" class="align-bottom">
-              <a :href="room.url" class="form-control-plaintext" target="_blank">{{ room.url }}</a>
-            </b-form-group>
-            <b-form-group label="QR code" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
-              <b-img :src="room.qrcode_image_url" fluid alt="QR code" class="m-10" width="129" height="129" blank-color="#eee" />
-            </b-form-group>
-            <b-form-group horizontal class="text-right mb-0">
-              <b-button variant="primary">変更</b-button>
-            </b-form-group>
+          <b-card header="アクセス用リンク" class="mb-3">
+            <div v-if="room.token">
+              <b-form-group label="URL" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm" class="align-bottom">
+                <a :href="room.url" class="form-control-plaintext" target="_blank">{{ room.url }}</a>
+              </b-form-group>
+              <b-form-group label="QRコード" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm">
+                <b-img :src="room.qrcode_image_url" fluid alt="QRコード" class="m-10" width="129" height="129" blank-color="#eee" />
+              </b-form-group>
+              <b-form-group horizontal class="text-right mb-0">
+                <b-button variant="danger" v-b-modal.delete_room_token>削除</b-button>
+              </b-form-group>
+            </div>
+            <div v-else="room.token">
+              <p>現在、このチャットルームはアクセス用リンクが無効です。チャットの利用者にチャットルームを公開するにはアクセス用リンクを生成してください。</p>
+              <b-form-group horizontal class="text-right mb-0">
+                <b-button variant="primary" @click="generateRoomToken">アクセス用リンクの生成</b-button>
+              </b-form-group>
+            </div>
           </b-card>
           <b-card header="アクセス制限">
-            <b-form-group label="暗証番号" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm"  :feedback="feedbacks['room.code']" :state="states['room.code']">
+            <b-form-group label="暗証番号" horizontal label-class="font-weight-bold" label-cols="4" breakpoint="sm" :feedback="feedbacks['room.code']" :state="states['room.code']">
               <b-form-input type="text" v-model="room.code" />
               <b-form-text>6〜20文字の数値を指定してください。</b-form-text>
             </b-form-group>
@@ -48,6 +56,10 @@
       </b-tabs>
     </b-card>
   </div>
+  <b-modal id="delete_room_token" ref="delete_room_token" size="sm" title="アクセス用リンクを削除しますか？" ok-title="削除する" cancel-title="キャンセル" @ok="deleteRoomToken" ok-variant="danger">
+    <p>アクセス用リンクを削除するとURLやQRコードを知っているチャットの利用者であっても、このチャットルームにアクセスできなくなります。</p>
+    <p>また、削除した後に同じURLやQRコードを生成することはできません。</p>
+  </b-modal>
 </div>
 </template>
 <script>
@@ -147,6 +159,45 @@ export default {
         data: form,
         onUploadProgress: vm.onFeedbacksProgress()
       }).then(function(response) {
+        vm.clearFeedbacks();
+        vm.setSuccessFeedback();
+      }).catch(vm.onFeedbacksErrors)
+    },
+    generateRoomToken() {
+      event.preventDefault();
+      let vm = this;
+      axios({
+        resource: 'room',
+        url: `/api/rooms/${vm.room.id}/create_token`,
+        method: 'patch',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json'
+        },
+        onUploadProgress: vm.onFeedbacksProgress()
+      }).then(function(response) {
+        console.log(response.data);
+        vm.room = response.data;
+        vm.clearFeedbacks();
+        vm.setSuccessFeedback();
+      }).catch(function(error){
+        console.log(error);
+      })
+    },
+    deleteRoomToken() {
+      event.preventDefault();
+      let vm = this;
+      axios({
+        resource: 'room',
+        url: `/api/rooms/${vm.room.id}/delete_token`,
+        method: 'patch',
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Accept': 'application/json'
+        },
+        onUploadProgress: vm.onFeedbacksProgress()
+      }).then(function(response) {
+        vm.room = response.data;
         vm.clearFeedbacks();
         vm.setSuccessFeedback();
       }).catch(vm.onFeedbacksErrors)
