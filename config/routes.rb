@@ -24,6 +24,8 @@ Rails.application.routes.draw do
         get 'qrcode', { format: 'png' }
         patch 'create_token'
         patch 'delete_token'
+        patch 'create_code'
+        patch 'delete_code'
       end
     end
     resources :chats, { param: :token } do

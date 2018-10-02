@@ -2,7 +2,7 @@ class Api::RoomsController < Api::ApiController
 
   before_action :authenticate_user!
   before_action :set_rooms, only: %i(index)
-  before_action :set_room, only: %i(show qrcode update destroy create_token delete_token)
+  before_action :set_room, only: %i(show qrcode update destroy create_token delete_token create_code delete_code)
 
   def index
     render json: @rooms.sort{ |room|
@@ -62,6 +62,22 @@ class Api::RoomsController < Api::ApiController
 
   def delete_token
     if @room.update(token: nil)
+      render json: RoomSerializer.new(@room).to_object
+    else
+      render json: @room.errors, status: :unprocessable_entity
+    end
+  end
+
+  def create_code
+    if @room.update(code: Room.generate_code)
+      render json: RoomSerializer.new(@room).to_object
+    else
+      render json: @room.errors, status: :unprocessable_entity
+    end
+  end
+
+  def delete_code
+    if @room.update(code: nil)
       render json: RoomSerializer.new(@room).to_object
     else
       render json: @room.errors, status: :unprocessable_entity
