@@ -16,9 +16,11 @@
 </div>
 </template>
 <script>
-import NavBar from './NavBar.vue'
 import axios from 'axios'
+import NavBar from './NavBar.vue'
+import feedbacks from '../plugins/feedbacks'
 export default {
+  mixins: [feedbacks],
   components: {
     NavBar
   },
@@ -35,12 +37,11 @@ export default {
         person_name: '',
         organization_name: '',
         email: ''
-      },
-      feedbacks: []
+      }
     }
   },
   mounted() {
-    this.getProfile()
+    this.getProfile();
   },
   methods: {
     getProfile() {
@@ -50,11 +51,7 @@ export default {
         method: 'get'
       }).then(function(response) {
         vm.user = response.data;
-      }).catch(function(error) {
-        // TODO error handling
-        // vm.feedbacks = []
-        // vm.feedbacks.push(error.response.statusText)
-      })
+      }).catch(vm.onFeedbacksErrors);
     }
   }
 }

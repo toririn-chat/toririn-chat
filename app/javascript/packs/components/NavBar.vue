@@ -2,7 +2,7 @@
 <div>
   <b-navbar toggleable type="dark">
     <b-navbar-brand href="/">とりりん<i class="fa fa-star"></i>チャット</b-navbar-brand>
-    <b-nav-toggle target="nav_collapse"></b-nav-toggle>
+    <b-nav-toggle target="nav_collapse" />
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
         <b-nav-item href="rooms">
@@ -16,7 +16,7 @@
           <i class="fa fa-gear"></i>
           <span>設定</span>
         </b-dropdown-item>
-        <b-dropdown-divider></b-dropdown-divider>
+        <b-dropdown-divider />
         <b-dropdown-item @click="signout">
           <i class="fa fa-sign-out"></i>
           <span>ログアウト</span>
@@ -30,11 +30,6 @@
 <script>
 import axios from 'axios'
 export default {
-  data() {
-    return {
-      errors: []
-    }
-  },
   methods: {
     signout() {
       let vm = this;
