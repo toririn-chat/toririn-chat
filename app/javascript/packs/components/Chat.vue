@@ -113,8 +113,6 @@ export default {
       }
     };
   },
-  asyncComputed: {
-  },
   computed: {
     token() {
       return this.$route.params.id;
