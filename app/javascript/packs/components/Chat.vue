@@ -182,7 +182,7 @@ export default {
           'Content-Type': 'multipart/form-data',
           'Accept': 'application/json'
         },
-        onUploadProgress: this.onFeedbacksProgress
+        onUploadProgress: this.onFeedbacksProgress()
       }).then(function(response) {
         Vue.set(vm.session, 'exists', true);
       }).catch(vm.onFeedbacksErrors)
@@ -202,7 +202,7 @@ export default {
           'Content-Type': 'multipart/form-data',
           'Accept': 'application/json'
         },
-        onUploadProgress: this.onFeedbacksProgress
+        onUploadProgress: this.onFeedbacksProgress()
       }).then(function(response) {
         vm.$refs.profile.hide();
       }).catch(vm.onFeedbacksErrors)

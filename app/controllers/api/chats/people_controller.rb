@@ -10,7 +10,7 @@ class Api::Chats::PeopleController < Api::Chats::ApiController
       avatar: {
         id: @person.avatar.id,
         name: @person.avatar.name,
-        image_url: api_chat_avatar_url(@room.token, person.avatar.id)
+        image_url: api_chat_avatar_url(@room.token, @person.avatar.id)
       }
     }
   end
