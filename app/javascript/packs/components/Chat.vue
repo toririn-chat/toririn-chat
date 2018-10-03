@@ -141,6 +141,7 @@ export default {
       if(value === true) {
         this.getRoom();
         this.getPerson();
+        this.connect();
       }
     },
     'person.exists': function(value) {
@@ -218,6 +219,30 @@ export default {
       // console.log(App.room);
       // App.room.text(this.message.text);
       // console.log('sendMessage');
+    },
+    connect() {
+      let vm = this;
+      let identifier = { channel: 'ChatChannel', token: vm.token };
+      let client = {
+        connected() {
+          console.log('connected');
+        },
+        disconnected() {
+          console.log('disconnected');
+        },
+        received(data) {
+          console.log(data);
+          console.log('received');
+          vm.room.messages.push(data.message);
+          Vue.nextTick(function() {
+            window.scrollTo(0, document.body.scrollHeight);
+          });
+        },
+        text(text) {
+          return this.perform('text', { room_id: vm.token, text: text });
+        }
+      };
+      this.channel = this.$cable.subscriptions.create(identifier, client);
     }
   },
   beforeCreate() {
@@ -233,37 +258,6 @@ export default {
     }).catch(function(error) {
       Vue.set(vm.session, 'exists', false);
     });
-  },
-  created() {
-    let vm = this;
-    let cid = {
-      channel: 'ChatChannel',
-      token: vm.token
-    }
-    console.log(cid);
-    this.channel = this.$cable.subscriptions.create(cid, {
-      connected() {
-        console.log('connected');
-      },
-      disconnected() {
-        console.log('disconnected');
-      },
-      received(data) {
-        console.log(data);
-        console.log('received');
-        // this.messages.push(data)
-        vm.room.messages.push(data.message);
-        Vue.nextTick(function() {
-          window.scrollTo(0, document.body.scrollHeight);
-        });
-      },
-      text(text) {
-        return this.perform('text', {
-          room_id: vm.token,
-          text: text
-        });
-      }
-    })
   }
 }
 </script>
