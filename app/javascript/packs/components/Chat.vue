@@ -39,7 +39,7 @@
     </b-input-group>
   </footer>
   <!-- Signin -->
-  <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" ok-only no-close-on-backdrop no-close-on-esc hide-header-close @ok="performSignin" :visible="!session.exists" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
+  <b-modal id="signin" ref="signin" size="sm" title="ログイン" ok-title="ログイン" ok-only no-close-on-backdrop no-close-on-esc hide-header-close @ok="handleSignin" :visible="!session.exists" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
     <b-alert variant="info" :show="feedbacks['info'] !== undefined">
       <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
       <span>{{ feedbacks['info'] }}</span>
@@ -54,7 +54,7 @@
     </b-form-group>
   </b-modal>
   <!-- Profile -->
-  <b-modal id="profile" ref="profile" size="sm" title="設定" ok-title="OK" ok-only no-close-on-backdrop no-close-on-esc hide-header-close @ok="saveProfile" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
+  <b-modal id="profile" ref="profile" size="sm" title="設定" ok-title="OK" ok-only no-close-on-backdrop no-close-on-esc hide-header-close @ok="handleSaveProfile" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
     <b-alert variant="info" :show="feedbacks['info'] !== undefined">
       <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
       <span>{{ feedbacks['info'] }}</span>
@@ -168,7 +168,7 @@ export default {
         vm.person = response.data;
       }).catch(vm.onFeedbacksErrors)
     },
-    performSignin(event) {
+    handleSignin(event) {
       event.preventDefault();
       let vm = this;
       let form = new FormData();
@@ -187,7 +187,7 @@ export default {
         Vue.set(vm.session, 'exists', true);
       }).catch(vm.onFeedbacksErrors)
     },
-    saveProfile(event) {
+    handleSaveProfile(event) {
       event.preventDefault();
       let vm = this;
       let form = new FormData();
