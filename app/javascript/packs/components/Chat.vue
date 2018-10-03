@@ -16,7 +16,7 @@
       <b-img width="64" height="64" slot="aside" :src="message.person.avatar.image_url" />
       <p>
         <strong>{{ message.person.name }}</strong>
-        <span>{{ message.created_at }}</span>
+        <span>{{ message.created_at | moment }}</span>
       </p>
       <p v-show="message.text">{{ message.text }}</p>
       <b-img width="150" height="150" blank-width="150" blank-height="150" blank-color="#fbfbfb" :src="message.sticker_image_url" v-show="message.sticker_image_url" />
@@ -82,6 +82,7 @@
 </div>
 </template>
 <script>
+import moment from 'moment'
 import Vue from 'vue'
 import axios from 'axios'
 import feedbacks from '../plugins/feedbacks'
@@ -146,6 +147,12 @@ export default {
       if(value === '') {
         this.$refs.profile.show();
       }
+    }
+  },
+  filters: {
+    moment(date) {
+      moment.locale('ja');
+      return moment(date).format('llll');
     }
   },
   methods: {
