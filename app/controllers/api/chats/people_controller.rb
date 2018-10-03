@@ -3,7 +3,6 @@ class Api::Chats::PeopleController < Api::Chats::ApiController
   before_action :chat_session_exists!
 
   def show
-    # TODO: デフォルトのアイコンを決める。
     @room = current_chat_room
     @person = current_chat_person
     render json: {

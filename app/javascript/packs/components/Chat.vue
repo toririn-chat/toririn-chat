@@ -128,19 +128,12 @@ export default {
     },
     avatars() {
       let vm = this;
-      if(vm.person.avatar_id === undefined || vm.person.avatar_id === null) {
-        return vm.room.avatars;
-      } else {
-        if(vm.room.avatars.length > 0) {
-          let avatar = vm.room.avatars.find(function(e) {
-            return e.id == vm.person.avatar_id;
-          });
-          vm.selectPersonAvatar(avatar);
-          return vm.room.avatars;
-        } else {
-          return vm.room.avatars;
-        }
+      if (vm.person.avatar.id !== undefined && vm.room.avatars.length > 0) {
+        vm.room.avatars.forEach(function(avatar) {
+          Vue.set(avatar, 'is_active', avatar.id === vm.person.avatar.id);
+        });
       }
+      return vm.room.avatars;
     }
   },
   watch: {
@@ -199,7 +192,7 @@ export default {
       let vm = this;
       let form = new FormData();
       form.set('person[name]', vm.person.name);
-      form.set('person[avatar_id]', vm.person.avatar_id);
+      form.set('person[avatar_id]', vm.person.avatar.id);
       axios({
         resource: 'person',
         url: `/api/chats/${vm.$route.params.id}/person`,
@@ -216,11 +209,7 @@ export default {
     },
     selectPersonAvatar(avatar) {
       let vm = this;
-      vm.room.avatars.forEach(function(avatar) {
-        Vue.set(avatar, 'is_active', false);
-      });
-      Vue.set(avatar, 'is_active', true);
-      Vue.set(vm.person, 'avatar_id', avatar.id);
+      Vue.set(vm.person, 'avatar', avatar);
     },
     sendMessage() {
       // TODO: impl

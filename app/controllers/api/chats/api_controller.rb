@@ -5,7 +5,10 @@ class Api::Chats::ApiController < ActionController::API
     @room = Room.find_by(token: chat_token, code: chat_code)
     if @room.present?
       # 人物を作成
-      @person = Person.create
+      @person = Person.new
+      # アバターをランダムに設定
+      @person.avatar = Avatar.find(Avatar.pluck(:id).sample)
+      @person.save!
       # セッションに記録
       session[:chat_person_id] = @person.id
       session[:chat_room_id] = @room.id
