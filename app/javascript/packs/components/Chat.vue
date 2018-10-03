@@ -35,6 +35,8 @@
         </b-btn>
       </b-input-group-prepend>
       <b-form-input name="message" size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" autocomplete="off" />
+      <!-- HACK: This is for preventing auto completion of Google Chrome -->
+      <input type="password" name="dummypass" style="top: -100px; left: -100px;　position: fixed;" />
       <b-input-group-append>
         <b-btn size="lg" :disabled="messageDisabled" @click="sendTextMessage">
           <i class="fa fa-lg fa-paper-plane-o"></i>
