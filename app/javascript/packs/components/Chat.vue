@@ -142,8 +142,8 @@ export default {
         this.connect();
       }
     },
-    'person.exists': function(value) {
-      if(value !== true) {
+    'person.name': function(value) {
+      if(value === '') {
         this.$refs.profile.show();
       }
     }
@@ -156,6 +156,7 @@ export default {
         method: 'get'
       }).then(function(response) {
         vm.room = response.data;
+        vm.handleScroll();
       }).catch(vm.onFeedbacksErrors)
     },
     getPerson() {
@@ -205,6 +206,11 @@ export default {
       }).then(function(response) {
         vm.$refs.profile.hide();
       }).catch(vm.onFeedbacksErrors)
+    },
+    handleScroll() {
+      Vue.nextTick(function() {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
     },
     selectPersonAvatar(avatar) {
       let vm = this;
