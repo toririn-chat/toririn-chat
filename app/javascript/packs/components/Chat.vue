@@ -34,7 +34,7 @@
           <i class="fa fa-lg fa-smile-o"></i>
         </b-btn>
       </b-input-group-prepend>
-      <b-form-input size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" />
+      <b-form-input name="message" size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" autocomplete="off" />
       <b-input-group-append>
         <b-btn size="lg" :disabled="messageDisabled" @click="sendTextMessage">
           <i class="fa fa-lg fa-paper-plane-o"></i>
