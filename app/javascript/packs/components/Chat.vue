@@ -282,8 +282,7 @@ export default {
 }
 .tc-chat-messages {
   padding-top: 15px;
-  padding-bottom: 15px;
-  margin-bottom: 52px;
+  padding-bottom: 60px;
 }
 .tc-chat-footer {
   background-color: rgba(#F7F8FC, 0.95);
