@@ -31,7 +31,7 @@ class Api::Chats::PeopleController < Api::Chats::ApiController
   private
 
     def person_params
-      params.require(:person).permit(:id, :name,:avatar_id)
+      params.require(:person).permit(:id, :name, :avatar_id)
     end
 
 end
