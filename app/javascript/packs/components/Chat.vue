@@ -12,15 +12,19 @@
   </b-navbar>
   <!-- Messages -->
   <div class="container tc-chat-messages">
-    <b-media v-for="message in room.messages" :key="message.id">
+    <div class="row justify-content-center">
+      <div class="col-xl-6">
+    <b-media :class="['mb-2', 'baloon', { 'your-message': message.person.id === person.id }, { 'others-message': message.person.id !== person.id }]" :right-align="message.person.id === person.id" v-for="message in room.messages" :key="message.id">
       <b-img width="64" height="64" slot="aside" :src="message.person.avatar.image_url" />
-      <p>
+      <p class="mb-1">
         <strong>{{ message.person.name }}</strong>
         <span>{{ message.created_at | moment }}</span>
       </p>
       <p v-show="message.text">{{ message.text }}</p>
       <b-img width="150" height="150" blank-width="150" blank-height="150" blank-color="#fbfbfb" :src="message.sticker_image_url" v-show="message.sticker_image_url" />
     </b-media>
+  </div>
+  </div>
   </div>
   <!-- Footer -->
   <footer class="fixed-bottom tc-chat-footer">
@@ -319,6 +323,23 @@ export default {
     }
   }
 }
+.media.baloon {
+  .media-body {
+    background: #d7ebfe;
+    padding: 8px;
+    border-radius: 12px;
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+.media.baloon.your-message {
+  margin-left: 80px;
+}
+.media.baloon.others-message {
+  margin-right: 80px;
+}
+
 div.gallery {
   .container {
     padding-left: 0;

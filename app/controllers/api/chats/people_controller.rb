@@ -6,6 +6,7 @@ class Api::Chats::PeopleController < Api::Chats::ApiController
     @room = current_chat_room
     @person = current_chat_person
     render json: {
+      id: @person.id,
       name: @person.name,
       avatar: {
         id: @person.avatar.id,
