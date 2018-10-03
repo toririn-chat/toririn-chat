@@ -32,7 +32,7 @@
       </b-input-group-prepend>
       <b-form-input size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" />
       <b-input-group-append>
-        <b-btn size="lg" :disabled="messageDisabled" @click="sendMessage">
+        <b-btn size="lg" :disabled="messageDisabled" @click="sendTextMessage">
           <i class="fa fa-lg fa-paper-plane-o"></i>
         </b-btn>
       </b-input-group-append>
@@ -212,13 +212,14 @@ export default {
       let vm = this;
       Vue.set(vm.person, 'avatar', avatar);
     },
-    sendMessage() {
-      // TODO: impl
-      let r = this.channel.text(this.message.text);
-      Vue.set(this.message, 'text', '');
-      // console.log(App.room);
-      // App.room.text(this.message.text);
-      // console.log('sendMessage');
+    sendTextMessage() {
+      let vm = this;
+      let result = vm.channel.text(vm.message.text);
+      if(result) {
+        Vue.set(vm.message, 'text', '');
+      } else {
+        // TODO: show error message about sending message
+      }
     },
     connect() {
       let vm = this;
@@ -239,7 +240,7 @@ export default {
           });
         },
         text(text) {
-          return this.perform('text', { room_id: vm.token, text: text });
+          return this.perform('text', { text: text });
         }
       };
       this.channel = this.$cable.subscriptions.create(identifier, client);
