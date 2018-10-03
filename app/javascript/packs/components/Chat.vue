@@ -34,7 +34,7 @@
           <i class="fa fa-lg fa-smile-o"></i>
         </b-btn>
       </b-input-group-prepend>
-      <b-form-input name="message" size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" autocomplete="nope" />
+      <b-form-input name="message" size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" autocomplete="off" />
         <b-btn size="lg" :disabled="messageDisabled" @click="sendTextMessage">
           <i class="fa fa-lg fa-paper-plane-o"></i>
         </b-btn>
@@ -50,11 +50,13 @@
     <b-alert variant="danger" :show="feedbacks['error'] !== undefined">
       <span>{{ feedbacks['error'] }}</span>
     </b-alert>
-    <b-form-group label="暗証番号" :feedback="feedbacks['session.chat_code']" :state="states['session.chat_code']">
-      <b-input-group>
-        <b-form-input type="password" v-model="session.chat_code" />
-      </b-input-group>
-    </b-form-group>
+    <form autocomplete="off">
+      <b-form-group label="暗証番号" :feedback="feedbacks['session.chat_code']" :state="states['session.chat_code']">
+        <b-input-group>
+          <b-form-input type="password" v-model="session.chat_code" />
+        </b-input-group>
+      </b-form-group>
+    </form>
   </b-modal>
   <!-- Profile -->
   <b-modal id="profile" ref="profile" size="sm" title="設定" ok-title="OK" ok-only no-close-on-backdrop no-close-on-esc hide-header-close @ok="handleSaveProfile" @shown="clearFeedbacks" :show="feedbacks['info'] !== undefined">
@@ -67,7 +69,7 @@
     </b-alert>
     <b-form-group label="名前" label-class="font-weight-bold" :feedback="feedbacks['person.name']" :state="states['person.name']">
       <b-input-group>
-        <b-form-input type="text" v-model="person.name" autocomplete="nope" />
+        <b-form-input type="text" v-model="person.name" autocomplete="off" />
       </b-input-group>
     </b-form-group>
     <b-form-group label="アイコン" label-class="font-weight-bold" :feedback="feedbacks['person.avatar']" :state="states['person.avatar']">
