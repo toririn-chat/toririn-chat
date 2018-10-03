@@ -34,10 +34,7 @@
           <i class="fa fa-lg fa-smile-o"></i>
         </b-btn>
       </b-input-group-prepend>
-      <b-form-input name="message" size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" autocomplete="off" />
-      <!-- HACK: This is for preventing auto completion of Google Chrome -->
-      <input type="password" name="dummypass" style="top: -100px; left: -100px;　position: fixed;" />
-      <b-input-group-append>
+      <b-form-input name="message" size="lg" type="text" placeholder="メッセージを入力" v-model="message.text" autocomplete="nope" />
         <b-btn size="lg" :disabled="messageDisabled" @click="sendTextMessage">
           <i class="fa fa-lg fa-paper-plane-o"></i>
         </b-btn>
@@ -70,7 +67,7 @@
     </b-alert>
     <b-form-group label="名前" label-class="font-weight-bold" :feedback="feedbacks['person.name']" :state="states['person.name']">
       <b-input-group>
-        <b-form-input type="text" v-model="person.name" autocomplete="off" />
+        <b-form-input type="text" v-model="person.name" autocomplete="nope" />
       </b-input-group>
     </b-form-group>
     <b-form-group label="アイコン" label-class="font-weight-bold" :feedback="feedbacks['person.avatar']" :state="states['person.avatar']">
