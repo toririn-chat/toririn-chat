@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2017_09_13_142045) do
+ActiveRecord::Schema.define(version: 2018_10_03_055314) do
 
   create_table "avatar_group_users", force: :cascade do |t|
     t.integer "avatar_group_id", null: false
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2017_09_13_142045) do
   end
 
   create_table "people", force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: "", null: false
     t.integer "avatar_id"
     t.string "token"
     t.datetime "created_at", null: false
