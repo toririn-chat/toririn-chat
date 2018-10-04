@@ -9,9 +9,10 @@ class Api::Chats::SessionsController < Api::Chats::ApiController
   end
 
   def create
-    if chat_session_create(params[:chat_token], params[:chat_code])
+    if chat_session_create
       render json: true
     else
+      # TODO: refactor
       error = {
         chat_code: ['が違います。']
       }
