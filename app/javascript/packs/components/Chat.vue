@@ -102,7 +102,6 @@ export default {
         avatars: []
       },
       person: {
-        exists: false,
         name: '',
         avatar: {
           id: '',
@@ -147,11 +146,6 @@ export default {
         this.getPerson();
         this.connect();
       }
-    },
-    'person.name': function(value) {
-      if(value === '') {
-        this.$refs.profile.show();
-      }
     }
   },
   filters: {
@@ -178,6 +172,11 @@ export default {
         method: 'get'
       }).then(function(response) {
         vm.person = response.data;
+        Vue.nextTick(function() {
+          if(vm.person.name === '') {
+            this.$refs.profile.show();
+          }
+        });
       }).catch(vm.onFeedbacksErrors)
     },
     handleSignin(event) {
