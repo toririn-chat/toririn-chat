@@ -13,7 +13,7 @@
   <!-- Messages -->
   <div class="container tc-chat-messages">
     <div class="row justify-content-center">
-      <div class="col-xl-6">
+      <div class="col-xs-12 col-md-12 col-lg-8">
     <b-media :class="['mb-2', 'baloon', { 'your-message': message.person.id === person.id }, { 'others-message': message.person.id !== person.id }]" :right-align="message.person.id === person.id" v-for="message in room.messages" :key="message.id">
       <b-img width="64" height="64" slot="aside" :src="message.person.avatar.image_url" />
       <p class="mb-1">
