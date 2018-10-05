@@ -11,7 +11,9 @@ module ApplicationCable
     protected
 
       def find_current_chat_person
-        person = Person.find_by(id: request.session[:chat_person_id])
+        token = request.params[:token]
+        person_id = request.session[:chats].dig(token, 'person_id')
+        person = Person.find_by(id: person_id)
         return person.presence || reject_unauthorized_connection
       end
 

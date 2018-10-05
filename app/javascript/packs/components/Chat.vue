@@ -90,11 +90,13 @@
 import moment from 'moment'
 import Vue from 'vue'
 import axios from 'axios'
+import ActionCable from 'actioncable';
 import feedbacks from '../plugins/feedbacks'
 export default {
   mixins: [feedbacks],
   data() {
     return {
+      cable: null,
       channel: null,
       room: {
         name: '',
@@ -174,7 +176,7 @@ export default {
         vm.person = response.data;
         Vue.nextTick(function() {
           if(vm.person.name === '') {
-            this.$refs.profile.show();
+            vm.$refs.profile.show();
           }
         });
       }).catch(vm.onFeedbacksErrors)
@@ -238,6 +240,9 @@ export default {
     },
     connect() {
       let vm = this;
+      // Create Consumer
+      vm.cable = ActionCable.createConsumer(`/cable?token=${vm.token}`);
+      // Create Channel
       let identifier = { channel: 'ChatChannel', token: vm.token };
       let client = {
         connected() {
@@ -258,7 +263,7 @@ export default {
           return this.perform('text', { text: text });
         }
       };
-      this.channel = this.$cable.subscriptions.create(identifier, client);
+      vm.channel = vm.cable.subscriptions.create(identifier, client);
     }
   },
   beforeCreate() {

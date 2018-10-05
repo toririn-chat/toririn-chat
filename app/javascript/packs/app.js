@@ -4,7 +4,6 @@ import 'formdata-polyfill' // for IE 11 and Edge
 import Vue from 'vue'
 import i18n from './i18n'
 import router from './router'
-import cable from './cable'
 import App from './components/App.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
