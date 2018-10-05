@@ -76,7 +76,7 @@
       <div class="gallery">
         <div class="container">
           <div class="row">
-            <div class="col col-sm-3" v-for="avatar in avatars">
+            <div class="col col-3" v-for="avatar in avatars">
               <b-img rounded fluid-grow :src="avatar.image_url" :alt="avatar.name" v-bind:class="{ active: avatar.is_active, inactive: !avatar.is_active }" @click="selectPersonAvatar(avatar)" />
             </div>
           </div>
