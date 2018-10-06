@@ -8,7 +8,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'webpacker'
 gem 'carrierwave'
-gem 'enumerize', '~> 2.1'
+gem 'enumerize', '~> 2.2'
 gem 'rqrcode', '~> 0.10'
 gem 'hashids', '~> 1.0'
 gem 'bootsnap', '>= 1.1.0', require: false
