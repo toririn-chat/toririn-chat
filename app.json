@@ -17,12 +17,17 @@
     "url": "heroku/nodejs"
   }, {
     "url": "heroku/ruby"
+  }, {
+    "url": "gunpowderlabs/buildpack-ruby-rake-deploy-tasks"
   }],
   "addons": ["heroku-postgresql"],
   "success_url": "/",
   "env": {
     "RAILS_FORCE_SSL": {
       "value": "enabled"
+    },
+    "DEPLOY_TASKS": {
+      "value": "db:migrate cache:clear"
     }
   }
 }
