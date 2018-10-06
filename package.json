@@ -1,4 +1,5 @@
 {
+  "name": "toririn-chat",
   "license": "MIT",
   "engines": {
     "node": ">=8.5.0",
