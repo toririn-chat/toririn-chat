@@ -30,7 +30,6 @@ Rails.application.routes.draw do
     end
     resources :chats, { param: :token } do
       resource :room, only: [:show], module: 'chats'
-      resources :messages, only: [:index], module: 'chats'
       resource :person, only: [:show, :update], module: 'chats'
       resources :avatars, only: [:show], module: 'chats'
       scope module: 'chats' do
