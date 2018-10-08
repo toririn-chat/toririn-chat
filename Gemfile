@@ -7,7 +7,6 @@ gem 'google-analytics-rails'
 gem 'devise'
 gem 'devise-i18n'
 gem 'webpacker'
-gem 'enumerize', '~> 2.2'
 gem 'rqrcode', '~> 0.10'
 gem 'hashids', '~> 1.0'
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -35,9 +34,7 @@ group :development do
   gem 'pry-doc', require: false
   gem 'pry-coolline'
   gem 'pry-byebug', platforms: :mri
-  gem 'awesome_print'
   gem 'i18n-tasks', require:false
-  gem 'guard-livereload', require:false
   gem 'letter_opener'
   gem 'letter_opener_web'
   gem 'foreman'
