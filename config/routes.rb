@@ -32,7 +32,7 @@ Rails.application.routes.draw do
       resource :room, only: [:show], module: 'chats'
       resources :messages, only: [:index], module: 'chats'
       resource :person, only: [:show, :update], module: 'chats'
-      resources :avatars, only: [:show, :index], module: 'chats'
+      resources :avatars, only: [:show], module: 'chats'
       scope module: 'chats' do
         post 'signin', to: 'sessions#create'
         get 'signin', to: 'sessions#show'
