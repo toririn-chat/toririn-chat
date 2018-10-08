@@ -4,6 +4,8 @@ class Message < ApplicationRecord
   belongs_to :person
   belongs_to :sticker, required: false
 
+  default_scope -> { order(created_at: :asc) }
+
   def type
     return :text    if text.present? && sticker.blank?
     return :sticker if text.blank?   && sticker.present?
