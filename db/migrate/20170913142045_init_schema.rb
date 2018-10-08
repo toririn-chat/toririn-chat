@@ -53,6 +53,8 @@ class InitSchema < ActiveRecord::Migration[5.1]
     add_index :people, :name
     add_index :people, :token, unique: true
 
+    # Stickers
+
     create_table :sticker_groups do |t|
       t.string :title
       t.string :author

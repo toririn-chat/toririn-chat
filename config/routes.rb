@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resource :room, only: [:show], module: 'chats'
       resource :person, only: [:show, :update], module: 'chats'
       resources :avatars, only: [:show], module: 'chats'
+      resources :stickers, only: [:show], module: 'chats'
       scope module: 'chats' do
         post 'signin', to: 'sessions#create'
         get 'signin', to: 'sessions#show'

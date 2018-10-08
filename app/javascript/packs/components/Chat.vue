@@ -14,23 +14,23 @@
   <div class="container tc-chat-messages">
     <div class="row justify-content-center">
       <div class="col-xs-12 col-md-12 col-lg-8">
-    <b-media :class="['mb-2', 'baloon', { 'your-message': message.person.id === person.id }, { 'others-message': message.person.id !== person.id }]" :right-align="message.person.id === person.id" v-for="message in room.messages" :key="message.id">
-      <b-img width="64" height="64" slot="aside" :src="message.person.avatar.image_url" />
-      <p class="mb-1">
-        <strong>{{ message.person.name }}</strong>
-        <span>{{ message.created_at | moment }}</span>
-      </p>
-      <p v-show="message.text">{{ message.text }}</p>
-      <b-img width="150" height="150" blank-width="150" blank-height="150" blank-color="#fbfbfb" :src="message.sticker_image_url" v-show="message.sticker_image_url" />
-    </b-media>
-  </div>
-  </div>
+        <b-media :class="['mb-2', 'baloon', { 'your-message': message.person.id === person.id }, { 'others-message': message.person.id !== person.id }]" :right-align="message.person.id === person.id" v-for="message in room.messages" :key="message.id">
+          <b-img width="64" height="64" slot="aside" :src="message.person.avatar.image_url" />
+          <p class="mb-1">
+            <strong>{{ message.person.name }}</strong>
+            <span>{{ message.created_at | moment }}</span>
+          </p>
+          <p v-if="message.type === 'text'">{{ message.text }}</p>
+          <b-img v-if="message.type === 'sticker'" :src="message.sticker.image_url" width="150" height="150" />
+        </b-media>
+      </div>
+    </div>
   </div>
   <!-- Footer -->
   <footer class="fixed-bottom tc-chat-footer">
     <b-input-group class="p-1">
       <b-input-group-prepend>
-        <b-btn size="lg">
+        <b-btn size="lg" v-b-modal.stickers>
           <i class="fa fa-lg fa-smile-o"></i>
         </b-btn>
       </b-input-group-prepend>
@@ -84,6 +84,18 @@
       </div>
     </b-form-group>
   </b-modal>
+  <!-- Stickers -->
+  <b-modal id="stickers" ref="stickers" size="md" title="スタンプ" :hide-footer="true">
+    <div class="gallery">
+      <div class="container">
+        <div class="row">
+          <div class="col col-3" v-for="sticker in stickers">
+            <b-img rounded fluid-grow :src="sticker.image_url" :alt="sticker.name"  @click="selectSticker(sticker)" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </b-modal>
 </div>
 </template>
 <script>
@@ -101,7 +113,8 @@ export default {
       room: {
         name: '',
         messages: [],
-        avatars: []
+        avatars: [],
+        stickers: []
       },
       person: {
         name: '',
@@ -139,6 +152,10 @@ export default {
         });
       }
       return vm.room.avatars;
+    },
+    stickers() {
+      let vm = this;
+      return vm.room.stickers;
     }
   },
   watch: {
@@ -229,6 +246,15 @@ export default {
       let vm = this;
       Vue.set(vm.person, 'avatar', avatar);
     },
+    selectSticker(sticker) {
+      let vm = this;
+      let result = vm.channel.sticker(sticker.id);
+      if(result) {
+        vm.$refs.stickers.hide();
+      } else {
+        // TODO: show error message about sending message
+      }
+    },
     sendTextMessage() {
       let vm = this;
       let result = vm.channel.text(vm.message.text);
@@ -261,6 +287,9 @@ export default {
         },
         text(text) {
           return this.perform('text', { text: text });
+        },
+        sticker(sticker_id) {
+          return this.perform('sticker', { sticker_id: sticker_id });
         }
       };
       vm.channel = vm.cable.subscriptions.create(identifier, client);

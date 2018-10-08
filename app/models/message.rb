@@ -3,6 +3,12 @@ class Message < ApplicationRecord
   belongs_to :room
   belongs_to :person
   belongs_to :sticker, required: false
+
+  def type
+    return :text    if text.present? && sticker.blank?
+    return :sticker if text.blank?   && sticker.present?
+  end
+
   # has_many :user_messages
   # validates :text_or_sticker, {presence: true}
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_03_055314) do
+ActiveRecord::Schema.define(version: 2018_10_07_093118) do
 
   create_table "avatar_group_users", force: :cascade do |t|
     t.integer "avatar_group_id", null: false
@@ -100,25 +100,28 @@ ActiveRecord::Schema.define(version: 2018_10_03_055314) do
   end
 
   create_table "sticker_groups", force: :cascade do |t|
-    t.string "title"
     t.string "author"
     t.text "url"
     t.string "license_name"
     t.text "license_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["author"], name: "index_sticker_groups_on_author"
     t.index ["license_name"], name: "index_sticker_groups_on_license_name"
     t.index ["license_url"], name: "index_sticker_groups_on_license_url"
-    t.index ["title"], name: "index_sticker_groups_on_title"
+    t.index ["name"], name: "index_sticker_groups_on_name"
     t.index ["url"], name: "index_sticker_groups_on_url"
   end
 
   create_table "stickers", force: :cascade do |t|
-    t.string "image", null: false
     t.integer "sticker_group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.binary "content_data", limit: 10485760, null: false
+    t.string "content_type", null: false
+    t.index ["name"], name: "index_stickers_on_name"
     t.index ["sticker_group_id"], name: "index_stickers_on_sticker_group_id"
   end
 

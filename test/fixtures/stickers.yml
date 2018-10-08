@@ -1,0 +1,7 @@
+<% Rails.root.join(*%w[test fixtures files stickers rubicle]).glob('*.png').each.with_index do |path, index| %>
+sticker_rubicle_<%= index %>:
+  name: <%= path.basename('.png') %>
+  content_data: <%= FixtureUtils::file(path) %>
+  content_type: image/png
+  group: sticker_group_rubicle
+<% end %>

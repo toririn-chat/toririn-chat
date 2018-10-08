@@ -17,12 +17,12 @@ class ChatChannel < ApplicationCable::Channel
     Message.create!(message)
   end
 
-  # receive a stamp message
-  def stamp(data)
+  # receive a sticker message
+  def sticker(data)
     message = {
       room_id: Room.find_by(token: params[:token]).id,
       person_id: current_chat_person.id,
-      stamp_id: data['stamp_id']
+      sticker_id: data['sticker_id']
     }
     Message.create!(message)
   end
