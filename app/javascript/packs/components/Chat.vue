@@ -272,14 +272,16 @@ export default {
       let identifier = { channel: 'ChatChannel', token: vm.token };
       let client = {
         connected() {
-          console.log('connected');
+          // DEBUG:
+          // console.log('connected');
         },
         disconnected() {
-          console.log('disconnected');
+          // DEBUG:
+          // console.log('disconnected');
         },
         received(data) {
-          console.log(data);
-          console.log('received');
+          // DEBUG:
+          // console.log('received', data);
           vm.room.messages.push(data.message);
           Vue.nextTick(function() {
             window.scrollTo(0, document.body.scrollHeight);
