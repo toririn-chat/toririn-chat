@@ -13,16 +13,19 @@
   <!-- Messages -->
   <div class="container tc-chat-messages">
     <div class="row justify-content-center">
-      <div class="col-xs-12 col-md-12 col-lg-8">
-        <b-media :class="['mb-2', 'baloon', { 'your-message': message.person.id === person.id }, { 'others-message': message.person.id !== person.id }]" :right-align="message.person.id === person.id" v-for="message in room.messages" :key="message.id">
-          <b-img width="64" height="64" slot="aside" :src="message.person.avatar.image_url" />
-          <p class="mb-1">
-            <strong>{{ message.person.name }}</strong>
-            <span>{{ message.created_at | moment }}</span>
-          </p>
-          <p v-if="message.type === 'text'">{{ message.text }}</p>
-          <b-img v-if="message.type === 'sticker'" :src="message.sticker.image_url" width="150" height="150" />
-        </b-media>
+      <div class="col-xs-12 col-md-8 col-lg-8">
+        <div v-for="message in room.messages" :key="message.id" :class="messageClass(message)">
+          <img v-if="!messageOwnerIsMe(message)" :src="message.person.avatar.image_url" :alt="message.person.name" width="64" height="64" class="align-self-start mr-1">
+          <div class="media-body">
+            <p class="mb-1">
+              <strong>{{ message.person.name }}</strong>
+              <span>{{ message.created_at | moment }}</span>
+            </p>
+            <p v-if="messageTypeIsText(message)">{{ message.text }}</p>
+            <img v-if="messageTypeIsSticker(message)" :src="message.sticker.image_url" width="150" height="150"   />
+          </div>
+          <img v-if="messageOwnerIsMe(message)" :src="message.person.avatar.image_url" :alt="message.person.name" width="64" height="64" class="align-self-start ml-1">
+        </div>
       </div>
     </div>
   </div>
@@ -295,6 +298,26 @@ export default {
         }
       };
       vm.channel = vm.cable.subscriptions.create(identifier, client);
+    },
+    messageClass (message) {
+      return [
+        'media',
+        'mb-2',
+        'tc-message',
+        { 'tc-message-text': this.messageTypeIsText(message) },
+        { 'tc-message-sticker': this.messageTypeIsSticker(message) },
+        { 'tc-message-right': this.messageOwnerIsMe(message) },
+        { 'tc-message-left': !this.messageOwnerIsMe(message) },
+      ];
+    },
+    messageOwnerIsMe(message) {
+      return message.person.id === this.person.id;
+    },
+    messageTypeIsText(message) {
+      return message.type === 'text';
+    },
+    messageTypeIsSticker(message) {
+      return message.type === 'sticker';
     }
   },
   beforeCreate() {
@@ -359,7 +382,10 @@ export default {
     }
   }
 }
-.media.baloon {
+
+// messages
+
+.media.tc-message.tc-message-text {
   .media-body {
     background: #d7ebfe;
     padding: 8px;
@@ -369,12 +395,36 @@ export default {
     }
   }
 }
-.media.baloon.your-message {
-  margin-left: 80px;
+
+.media.tc-message.tc-message-sticker {
+  .media-body {
+    padding: 8px;
+  }
 }
-.media.baloon.others-message {
-  margin-right: 80px;
+
+.media.tc-message-right {
+  margin-left: 120px;
 }
+.media.tc-message-left {
+  margin-right: 120px;
+}
+
+// .media.baloon {
+//   .media-body {
+//     background: #d7ebfe;
+//     padding: 8px;
+//     border-radius: 12px;
+//     p {
+//       margin-bottom: 0;
+//     }
+//   }
+// }
+// .media.baloon.your-message {
+//   margin-left: 80px;
+// }
+// .media.baloon.others-message {
+//   margin-right: 80px;
+// }
 
 div.gallery {
   .container {
